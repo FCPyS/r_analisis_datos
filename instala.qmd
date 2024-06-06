@@ -1,0 +1,53 @@
+# Instalación de R y Rstudio {.unnumbered}
+
+## Introducción a R
+
+{{< video https://youtu.be/YkN5urybh2A >}}
+
+
+
+## Instalación en OS
+
+1.  Necesito que instalen la versión más nueva de R: 
+Download R-4.4.0 of MAC. *The R-project for statistical computing*.
+<https://cran.r-project.org/bin/macosx/>
+
+Elije la versión de acuerdo a tu procesador, intel o ARM.
+
+2. Instalar también las herramientas Quartz, xcode y fortran 
+
+* <https://www.xquartz.org/>
+
+* <https://developer.apple.com/xcode/resources/>
+
+* <https://mac.r-project.org/tools/gfortran-12.2-universal.pkg>
+
+3. Después de eso instalar el Rstudio, que hoy se encuentra alojado en el sitio posit, que vaya acorde con MAC
+
+<https://posit.co/download/rstudio-desktop/>
+
+Algunas indicaciones en video, pero son algo viejitas y pueden cambiar las versiones de R.
+
+{{< video https://youtu.be/icWV8jzYOtA >}}
+
+Algunas indicaciones en video, pero son algo viejitas y pueden cambiar las versiones de R.
+
+## Instalación en PC
+
+1.  Necesito que instalen la versión más nueva de R: 
+Download R-4.4.0 for Windows. *The R-project for statistical computing*.
+<https://cran.r-project.org/bin/windows/base/>
+
+2. Instalar también la herramienta RTools
+<https://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html>
+
+3. Después de eso instalar el Rstudio, que hoy se encuentra alojado en el sitio posit, que vaya acorde con Windows
+<https://posit.co/download/rstudio-desktop/>
+
+Algunas indicaciones en video, pero son algo viejitas y pueden cambiar las versiones de R.
+
+{{< video https://youtu.be/TNSQikMfgJI >}}
+
+## Ojo
+
+Desde octubre de 2022, RStudio se volvió **"Posit"**

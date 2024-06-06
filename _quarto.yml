@@ -1,0 +1,22 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "R para el análisis estadístico de datos"
+  author: "Ana Escoto"
+  date: "10/06/2024"
+  chapters:
+    - index.qmd
+    - instala.qmd
+
+
+
+format:
+  html:
+    theme: journal
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
