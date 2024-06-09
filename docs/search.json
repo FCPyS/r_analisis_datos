@@ -1,0 +1,177 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R para el análisis estadístico de datos",
+    "section": "",
+    "text": "Sobre el curso"
+  },
+  {
+    "objectID": "index.html#introducción-a-r-y-rstudio-4-horas",
+    "href": "index.html#introducción-a-r-y-rstudio-4-horas",
+    "title": "R para el análisis estadístico de datos",
+    "section": "Introducción a R y Rstudio (4 horas)",
+    "text": "Introducción a R y Rstudio (4 horas)\nObjetivo: que el estudiantado sea familiarice con la interfase de trabajo y la programación por objetos, del mismo modo que sean capaces de realizar tareas básicas tales como crear un script, un proyecto, objetos, ambientes e instalar paqueterías."
+  },
+  {
+    "objectID": "index.html#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas",
+    "href": "index.html#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas",
+    "title": "R para el análisis estadístico de datos",
+    "section": "Importación de información y primera revisión de fuentes demográficas (4 horas)",
+    "text": "Importación de información y primera revisión de fuentes demográficas (4 horas)\n\nImportación de información a R en diferentes formatos\nRevisión de encuestas y ejemplos de importación de datos en formatos diferentes\nRevisión preliminar y limpieza de información\n\nObjetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo data.frame: funciones dplyr::glimpse(), skimr::skim(), manejo de etiquetas y hacer subconjuntos de información"
+  },
+  {
+    "objectID": "index.html#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas",
+    "href": "index.html#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas",
+    "title": "R para el análisis estadístico de datos",
+    "section": "Revisión de elementos estadísticos básicos desde {tidyverse} (8 horas)",
+    "text": "Revisión de elementos estadísticos básicos desde {tidyverse} (8 horas)\n\nTabulados con janitor::tabyl() y uso de factores de expansión con pollster::topline(), pollster::crosstab. Lectura e interpretación de tablas de doble entrada\nEstadística descriptiva básica (medidas de tendencia central, dispersión y de posición) con el paquete {dplyr}\nGráficos univariados y bivariados usando {ggplot2} y extensiones de {ggplot2}\nFusionado de información\n\nObjetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuestas mexicanas"
+  },
+  {
+    "objectID": "index.html#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas",
+    "href": "index.html#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas",
+    "title": "R para el análisis estadístico de datos",
+    "section": "Estimaciones por intervalo y diseño complejo muestral (4 horas)",
+    "text": "Estimaciones por intervalo y diseño complejo muestral (4 horas)\n\nEstimaciones para medias\nEstimaciones para proporciones\nEstimaciones para totales\nEstimaciones lineales de coeficientes\n\nObjetivo: que el estudiantado sea capaz de realizar intervalos de confianza, calculo de errores estándar con diseño muestral complejo y sepa evaluar la confiabilidad de sus estimaciones"
+  },
+  {
+    "objectID": "index.html#ana-ruth-escoto-castillo",
+    "href": "index.html#ana-ruth-escoto-castillo",
+    "title": "R para el análisis estadístico de datos",
+    "section": "Ana Ruth Escoto Castillo",
+    "text": "Ana Ruth Escoto Castillo\nProfesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado."
+  },
+  {
+    "objectID": "instala.html#introducción-a-r",
+    "href": "instala.html#introducción-a-r",
+    "title": "Instalación de R y Rstudio",
+    "section": "Introducción a R",
+    "text": "Introducción a R"
+  },
+  {
+    "objectID": "instala.html#instalación-en-os",
+    "href": "instala.html#instalación-en-os",
+    "title": "Instalación de R y Rstudio",
+    "section": "Instalación en OS",
+    "text": "Instalación en OS\n\nNecesito que instalen la versión más nueva de R: Download R-4.4.0 of MAC. The R-project for statistical computing. https://cran.r-project.org/bin/macosx/\n\nElije la versión de acuerdo a tu procesador, intel o ARM.\n\nInstalar también las herramientas Quartz, xcode y fortran\n\n\nhttps://www.xquartz.org/\nhttps://developer.apple.com/xcode/resources/\nhttps://mac.r-project.org/tools/gfortran-12.2-universal.pkg\n\n\nDespués de eso instalar el Rstudio, que hoy se encuentra alojado en el sitio posit, que vaya acorde con MAC\n\nhttps://posit.co/download/rstudio-desktop/\nAlgunas indicaciones en video, pero son algo viejitas y pueden cambiar las versiones de R.\n\nAlgunas indicaciones en video, pero son algo viejitas y pueden cambiar las versiones de R."
+  },
+  {
+    "objectID": "instala.html#instalación-en-pc",
+    "href": "instala.html#instalación-en-pc",
+    "title": "Instalación de R y Rstudio",
+    "section": "Instalación en PC",
+    "text": "Instalación en PC\n\nNecesito que instalen la versión más nueva de R: Download R-4.4.0 for Windows. The R-project for statistical computing. https://cran.r-project.org/bin/windows/base/\nInstalar también la herramienta RTools https://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html\nDespués de eso instalar el Rstudio, que hoy se encuentra alojado en el sitio posit, que vaya acorde con Windows https://posit.co/download/rstudio-desktop/\n\nAlgunas indicaciones en video, pero son algo viejitas y pueden cambiar las versiones de R."
+  },
+  {
+    "objectID": "instala.html#ojo",
+    "href": "instala.html#ojo",
+    "title": "Instalación de R y Rstudio",
+    "section": "Ojo",
+    "text": "Ojo\nDesde octubre de 2022, RStudio se volvió “Posit”"
+  },
+  {
+    "objectID": "P1.html#introducción",
+    "href": "P1.html#introducción",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.1 Introducción",
+    "text": "1.1 Introducción\nEn RStudio podemos tener varias ventanas que nos permiten tener más control de nuestro “ambiente”, el historial, los “scripts” o códigos que escribimos y por supuesto, tenemos nuestra consola, que también tiene el símbolo “&gt;” con R. Podemos pedir operaciones básicas\n\n2+5\n\n[1] 7\n\n5*3\n\n[1] 15\n\n#Para escribir comentarios y que no los lea como operaciones ponemos el símbolo de gato\n# Lo podemos hacer para un comentario en una línea o la par de una instrucción\n\n1:5               # Secuencia 1-5\n\n[1] 1 2 3 4 5\n\nseq(1, 10, 0.5)   # Secuencia con incrementos diferentes a 1\n\n [1]  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0  7.5  8.0\n[16]  8.5  9.0  9.5 10.0\n\nc('a','b','c')  # Vector con caracteres\n\n[1] \"a\" \"b\" \"c\"\n\n1:7             # Entero\n\n[1] 1 2 3 4 5 6 7\n\n40 &lt; 80         # Valor logico\n\n[1] TRUE\n\n2 + 2 == 5      # Valor logico\n\n[1] FALSE\n\nT == TRUE       # T expresion corta de verdadero\n\n[1] TRUE\n\n\nR es un lenguaje de programación por objetos. Por lo cual vamos a tener objetos a los que se les asigna su contenido. Si usamos una flechita “&lt;-” o “-&gt;” le estamos asignando algo al objeto que apunta la felcha.\n\nx &lt;- 24         # Asignacion de valor 24 a la variable x para su uso posterior (OBJETO)\nx/2             # Uso posterior de variable u objeto x\n\n[1] 12\n\nx               # Imprime en pantalla el valor de la variable u objeto\n\n[1] 24\n\nx &lt;- TRUE       # Asigna el valor logico TRUE a la variable x OJO: x toma el ultimo valor que se le asigna\nx\n\n[1] TRUE"
+  },
+  {
+    "objectID": "P1.html#vectores",
+    "href": "P1.html#vectores",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.2 Vectores",
+    "text": "1.2 Vectores\nLos vectores son uno de los objetos más usados en R.\n\ny &lt;- c(2, 4, 6)     # Vector numerico\ny &lt;- c('Primaria', 'Secundaria') # Vector caracteres\n\nDado que poseen elementos, podemos también observar y hacer operaciones con sus elementos, usando “[ ]” para acceder a ellos\n\ny[2]              # Acceder al segundo valor del vector y\n\n[1] \"Secundaria\"\n\ny[3] &lt;- 'Preparatoria y más' # Asigna valor a la tercera componente del vector\nsex &lt;-1:2         # Asigna a la variable sex los valores 1 y 2\nnames(sex) &lt;- c(\"Femenino\", \"Masculino\") # Asigna nombres al vector de elementos sexo\nsex[2]            # Segundo elemento del vector sex\n\nMasculino \n        2"
+  },
+  {
+    "objectID": "P1.html#matrices",
+    "href": "P1.html#matrices",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.3 Matrices",
+    "text": "1.3 Matrices\nLas matrices son muy importantes, porque nos permiten hacer operaciones y casi todas nuestras bases de datos tendran un aspecto de matriz.\n\nm &lt;- matrix (nrow=2, ncol=3, 1:6, byrow = TRUE) # Matrices Ejemplo 1\nm\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6\n\nm &lt;- matrix (nrow=2, ncol=3, 1:6, byrow = FALSE) # Matrices Ejemplo 1\nm\n\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\ndim(m)\n\n[1] 2 3\n\nattributes(m)\n\n$dim\n[1] 2 3\n\n\n¿Qué hace “byrow”?\n\nn &lt;- 1:6     # Matrices Ejemplo 2\ndim(n) &lt;- c(2,3)\nn\n\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\n\n\nxx &lt;-10:12   # Matrices Ejemplo 3\nyy&lt;-14:16\ncbind(xx,yy) # Une vectores por Columnas\n\n     xx yy\n[1,] 10 14\n[2,] 11 15\n[3,] 12 16\n\nrbind(xx,yy) # Une vectores por Renglones\n\n   [,1] [,2] [,3]\nxx   10   11   12\nyy   14   15   16\n\nmi_matrix&lt;-cbind(xx,yy) # este resultado lo puedo asignar a un objeto"
+  },
+  {
+    "objectID": "P1.html#data.frames-o-conjuntos-de-datos",
+    "href": "P1.html#data.frames-o-conjuntos-de-datos",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.4 data.frames o conjuntos de datos",
+    "text": "1.4 data.frames o conjuntos de datos\n\nmi_dataframe&lt;-as.data.frame(m)\n\nEl formato matricial sigue sirviendo:\n\nmi_dataframe[2,]\n\n  V1 V2 V3\n2  2  4  6\n\nmi_dataframe[,2]\n\n[1] 3 4\n\n\nPero también podemos utilizar el símbolo de peso para cada variable:\n\nmi_dataframe$V2\n\n[1] 3 4\n\n\nPuedo agregar variables columnas:\n\ncbind(mi_dataframe, c(\"a\", \"b\"), c(T, F))\n\n  V1 V2 V3 c(\"a\", \"b\") c(T, F)\n1  1  3  5           a    TRUE\n2  2  4  6           b   FALSE\n\n\nQué pasa con las matrices\n\ncbind(m, c(\"a\", \"b\"),  c(T, F))\n\n     [,1] [,2] [,3] [,4] [,5]   \n[1,] \"1\"  \"3\"  \"5\"  \"a\"  \"TRUE\" \n[2,] \"2\"  \"4\"  \"6\"  \"b\"  \"FALSE\"\n\n\nCheca cómo cambian los elementos. En una matriz todos los elementos deben ser del mismo tipo.\nPodemos crear “a mano” dataframes:\n\ndata&lt;-data.frame(\n  \"entero\" = 1:4, \n  \"factor\" = as.factor(c(\"a\", \"b\", \"c\", \"d\")), \n  \"numero\" = c(1/1, 1/2, 1/3, 1/4),\n  \"cadena\" = as.character(c(\"a\", \"b\", \"c\", \"d\"))\n)\n\nLos data.frames tienen una estructura\n\nstr(data)\n\n'data.frame':   4 obs. of  4 variables:\n $ entero: int  1 2 3 4\n $ factor: Factor w/ 4 levels \"a\",\"b\",\"c\",\"d\": 1 2 3 4\n $ numero: num  1 0.5 0.333 0.25\n $ cadena: chr  \"a\" \"b\" \"c\" \"d\""
+  },
+  {
+    "objectID": "P1.html#valores-y-perdidos",
+    "href": "P1.html#valores-y-perdidos",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.5 Valores y perdidos",
+    "text": "1.5 Valores y perdidos\nAdemás de caracteres, numéricos y lógicos hay también valores perdidos. Y de varios tipos\n\nvector&lt;-c(1:5, # numérico\n          T, # lógico\n          NA, # perdido\n          \"a\", # caracter\n          5/0, # no es un número\n          sqrt(-1))\n\nWarning in sqrt(-1): Se han producido NaNs\n\n\nSi lo imprimimos vamos a ir viendo cómo se convierten ciertos valores a otros al quererlos incluir en un mismo conjunto:\n\nvector\n\n [1] \"1\"    \"2\"    \"3\"    \"4\"    \"5\"    \"TRUE\" NA     \"a\"    \"Inf\"  \"NaN\" \n\n\nQuitaremos el caracter\n\nvector&lt;-c(1:5, # numérico\n          T, # lógico\n          NA, # perdido\n          5/0, # Infinito\n          sqrt(-1))\n\nWarning in sqrt(-1): Se han producido NaNs\n\nvector\n\n[1]   1   2   3   4   5   1  NA Inf NaN\n\n\n¿Qué le pasó al valor lógico?\nHay unos operadores que nos señalan si los valores son perdidos o infinitos o “Not a number”\n\nis.na(vector)\n\n[1] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE\n\nis.nan(vector)\n\n[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE\n\nis.infinite(vector)\n\n[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE"
+  },
+  {
+    "objectID": "P1.html#funciones",
+    "href": "P1.html#funciones",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.6 Funciones",
+    "text": "1.6 Funciones\nAlgunas funciones básicas son las siguientes. Vamos a ir viendo más funciones, pero para entender cómo funcionan, haremos unos ejemplos y cómo pedir ayuda sobre ellas.\n\nsum(10, 20, 30)    # Función suma\n\n[1] 60\n\nrep('R', times = 3) # Repite la letra R el numero de veces que se indica\n\n[1] \"R\" \"R\" \"R\"\n\nsqrt(9)           # Raiz cuadrada de 9\n\n[1] 3"
+  },
+  {
+    "objectID": "P1.html#listas",
+    "href": "P1.html#listas",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.7 Listas",
+    "text": "1.7 Listas\nLas listas son conjuntos de objetos y pueden ser de varios tipos\n\nmilista&lt;- list(data, m, xx, \"a\")\n\n\nmilista\n\n[[1]]\n  entero factor    numero cadena\n1      1      a 1.0000000      a\n2      2      b 0.5000000      b\n3      3      c 0.3333333      c\n4      4      d 0.2500000      d\n\n[[2]]\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\n[[3]]\n[1] 10 11 12\n\n[[4]]\n[1] \"a\"\n\n\nOjo con los corchetes\n\nmilista[[1]]\n\n  entero factor    numero cadena\n1      1      a 1.0000000      a\n2      2      b 0.5000000      b\n3      3      c 0.3333333      c\n4      4      d 0.2500000      d\n\n\nSi queremos ponerle nombres a los elementos\n\nmilista&lt;- list(datos = data, \n               matriz = m, \n               vector = xx,\n               valor = \"a\")\n\nmilista\n\n$datos\n  entero factor    numero cadena\n1      1      a 1.0000000      a\n2      2      b 0.5000000      b\n3      3      c 0.3333333      c\n4      4      d 0.2500000      d\n\n$matriz\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\n$vector\n[1] 10 11 12\n\n$valor\n[1] \"a\""
+  },
+  {
+    "objectID": "P1.html#ayuda",
+    "href": "P1.html#ayuda",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.8 Ayuda",
+    "text": "1.8 Ayuda\nPedir ayuda es indispensable para aprender a escribir nuestros códigos. A prueba y error, es el mejor sistema para aprender. Podemos usar la función help, example y ?\n\nhelp(sum)         # Ayuda sobre función sum\nexample(sum)      # Ejemplo de función sum\n\n\nsum&gt; ## Pass a vector to sum, and it will add the elements together.\nsum&gt; sum(1:5)\n[1] 15\n\nsum&gt; ## Pass several numbers to sum, and it also adds the elements.\nsum&gt; sum(1, 2, 3, 4, 5)\n[1] 15\n\nsum&gt; ## In fact, you can pass vectors into several arguments, and everything gets added.\nsum&gt; sum(1:2, 3:5)\n[1] 15\n\nsum&gt; ## If there are missing values, the sum is unknown, i.e., also missing, ....\nsum&gt; sum(1:5, NA)\n[1] NA\n\nsum&gt; ## ... unless  we exclude missing values explicitly:\nsum&gt; sum(1:5, NA, na.rm = TRUE)\n[1] 15"
+  },
+  {
+    "objectID": "P1.html#mi-ambiente",
+    "href": "P1.html#mi-ambiente",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.9 Mi ambiente",
+    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"            \"has_annotations\" \"m\"               \"mi_dataframe\"   \n [5] \"mi_matrix\"       \"milista\"         \"n\"               \"pandoc_dir\"     \n [9] \"quarto_bin_path\" \"sex\"             \"vector\"          \"x\"              \n[13] \"xx\"              \"y\"               \"yy\"             \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  624615 33.4    1332542 71.2         NA  1332542 71.2\nVcells 1170118  9.0    8388608 64.0      16384  2139725 16.4\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
+  },
+  {
+    "objectID": "P1.html#directorio-de-trabajo",
+    "href": "P1.html#directorio-de-trabajo",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.10 Directorio de trabajo",
+    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/Curso_R_inter/r_analisis_datos/r_analisis_datos\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"P1.qmd\"                 \"P1.rmarkdown\"           \"README.md\"             \n [4] \"_quarto.yml\"            \"datos\"                  \"docs\"                  \n [7] \"index.html\"             \"index.qmd\"              \"instala.html\"          \n[10] \"instala.qmd\"            \"intro1.png\"             \"r_analisis_datos.Rproj\"\n[13] \"site_libs\"             \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
+  },
+  {
+    "objectID": "P1.html#proyectos",
+    "href": "P1.html#proyectos",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.11 Proyectos",
+    "text": "1.11 Proyectos\nPero… a veces preferimos trabajar en proyectos, sobre todo porque nos da más control.\nHay gente que lo dice mejor que yo, como Hadley Wickham: https://es.r4ds.hadley.nz/flujo-de-trabajo-proyectos.html"
+  },
+  {
+    "objectID": "P1.html#instalación-de-paquetes",
+    "href": "P1.html#instalación-de-paquetes",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.12 Instalación de paquetes",
+    "text": "1.12 Instalación de paquetes\nLos paquetes son útiles para realizar funciones especiales. La especialización de paquetes es más rápida en R que en otros programas por ser software libre.\nVamos a instalar el paquete {foreign}, como su nombre lo indica, nos permite leer elementos “extranjeros” en R.\nPara instalar las paqueterías usamos el siguiente comando install.packages() Checa que adentro del paréntesis va el nombre de la librería, con comillas.\nVamos a instalar dos librerías que nos permiten importar formatos.\n\n#install.packages(\"foreign\", dependencies = TRUE)\n#install.packages(\"haven\", dependencies = TRUE)\n\nEste proceso no hay que hacerlo siempre. Si no sólo la primera vez. Una vez instalado un paquete de librería, la llamamos con el comando “library”\n\nlibrary(haven)\nlibrary(foreign)\n\n{foreing} nos permite leer archivos en formato de dBase, con extensión “.dbf”. Si bien no es un formato muy común para los investigadores, sí para los que generan la información, puesto que dBase es uno de los principales programas de administración de bases de datos.\nHe puesto un ejemplo de una base de datos mexicana en dbf, en este formato.\n\nejemplo_dbf&lt;-foreign::read.dbf(\"datos/ejemplo_dbf.DBF\") #checa cómo nos vamos adentro de nuestro directorio\n\nLos :: sirven para tres cosas:\n\ncargar un comando de un paquete, sin haberlo cargado\npara identificar de qué paquete viene el comando.\npara especificar en caso que hayan dos comandos iguales en un paquete, usar el que tenemos de los paquetes."
+  },
+  {
+    "objectID": "P1.html#paquete-pacman",
+    "href": "P1.html#paquete-pacman",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.13 Paquete {pacman}",
+    "text": "1.13 Paquete {pacman}\nEn general, cuando hacemos nuestro código querremos verificar que nuestras librerías estén instaladas. Si actualizamos nuestro R y Rstudio es probable (sobre todo en MAC) que hayamos perdido alguno.\nEste es un ejemplo de un código. Y vamos a introducir un paquete muy útil llamado {pacman}\n\nif (!require(\"pacman\")) install.packages(\"pacman\") # instala pacman si se requiere\n\nLoading required package: pacman\n\npacman::p_load(tidyverse, readxl, writexl, haven, sjlabelled, foreign) #carga los paquetes necesarios para esta práctica\n\nHay muchos formatos de almacenamiento de bases de datos. Vamos a aprender a importar información desde ellos."
+  },
+  {
+    "objectID": "P1.html#estilos",
+    "href": "P1.html#estilos",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.14 Estilos",
+    "text": "1.14 Estilos\nEscribir código tiene su gramática. Por lo general en este curso seguiremos el estilo de Google\nhttps://google.github.io/styleguide/Rguide.html"
+  },
+  {
+    "objectID": "P1.html#ejercicio-1",
+    "href": "P1.html#ejercicio-1",
+    "title": "1  Primer acercamiento al uso del programa",
+    "section": "1.15 Ejercicio 1",
+    "text": "1.15 Ejercicio 1\nReealice en nuevo script lo siguiente:\n\nEscriba un vector “x”, con los elementos 2,3,7,9. Muestre el resultado\nEscriba un vector “y”, con los elementos 9, 7, 3, 2. Muestre el resultado\nEscriba un vector “year” con los años que van desde 1990 a 1993. Muestre el resultado\nEscriba un vector “name” con los nombres de 4 de sus compañeros de curso. Muestre el resultado\nCree una matrix “m” 2x4 que incluya los valores 101 a 108, que se ordene según fila\n¿Cuáles son las dimensiones de la matriz “m”?\nCree una matriz “m2” juntado los vectores “x” y “y”, por sus filas ¿Cuáles son las dimensiones de la matriz “m2”?\nConvierta esa matriz en un data.frame\nEscriba una lista"
+  }
+]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ana Escoto">
-<meta name="dcterms.date" content="2024-10-06">
+<meta name="dcterms.date" content="2024-06-10">
 
 <title>R para el análisis estadístico de datos</title>
 <style>
@@ -38,10 +38,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -91,6 +93,10 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">R para el análisis estadístico de datos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/fcpys/r_analisis_datos/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -132,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#introducción-a-r-y-rstudio-4-horas" id="toc-introducción-a-r-y-rstudio-4-horas" class="nav-link" data-scroll-target="#introducción-a-r-y-rstudio-4-horas">Introducción a R y Rstudio (4 horas)</a></li>
   <li><a href="#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas" id="toc-importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas" class="nav-link" data-scroll-target="#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas">Importación de información y primera revisión de fuentes demográficas (4 horas)</a></li>
-  <li><a href="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" id="toc-revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" class="nav-link" data-scroll-target="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas">Revisión de elementos estadísticos básicos desde “tidyverse” (8 horas)</a></li>
+  <li><a href="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" id="toc-revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" class="nav-link" data-scroll-target="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas">Revisión de elementos estadísticos básicos desde <code>{tidyverse}</code> (8 horas)</a></li>
   <li><a href="#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas" id="toc-estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas" class="nav-link" data-scroll-target="#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas">Estimaciones por intervalo y diseño complejo muestral (4 horas)</a></li>
   </ul></li>
   <li><a href="#facilitadora" id="toc-facilitadora" class="nav-link" data-scroll-target="#facilitadora">Facilitadora</a>
@@ -140,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#ana-ruth-escoto-castillo" id="toc-ana-ruth-escoto-castillo" class="nav-link" data-scroll-target="#ana-ruth-escoto-castillo">Ana Ruth Escoto Castillo</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_analisis_datos/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_analisis_datos/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -164,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 6, 2024</p>
+      <p class="date">June 10, 2024</p>
     </div>
   </div>
   
@@ -190,14 +196,14 @@ ul.task-list li input[type="checkbox"] {
 <p><em>Objetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo <code>data.frame</code>: funciones <code>dplyr::glimpse()</code>, <code>skimr::skim()</code>, manejo de etiquetas y hacer subconjuntos de información</em></p>
 </section>
 <section id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" class="level2">
-<h2 class="anchored" data-anchor-id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas">Revisión de elementos estadísticos básicos desde “tidyverse” (8 horas)</h2>
+<h2 class="anchored" data-anchor-id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas">Revisión de elementos estadísticos básicos desde <code>{tidyverse}</code> (8 horas)</h2>
 <ol type="a">
-<li><p>Tabulados con <code>janitor::tabyl()</code> y uso de factores de expansión con <code>pollster::topline()</code>, <code>pollstter::crosstab</code>. Lectura e interpretación de tablas de doble entrada</p></li>
+<li><p>Tabulados con <code>janitor::tabyl()</code> y uso de factores de expansión con <code>pollster::topline()</code>, <code>pollster::crosstab</code>. Lectura e interpretación de tablas de doble entrada</p></li>
 <li><p>Estadística descriptiva básica (medidas de tendencia central, dispersión y de posición) con el paquete <code>{dplyr}</code></p></li>
 <li><p>Gráficos univariados y bivariados usando <code>{ggplot2}</code> y extensiones de <code>{ggplot2}</code></p></li>
 <li><p>Fusionado de información</p></li>
 </ol>
-<p><em>Objetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuenstas mexicanas</em></p>
+<p><em>Objetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuestas mexicanas</em></p>
 </section>
 <section id="estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas" class="level2">
 <h2 class="anchored" data-anchor-id="estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas">Estimaciones por intervalo y diseño complejo muestral (4 horas)</h2>
@@ -241,6 +247,121 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

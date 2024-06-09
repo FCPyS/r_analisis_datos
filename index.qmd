@@ -14,9 +14,9 @@ c.  Revisión preliminar y limpieza de información
 
 *Objetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo `data.frame`: funciones `dplyr::glimpse()`, `skimr::skim()`, manejo de etiquetas y hacer subconjuntos de información*
 
-## Revisión de elementos estadísticos básicos desde “tidyverse” (8 horas)
+## Revisión de elementos estadísticos básicos desde `{tidyverse}` (8 horas)
 
-a.  Tabulados con `janitor::tabyl()` y uso de factores de expansión con `pollster::topline()`, `pollstter::crosstab`. Lectura e interpretación de tablas de doble entrada
+a.  Tabulados con `janitor::tabyl()` y uso de factores de expansión con `pollster::topline()`, `pollster::crosstab`. Lectura e interpretación de tablas de doble entrada
 
 b.  Estadística descriptiva básica (medidas de tendencia central, dispersión y de posición) con el paquete `{dplyr}`
 
@@ -24,7 +24,7 @@ c.  Gráficos univariados y bivariados usando `{ggplot2}` y extensiones de `{ggp
 
 d.  Fusionado de información
 
-*Objetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuenstas mexicanas*
+*Objetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuestas mexicanas*
 
 ## Estimaciones por intervalo y diseño complejo muestral (4 horas)
 
@@ -38,8 +38,8 @@ d.  Estimaciones lineales de coeficientes
 
 *Objetivo: que el estudiantado sea capaz de realizar intervalos de confianza, calculo de errores estándar con diseño muestral complejo y sepa evaluar la confiabilidad de sus estimaciones*
 
-
 # Facilitadora {.unnumbered}
 
 ## Ana Ruth Escoto Castillo
-Profesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado. 
+
+Profesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado.
