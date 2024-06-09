@@ -10,29 +10,29 @@
     "objectID": "index.html#introducción-a-r-y-rstudio-4-horas",
     "href": "index.html#introducción-a-r-y-rstudio-4-horas",
     "title": "R para el análisis estadístico de datos",
-    "section": "Introducción a R y Rstudio (4 horas)",
-    "text": "Introducción a R y Rstudio (4 horas)\nObjetivo: que el estudiantado sea familiarice con la interfase de trabajo y la programación por objetos, del mismo modo que sean capaces de realizar tareas básicas tales como crear un script, un proyecto, objetos, ambientes e instalar paqueterías."
+    "section": "1. Introducción a R y Rstudio (4 horas)",
+    "text": "1. Introducción a R y Rstudio (4 horas)\nObjetivo: que el estudiantado sea familiarice con la interfase de trabajo y la programación por objetos, del mismo modo que sean capaces de realizar tareas básicas tales como crear un script, un proyecto, objetos, ambientes e instalar paqueterías."
   },
   {
     "objectID": "index.html#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas",
     "href": "index.html#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas",
     "title": "R para el análisis estadístico de datos",
-    "section": "Importación de información y primera revisión de fuentes demográficas (4 horas)",
-    "text": "Importación de información y primera revisión de fuentes demográficas (4 horas)\n\nImportación de información a R en diferentes formatos\nRevisión de encuestas y ejemplos de importación de datos en formatos diferentes\nRevisión preliminar y limpieza de información\n\nObjetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo data.frame: funciones dplyr::glimpse(), skimr::skim(), manejo de etiquetas y hacer subconjuntos de información"
+    "section": "2. Importación de información y primera revisión de fuentes demográficas (4 horas)",
+    "text": "2. Importación de información y primera revisión de fuentes demográficas (4 horas)\n\nImportación de información a R en diferentes formatos\nRevisión de encuestas y ejemplos de importación de datos en formatos diferentes\nRevisión preliminar y limpieza de información\n\nObjetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo data.frame: funciones dplyr::glimpse(), skimr::skim(), manejo de etiquetas y hacer subconjuntos de información"
   },
   {
     "objectID": "index.html#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas",
     "href": "index.html#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas",
     "title": "R para el análisis estadístico de datos",
-    "section": "Revisión de elementos estadísticos básicos desde {tidyverse} (8 horas)",
-    "text": "Revisión de elementos estadísticos básicos desde {tidyverse} (8 horas)\n\nTabulados con janitor::tabyl() y uso de factores de expansión con pollster::topline(), pollster::crosstab. Lectura e interpretación de tablas de doble entrada\nEstadística descriptiva básica (medidas de tendencia central, dispersión y de posición) con el paquete {dplyr}\nGráficos univariados y bivariados usando {ggplot2} y extensiones de {ggplot2}\nFusionado de información\n\nObjetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuestas mexicanas"
+    "section": "3. Revisión de elementos estadísticos básicos desde {tidyverse} (8 horas)",
+    "text": "3. Revisión de elementos estadísticos básicos desde {tidyverse} (8 horas)\n\nTabulados con janitor::tabyl() y uso de factores de expansión con pollster::topline(), pollster::crosstab. Lectura e interpretación de tablas de doble entrada\nEstadística descriptiva básica (medidas de tendencia central, dispersión y de posición) con el paquete {dplyr}\nGráficos univariados y bivariados usando {ggplot2} y extensiones de {ggplot2}\nFusionado de información\n\nObjetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuestas mexicanas"
   },
   {
     "objectID": "index.html#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas",
     "href": "index.html#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas",
     "title": "R para el análisis estadístico de datos",
-    "section": "Estimaciones por intervalo y diseño complejo muestral (4 horas)",
-    "text": "Estimaciones por intervalo y diseño complejo muestral (4 horas)\n\nEstimaciones para medias\nEstimaciones para proporciones\nEstimaciones para totales\nEstimaciones lineales de coeficientes\n\nObjetivo: que el estudiantado sea capaz de realizar intervalos de confianza, calculo de errores estándar con diseño muestral complejo y sepa evaluar la confiabilidad de sus estimaciones"
+    "section": "4. Estimaciones por intervalo y diseño complejo muestral (4 horas)",
+    "text": "4. Estimaciones por intervalo y diseño complejo muestral (4 horas)\n\nEstimaciones para medias\nEstimaciones para proporciones\nEstimaciones para totales\nEstimaciones lineales de coeficientes\n\nObjetivo: que el estudiantado sea capaz de realizar intervalos de confianza, calculo de errores estándar con diseño muestral complejo y sepa evaluar la confiabilidad de sus estimaciones"
   },
   {
     "objectID": "index.html#ana-ruth-escoto-castillo",
@@ -130,7 +130,7 @@
     "href": "P1.html#mi-ambiente",
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.9 Mi ambiente",
-    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"            \"has_annotations\" \"m\"               \"mi_dataframe\"   \n [5] \"mi_matrix\"       \"milista\"         \"n\"               \"pandoc_dir\"     \n [9] \"quarto_bin_path\" \"sex\"             \"vector\"          \"x\"              \n[13] \"xx\"              \"y\"               \"yy\"             \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  624615 33.4    1332542 71.2         NA  1332542 71.2\nVcells 1170118  9.0    8388608 64.0      16384  2139725 16.4\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
+    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"            \"has_annotations\" \"m\"               \"mi_dataframe\"   \n [5] \"mi_matrix\"       \"milista\"         \"n\"               \"pandoc_dir\"     \n [9] \"quarto_bin_path\" \"sex\"             \"vector\"          \"x\"              \n[13] \"xx\"              \"y\"               \"yy\"             \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  624615 33.4    1332548 71.2         NA  1332548 71.2\nVcells 1170118  9.0    8388608 64.0      16384  2139728 16.4\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
   },
   {
     "objectID": "P1.html#directorio-de-trabajo",
