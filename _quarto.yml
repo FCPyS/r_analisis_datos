@@ -5,16 +5,24 @@ project:
 book:
   title: "R para el análisis estadístico de datos"
   author: "Ana Escoto"
-  date: "10/06/2024"
+  date: "06/10/2024"
+  site-url: https://fcpys.github.io/r_analisis_datos/
+  repo-url: https://github.com/fcpys/r_analisis_datos/
+  repo-branch: main
+  repo-actions: [edit, issue]  
   chapters:
     - index.qmd
     - instala.qmd
+    - P1.qmd
 
 
 
 format:
   html:
-    theme: journal
+    theme:
+      light: cosmo
+      dark: darkly
+  
   pdf:
     documentclass: scrreprt
 

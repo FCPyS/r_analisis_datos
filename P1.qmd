@@ -253,7 +253,9 @@ example(sum)      # Ejemplo de función sum
 
 ## Mi ambiente
 
-Todos los objetos que hemos declarado hasta ahora son parte de nuestro "ambiente" (environment). Para saber qué está en nuestro ambiente usamos el comando
+Todos los objetos que hemos declarado hasta ahora son parte de nuestro
+"ambiente" (environment). Para saber qué está en nuestro ambiente usamos
+el comando
 
 ```{r 8}
 ls()
@@ -375,12 +377,12 @@ seguiremos el estilo de Google
 
 ## Ejercicio 1
 
-Reealice en nuevo script lo siguiente:
+Realice en un **nuevo script** lo siguiente:
 
 1.  Escriba un vector “x”, con los elementos 2,3,7,9. Muestre el
     resultado
 
-2.   Escriba un vector “y”, con los elementos 9, 7, 3, 2. Muestre el
+2.  Escriba un vector “y”, con los elementos 9, 7, 3, 2. Muestre el
     resultado
 
 3.  Escriba un vector “year” con los años que van desde 1990 a 1993.
@@ -400,3 +402,6 @@ Reealice en nuevo script lo siguiente:
 8.  Convierta esa matriz en un *data.frame*
 
 9.  Escriba una lista
+
+Entregue su resultado en [este
+formulario](https://docs.google.com/open?id=1xJL2Auj901Bd68RLxYYLe6TM4GeQtUD59Fg3zWmZJpU&usp=drive_fs)
