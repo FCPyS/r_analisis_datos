@@ -175,13 +175,6 @@
     "text": "1.15 Ejercicio 1\nRealice en un nuevo script lo siguiente:\n\nEscriba un vector “x”, con los elementos 2,3,7,9. Muestre el resultado\nEscriba un vector “y”, con los elementos 9, 7, 3, 2. Muestre el resultado\nEscriba un vector “year” con los años que van desde 1990 a 1993. Muestre el resultado\nEscriba un vector “name” con los nombres de 4 de sus compañeros de curso. Muestre el resultado\nCree una matrix “m” 2x4 que incluya los valores 101 a 108, que se ordene según fila\n¿Cuáles son las dimensiones de la matriz “m”?\nCree una matriz “m2” juntado los vectores “x” y “y”, por sus filas ¿Cuáles son las dimensiones de la matriz “m2”?\nConvierta esa matriz en un data.frame\nEscriba una lista\n\nEntregue su resultado en este formulario"
   },
   {
-    "objectID": "P2.html",
-    "href": "P2.html",
-    "title": "2  Manejo de datos: importación, selección y revisión",
-    "section": "",
-    "text": "3 Ejercicio\nEnvíe al siguiente formulario"
-  },
-  {
     "objectID": "P2.html#datos",
     "href": "P2.html#datos",
     "title": "2  Manejo de datos: importación, selección y revisión",
@@ -229,6 +222,13 @@
     "title": "2  Manejo de datos: importación, selección y revisión",
     "section": "2.7 Etiquetas y cómo usarlas",
     "text": "2.7 Etiquetas y cómo usarlas\nPodemos ver que los objetos data.frame\n\nclass(concentradohogar$sexo_jefe)\n\n[1] \"character\"\n\n\n¿Cómo etiquetamos?\n\nCreamos un vector de la etiqueta\nConvertimos la variable a numérica\nUsamos dplyr::mutate() y sjlabelled:set_labels()\n\n\netiqueta_sex&lt;-c(\"Hombre\", \"Mujer\")\n\nconcentradohogar&lt;-concentradohogar %&gt;% \n  mutate(sexo_jefe=as_numeric(sexo_jefe)) %&gt;% # para quitar el \"string\"\n  sjlabelled::set_labels(sexo_jefe, labels=etiqueta_sex) \n\nVeamos hoy nuestra variable\n\nclass(concentradohogar$sexo_jefe)\n\n[1] \"numeric\"\n\nclass(sjlabelled::as_label(concentradohogar$sexo_jefe))\n\n[1] \"factor\"\n\n\n\nconcentradohogar %&gt;% \n  mutate(sexo_jefe=sjlabelled::as_label(sexo_jefe)) %&gt;% \n  tabyl(sexo_jefe)\n\n sexo_jefe     n   percent\n    Hombre 61905 0.6870547\n     Mujer 28197 0.3129453"
+  },
+  {
+    "objectID": "P2.html#ejercicio",
+    "href": "P2.html#ejercicio",
+    "title": "2  Manejo de datos: importación, selección y revisión",
+    "section": "2.8 Ejercicio",
+    "text": "2.8 Ejercicio\n\nEscoja una base con la que usted esté trabajando. Impórtela\nReplique la exploración de la práctica: incluya limpiar nombre, alguna revisión global y, opcionalmente, alguna selección de variables o casos de acuerdo a su interés\nUtilice al menos un comando con {dplyr} para revisar algo\nAdjunte un archivo con información de la base (para que yo verifique su importación.), así como el código en .R\n\nEnvíe al siguiente formulario"
   },
   {
     "objectID": "videos.html#sesión-1",

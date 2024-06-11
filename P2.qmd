@@ -297,7 +297,7 @@ concentradohogar %>%
   tabyl(sexo_jefe)
 ```
 
-# Ejercicio
+## Ejercicio
 
 -   Escoja una base con la que usted esté trabajando. Impórtela
 -   Replique la exploración de la práctica: incluya limpiar nombre, alguna revisión global y, opcionalmente, alguna selección de variables o casos de acuerdo a su interés
