@@ -1,28 +1,41 @@
 # Manejo de datos: importación, selección y revisión
 
-## Previo
+## Datos
 
-Vamos a llamar algunas librerías básicas, el tidyverse (que son muchas librerías) y sjlabelled que nos sirve para el manejo de etiquetas
+Guarda en tu carpeta de datos, la información que está [acá](https://www.dropbox.com/scl/fo/42zy3owbokvfhdg4a9t78/AEPl06bBAvO6Du_zvk6EuVo?rlkey=t9f56pjt0w2nhfnn9otu1zxnm&dl=0) (ayer descargamos algunos archivos, agregué dos más)
+
+## Paquetes
+
+Vamos a llamar algunas paqueterías básicas para la práctica de hoy.
 
 ```{r}
 if (!require("pacman")) install.packages("pacman") # instala pacman si se requiere
-pacman::p_load(tidyverse, haven, sjlabelled, foreign, janitor) #carga los paquetes necesarios para esta práctica
+pacman::p_load(tidyverse,
+               readr,
+               readxl,
+               writexl,
+               haven, 
+               magrittr,
+               skimr,
+               sjlabelled,
+               foreign,
+               janitor) #carga los paquetes necesarios para esta práctica
 ```
 
 ## Importación de datos
 
 ### Desde Excel
 
-El paquete más compatible con RStudio es readxl. A veces, otros paquetes tienen más problemas de configuración entre R y el Java.
+El paquete más compatible con RStudio es `{readxl}`. Como su nombre dice "lee" los archivos de excel
 
 ```{r 3}
 ejemploxl <- readxl::read_excel("datos/ejemplo_xlsx.xlsx", sheet = "para_importar")
 
 ```
 
-Como el nombre de paquete lo indica, sólo lee. Para escribir en este formato, recomiendo el paquete "writexl". Lo instalamos anteriormente.
+Como el nombre de paquete lo indica, sólo lee. Para "escribir" en este formato, recomiendo el paquete `{writexl}`. Lo instalamos anteriormente.
 
-Si quisiéramos exportar un objeto a Excel
+Si quisiéramos exportar un objeto a Excel, se hace de la siguiente forma:
 
 ```{r 5}
 writexl::write_xlsx(ejemploxl, path = "Mi_Exportación.xlsx")
@@ -30,12 +43,12 @@ writexl::write_xlsx(ejemploxl, path = "Mi_Exportación.xlsx")
 
 ### Desde STATA y SPSS
 
-Si bien también se puede realizar desde el paquete foreign. Pero este no importa algunas características como las etiquetas y tampoco funciona con las versiones más nuevas de STATA. Vamos a instalar otro paquete, compatible con el mundo tidyverse.
+Si bien también se puede realizar desde el paquete `{foreign}` Pero este no importa algunas características como las etiquetas y tampoco funciona con las versiones más nuevas de STATA. Vamos a instalar otro paquete, compatible con el mundo `{tidyverse}`.
 
-Recuerda que no hay que instalarlo (viene adentro de tidyverse). Se instalasólo la primera vez. Una vez instalado un paquete, lo llamamos con el comando "library"
+Recuerda que no hay que instalarlo (viene adentro de `{tidyverse}`).
 
 ```{r}
-ehpm_2019 <- haven::read_dta("datos/ehpm_2019.dta", encoding="latin1")
+concentradohogar <- haven::read_dta("datos/concentradohogar.dta")
 ```
 
 !Importante, a R no le gustan los objetos con nombres que empiezan en números
@@ -43,34 +56,68 @@ ehpm_2019 <- haven::read_dta("datos/ehpm_2019.dta", encoding="latin1")
 El paquete haven sí exporta información.
 
 ```{r}
-haven::write_dta(ehpm_2019, "datos/mi_exportación.dta", version = 12)
+haven::write_dta(concentradohogar,
+                 "datos/mi_exportación.dta",
+                 version = 12)
 ```
 
-Con SSPS es muy parecido. Dentro de "haven" hay una función específica para ello.
+Con SSPS es muy parecido. Dentro de `{haven}` hay una función específica para ello.
 
 ```{r}
-#encevi_hogar<- haven::read_sav("datos/encevi_hogar.sav")
+concentradohogarr<- haven::read_sav("datos/concentradohogar.sav")
 
 ```
 
 Para escribir
 
 ```{r}
-#haven::write_sav(ehpm_2019 , "mi_exportacion.sav")
+haven::write_sav(concentradohogar , "mi_exportacion.sav")
 ```
 
 Checa que en todas las exportaciones en los nombres hay que incluir la extensión del programa. Si quieres guardar en un lugar diferente al directorio del trabajo, hay que escribir toda la ruta dentro de la computadora.
 
-## Revisión de nuestra base
+### Desde archivos de texto y de una url
+
+Desde el portal <https://datos.gob.mx/> tenemos acceso a directo a varias fuentes de información, al ser datos abiertos, los archivos de texto son muy comunes.
+
+Leeremos parte de esa información, específicamente de las [proyecciones de CONAPO](https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2020-2070)
+
+```{r}
+mig_inter_quin_proyecciones <- read.csv("https://conapo.segob.gob.mx/work/models/CONAPO/Datos_Abiertos/pry23/02_mig_inter_quinquen_proyecciones.csv")
+names(mig_inter_quin_proyecciones)
+```
+
+```{r}
+mig_inter_quin_proyecciones <- readr::read_csv("https://conapo.segob.gob.mx/work/models/CONAPO/Datos_Abiertos/pry23/02_mig_inter_quinquen_proyecciones.csv")
+names(mig_inter_quin_proyecciones)
+```
+
+
+## Revisión de nuestro conjunto de datos
+
+### con base
 
 Vamos a revisar la base, brevemente la base
 
 ```{r}
-class(ehpm_2019) # tipo de objeto
-names(ehpm_2019) # lista las variables
-head(ehpm_2019) # muestra las primeras 6 líneas
-table(ehpm_2019$r401) # un tabulado simple
+class(concentradohogar) # tipo de objeto
+
+names(concentradohogar) # lista las variables
+
+head(concentradohogar) # muestra las primeras 6 líneas
+
+table(concentradohogar$sexo_jefe) # un tabulado simple
 ```
+
+### Revisión con `{skimr}`
+
+Esto se puede tardar un poquito
+
+```{r}
+skimr::skim(concentradohogar)
+```
+
+
 
 ## Un poquito de `{dplyr}` y limpieza
 
@@ -78,15 +125,20 @@ table(ehpm_2019$r401) # un tabulado simple
 
 R utiliza dos pipes el nativo `|>` y el pipe que está en `{dplyr}` `%>%`. Algunas de las diferencias las puedes checar acá <https://eliocamp.github.io/codigo-r/2021/05/r-pipa-nativa/>
 
-En estas prácticas utilizaremos el segundo, pero son muy parecidos y para que esta instructora recicle algunos de sus códigos viejos. Pero funcionan igual:
+Aquí hay un *tuit*, o *post de x.com* que lo explica bien.
+
+<https://x.com/ArthurWelle/status/1535429654760284161>
+
+En estas prácticas utilizaremos el segundo, son muy parecidos y así esta instructora pueda reciclar algunos de sus códigos viejos. Pero funcionan igual:
 
 ```{r}
-tlaxt322|> #pipe nativo, no necesita instalación
+
+concentradohogar|> #pipe nativo, no necesita instalación
   head()
 ```
 
 ```{r}
-tlaxt322 %>%  #pipe de dplyr, necesita instalación de dplyr en tidyverse
+concentradohogar %>%  #pipe de dplyr, necesita instalación de dplyr en tidyverse
   head()
 ```
 
@@ -97,70 +149,36 @@ Este paso también nos permitirá enseñar otro *pipe* que está en el paquete `
 Los nombres de una base de datos son los nombres de las columnas.
 
 ```{r}
-names(tlaxt322)
-names(ICI_2021)
+names(concentradohogar)
+names(ejemploxl)
 ```
 
 Como vemos en las bases hay mayúsculas, caracteres especiales y demás. Esto lo podemos cambiar
 
 ```{r}
-ICI_2021<-ICI_2021 %>% 
+ejemploxl<-ejemploxl %>% 
   janitor::clean_names()
 
-names(ICI_2021)
+names(ejemploxl)
 ```
 
-Si quisiéramos que la acción quedará de un solo, podemos usar un pipe diferente:
+Si quisiéramos que la acción quedará en una sola operación, podemos usar un pipe diferente:
 
 ```{r}
-tlaxt322%<>% 
+concentradohogar %<>% 
   clean_names()
 
-names(tlaxt322)
+names(concentradohogar)
 ```
 
-## Etiquetas importadas y cómo usarlas
-
-Podemos ver que los objetos "data.frame"(*spoiler*, ya hablaremos de ellos), tiene una clase que se llama "haven_labelled"
-
-```{r}
-
-class(ehpm_2019$r104)
-
-```
-
-¿Esto que significa? Que en el programa original hay alguna etiqueta que podemos usar.
-
-```{r}
-table(ehpm_2019$r104)
-table(sjlabelled::as_label(ehpm_2019$r104))
-
-```
 
 ### Ojeando
 
 ```{r}
-dplyr::glimpse(ehpm_2019)
-dplyr::glimpse(ehpm_2019[,1:10]) # en corchete del lado derecho podemos ojear columnas 
+dplyr::glimpse(concentradohogar)
+dplyr::glimpse(concentradohogar[,1:10]) # en corchete del lado derecho podemos ojear columnas 
 
 ```
-
-Podemos hacer un tipo "labelbook", usando una función que viene de la librería "sjlabelled", "get_labels". Funciona para toda la base o para columnas, o para variables.
-
-```{r}
-#print(get_labels(ehpm_2019)) #todas
-print(get_labels(ehpm_2019[, 1:10])) #de las primeras 10 variables
-print(get_labels(ehpm_2019$actpr2012)) #
-```
-
-En singular nos da las etiquetas de las variables, no de los valores:
-
-```{r}
-#print(get_label(ehpm_2019)) #todas
-print(get_label(ehpm_2019[, 1:10])) #de las primeras 10 variables
-print(get_label(ehpm_2019$actpr2012)) #
-```
-
 ### Selección de casos y de variables
 
 Poco a poco vamos comprendiendo más la lógica de R. Hay varias "formas" de programar. Por lo que no te asustes si varios códigos llegan al mismo resultado
@@ -168,18 +186,18 @@ Poco a poco vamos comprendiendo más la lógica de R. Hay varias "formas" de pro
 Para revisar el contenido de un data frame podemos usar, como lo hicimos anteriormente, el formato basededatos\$var o usar corchete, checa como estas cuatro formas tan el mismo resultado.
 
 ```{r}
-x<-ehpm_2019$aproba1
-x<-ehpm_2019[["aproba1"]]  # ¡Ojo con las comillas! 
-x<-ehpm_2019[,126]
-x<-ehpm_2019[,"aproba1"]
+x<-concentradohogar$ing_cor
+x<-concentradohogar[["ing_cor"]]  # ¡Ojo con las comillas! 
+x<-concentradohogar[,23]
+x<-concentradohogar[,"ing_cor"]
 
 ```
 
 Ahora, con el formato de dplyr podemos llegar a lo mismo
 
 ```{r}
-x<-ehpm_2019 %>% 
-  select(aproba1)
+x<-concentradohogar %>% 
+  dplyr::select(ing_cor)
 ```
 
 ## "Subsetting"
@@ -187,8 +205,8 @@ x<-ehpm_2019 %>%
 Selección "inversa" O sea no "botar algo", es con el negativo. No funciona con todos los formatos
 
 ```{r}
-x<-ehpm_2019 %>% 
-  select(-aproba1)
+x<-concentradohogar %>% 
+  select(-ing_cor)
 
 rm(x) #rm sólo bota objetos
 ```
@@ -196,52 +214,95 @@ rm(x) #rm sólo bota objetos
 Pero con los otros formatos podemos "asignar" valores adentro de un data.frame, y uno de eso valores puede ser "la nada""
 
 ```{r}
-ehpm_2019$aproba2<-ehpm_2019$aproba1
-ehpm_2019$aproba2<-NULL
+concentradohogar$ing_cor2<-concentradohogar$ing_cor
+concentradohogar$ing_cor2<-NULL
+
+concentradohogar %<>% 
+  dplyr::mutate(ing_cor2=ing_cor) # crea o cambia variables
+
+concentradohogar %<>% 
+  dplyr::mutate(ing_cor2=NULL) # crea o cambia variables
 
 ```
 
-De aquí viene esa cuesta en el aprendizaje; tenemos que comprender en qué forma programó el que hizo la librería e incluso a veces cómo aprendió quién te está enseñando o el foro que estás leyendo.
+De aquí viene esa cuesta en el aprendizaje; tenemos que comprender en qué forma programó el que hizo el paquete e incluso a veces cómo aprendió quién te está enseñando o el foro que estás leyendo.
 
 Rara vez utilizamos una base de datos completa, y rara vez queremos hacer operaciones completas con ellas.
 
 Vamos a pedir cosas más específicas y podemos seleccionar observaciones o filas. Como nuestra base de datos es muy grande, guardaremos el filtro o selección en un objeto.
 
 ```{r}
-subset1<-ehpm_2019[ehpm_2019$aproba1>4,]
+subset1<-concentradohogar[concentradohogar$ing_cor>4,]
 ```
 
 También podemos seleccionar columnas
 
 ```{r}
-subset2<- ehpm_2019[, c("r104", "r106", "aproba1")]
+subset2<- concentradohogar[, c("sexo_jefe", "edad_jefe", "ing_cor")]
 ```
 
 podemos combinar los dos tipos de selección
 
 ```{r}
-subset3<- ehpm_2019[(ehpm_2019$aproba1>4 & ehpm_2019$r104==1 ), c("r104", "r106", "aproba1")]
+subset3<- concentradohogar[(concentradohogar$ing_cor>2000 & concentradohogar$sexo_jefe==1 ), c("sexo_jefe", "edad_jefe", "ing_cor")]
 ```
 
-Con dplyr, podemos usar "filter" y "select"
+Con `{dplyr}`, podemos usar `dplyr::filter()` y `dplyr::select`
 
 ```{r}
 
-subset4<-ehpm_2019 %>% 
-  dplyr::filter(aproba1>4 & r104==1) %>%
-    dplyr::select(r104, r106, aproba1)
+subset4<-concentradohogar %>% 
+  dplyr::filter(ing_cor>2000 & sexo_jefe==1) %>%
+  dplyr::select(sexo_jefe, edad_jefe, ing_cor)
 ```
 
-## Leer desde archivos de texto y desde una url
 
-Desde el portal <https://datos.gob.mx/> tenemos acceso a directo a varias fuentes de información, al ser datos abiertos, los archivos de texto son muy comunes.
+## Etiquetas y cómo usarlas
 
-Leeremos parte de esa información, específicamente la de CONAPO <https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2016-2050>
-
-En estas bases hay acentos y otros carecteres especiales del español, por lo que agregaremos una opción de "encoding", de lo contrario da error.
+Podemos ver que los objetos *data.frame*
 
 ```{r}
-mig_inter_quin_proyecciones <- read.csv("http://www.conapo.gob.mx/work/models/CONAPO/Datos_Abiertos/Proyecciones2018/mig_inter_quin_proyecciones.csv", encoding="latin1")
-#View(mig_inter_quin_proyecciones)
-names(mig_inter_quin_proyecciones)
+
+class(concentradohogar$sexo_jefe)
+
 ```
+
+¿Cómo etiquetamos?
+
+1.  Creamos un vector de la etiqueta
+
+2.  Convertimos la variable a numérica
+
+3.  Usamos `dplyr::mutate()` y `sjlabelled:set_labels()`
+
+```{r}
+etiqueta_sex<-c("Hombre", "Mujer")
+
+concentradohogar<-concentradohogar %>% 
+  mutate(sexo_jefe=as_numeric(sexo_jefe)) %>% # para quitar el "string"
+  sjlabelled::set_labels(sexo_jefe, labels=etiqueta_sex) 
+
+```
+
+Veamos hoy nuestra variable
+```{r}
+class(concentradohogar$sexo_jefe)
+class(sjlabelled::as_label(concentradohogar$sexo_jefe))
+
+```
+
+```{r}
+concentradohogar %>% 
+  mutate(sexo_jefe=sjlabelled::as_label(sexo_jefe)) %>% 
+  tabyl(sexo_jefe)
+```
+
+# Ejercicio
+
+-   Escoja una base con la que usted esté trabajando. Impórtela
+-   Replique la exploración de la práctica: incluya limpiar nombre, alguna revisión global y, opcionalmente, alguna selección de variables o casos de acuerdo a su interés
+-   Utilice al menos un comando con `{dplyr}` para revisar algo
+-   Adjunte un archivo con información de la base (para que yo verifique su importación.), así como el código en .R
+
+Envíe al siguiente [formulario](https://forms.gle/kb416LtHPZxRZkSx5)
+
