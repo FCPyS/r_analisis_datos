@@ -23,8 +23,7 @@ format:
     theme:
       light: cosmo
       dark: darkly
-    embed-resources: true
-    smooth-scroll: true
+
    
   pdf:
     documentclass: scrreprt
