@@ -1,0 +1,9 @@
+# Videos y extras {.unnumbered}
+
+
+## Sesión 1
+
+{{< video https://youtu.be/N78ZLRTZeLg >}}
+
+[Código](https://www.dropbox.com/scl/fi/j96hysuu47ykxh5ddk462/P1.R?rlkey=8n104fshanlb3gp6ihmdtxc25&dl=0)
+

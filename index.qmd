@@ -1,6 +1,6 @@
 # Sobre el curso {.unnumbered}
 
-## 1.  Introducción a R y Rstudio (4 horas)
+## 1. Introducción a R y Rstudio (4 horas)
 
 *Objetivo: que el estudiantado sea familiarice con la interfase de trabajo y la programación por objetos, del mismo modo que sean capaces de realizar tareas básicas tales como crear un script, un proyecto, objetos, ambientes e instalar paqueterías*.
 

@@ -130,14 +130,14 @@
     "href": "P1.html#mi-ambiente",
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.9 Mi ambiente",
-    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"         \"m\"            \"mi_dataframe\" \"mi_matrix\"    \"milista\"     \n [6] \"n\"            \"sex\"          \"vector\"       \"x\"            \"xx\"          \n[11] \"y\"            \"yy\"          \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  638767 34.2    1344165 71.8         NA  1344165 71.8\nVcells 1196069  9.2    8388608 64.0      16384  2161045 16.5\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
+    "text": "1.9 Mi ambiente\nTodos los objetos que hemos declarado hasta ahora son parte de nuestro “ambiente” (environment). Para saber qué está en nuestro ambiente usamos el comando\n\nls()\n\n [1] \"data\"         \"m\"            \"mi_dataframe\" \"mi_matrix\"    \"milista\"     \n [6] \"n\"            \"sex\"          \"vector\"       \"x\"            \"xx\"          \n[11] \"y\"            \"yy\"          \n\ngc()           # Garbage collection, reporta memoria en uso\n\n          used (Mb) gc trigger (Mb) limit (Mb) max used (Mb)\nNcells  638780 34.2    1344208 71.8         NA  1344208 71.8\nVcells 1196118  9.2    8388608 64.0      16384  2161106 16.5\n\n\nPara borrar todos nuestros objetos, usamos el siguiente comando, que equivale a usar la escobita de la venta de environment\n\nrm(list=ls())  # Borrar objetos actuales"
   },
   {
     "objectID": "P1.html#directorio-de-trabajo",
     "href": "P1.html#directorio-de-trabajo",
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.10 Directorio de trabajo",
-    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/Curso_R_inter/r_analisis_datos/r_analisis_datos\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"P1.qmd\"                 \"P1.rmarkdown\"           \"README.md\"             \n [4] \"_quarto.yml\"            \"datos\"                  \"docs\"                  \n [7] \"index.html\"             \"index.qmd\"              \"instala.html\"          \n[10] \"instala.qmd\"            \"intro1.png\"             \"r_analisis_datos.Rproj\"\n[13] \"site_libs\"             \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
+    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/Curso_R_inter/r_analisis_datos/r_analisis_datos\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"P1.qmd\"                 \"P1.rmarkdown\"           \"README.md\"             \n [4] \"_quarto.yml\"            \"datos\"                  \"docs\"                  \n [7] \"index.html\"             \"index.qmd\"              \"instala.html\"          \n[10] \"instala.qmd\"            \"intro1.png\"             \"r_analisis_datos.Rproj\"\n[13] \"scripts\"                \"videos.qmd\"            \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
   },
   {
     "objectID": "P1.html#proyectos",
@@ -173,5 +173,12 @@
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.15 Ejercicio 1",
     "text": "1.15 Ejercicio 1\nRealice en un nuevo script lo siguiente:\n\nEscriba un vector “x”, con los elementos 2,3,7,9. Muestre el resultado\nEscriba un vector “y”, con los elementos 9, 7, 3, 2. Muestre el resultado\nEscriba un vector “year” con los años que van desde 1990 a 1993. Muestre el resultado\nEscriba un vector “name” con los nombres de 4 de sus compañeros de curso. Muestre el resultado\nCree una matrix “m” 2x4 que incluya los valores 101 a 108, que se ordene según fila\n¿Cuáles son las dimensiones de la matriz “m”?\nCree una matriz “m2” juntado los vectores “x” y “y”, por sus filas ¿Cuáles son las dimensiones de la matriz “m2”?\nConvierta esa matriz en un data.frame\nEscriba una lista\n\nEntregue su resultado en este formulario"
+  },
+  {
+    "objectID": "videos.html#sesión-1",
+    "href": "videos.html#sesión-1",
+    "title": "Videos y extras",
+    "section": "Sesión 1",
+    "text": "Sesión 1\n\nCódigo"
   }
 ]
