@@ -92,7 +92,6 @@ mig_inter_quin_proyecciones <- readr::read_csv("https://conapo.segob.gob.mx/work
 names(mig_inter_quin_proyecciones)
 ```
 
-
 ## Revisión de nuestro conjunto de datos
 
 ### con base
@@ -116,8 +115,6 @@ Esto se puede tardar un poquito
 ```{r}
 skimr::skim(concentradohogar)
 ```
-
-
 
 ## Un poquito de `{dplyr}` y limpieza
 
@@ -171,7 +168,6 @@ concentradohogar %<>%
 names(concentradohogar)
 ```
 
-
 ### Ojeando
 
 ```{r}
@@ -179,6 +175,7 @@ dplyr::glimpse(concentradohogar)
 dplyr::glimpse(concentradohogar[,1:10]) # en corchete del lado derecho podemos ojear columnas 
 
 ```
+
 ### Selección de casos y de variables
 
 Poco a poco vamos comprendiendo más la lógica de R. Hay varias "formas" de programar. Por lo que no te asustes si varios códigos llegan al mismo resultado
@@ -256,7 +253,6 @@ subset4<-concentradohogar %>%
   dplyr::select(sexo_jefe, edad_jefe, ing_cor)
 ```
 
-
 ## Etiquetas y cómo usarlas
 
 Podemos ver que los objetos *data.frame*
@@ -285,6 +281,7 @@ concentradohogar<-concentradohogar %>%
 ```
 
 Veamos hoy nuestra variable
+
 ```{r}
 class(concentradohogar$sexo_jefe)
 class(sjlabelled::as_label(concentradohogar$sexo_jefe))
@@ -305,4 +302,3 @@ concentradohogar %>%
 -   Adjunte un archivo con información de la base (para que yo verifique su importación.), así como el código en .R
 
 Envíe al siguiente [formulario](https://forms.gle/kb416LtHPZxRZkSx5)
-

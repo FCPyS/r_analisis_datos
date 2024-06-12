@@ -15,3 +15,9 @@
 [Código](https://www.dropbox.com/scl/fi/d518ahm0d9im3k84a0i89/P2.R?rlkey=5fg027qn7h0yak3nq3j3svnnr&dl=0)
 
 Sitio web [demos](https://fcpys.github.io/demos)
+
+## Cheatsheets
+
+### `{dplyr}`
+
+La puedes descargar de [aquí](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
