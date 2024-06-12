@@ -1,4 +1,4 @@
-# Revisión de elementos estadísticos básicos desde {tidyverse}
+# Revisión de elementos estadísticos básicos
 
 ## Análisis descriptivo
 
@@ -417,7 +417,6 @@ Esto en base sería similar a
 names(concentradohogar)[128]<-"grupo_edad2"
 names(concentradohogar)
 ```
-
 
 ## Ejercicio 3
 
