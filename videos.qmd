@@ -6,15 +6,22 @@
 
 [Código](https://www.dropbox.com/scl/fi/j96hysuu47ykxh5ddk462/P1.R?rlkey=8n104fshanlb3gp6ihmdtxc25&dl=0)
 
-
 ## Sesión 2
 
 {{< video https://youtu.be/w2c45eNz5_0 >}}
 
-
 [Código](https://www.dropbox.com/scl/fi/d518ahm0d9im3k84a0i89/P2.R?rlkey=5fg027qn7h0yak3nq3j3svnnr&dl=0)
 
 Sitio web [demos](https://fcpys.github.io/demos)
+
+## Sesión 3
+
+{{< video hhttps://youtu.be/XBXzgVZ4Rs4 >}}
+
+[Código](https://www.dropbox.com/scl/fi/tc4vl27sdru3176b3r3pw/P3.R?rlkey=m85ur2ig6xjvdihly5pcddl52&dl=0)
+
+Jamboard repaso de paquetes [aquí](https://jamboard.google.com/d/19Wt96KtCsklDNnvPINrjP-t_f4kIZWkqHbbQI6Ku3B8/edit?usp=sharing)
+
 
 ## Cheatsheets
 
