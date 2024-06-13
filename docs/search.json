@@ -231,13 +231,6 @@
     "text": "2.8 Ejercicio\n\nEscoja una base con la que usted esté trabajando. Impórtela\nReplique la exploración de la práctica: incluya limpiar nombre, alguna revisión global y, opcionalmente, alguna selección de variables o casos de acuerdo a su interés\nUtilice al menos un comando con {dplyr} para revisar algo\nAdjunte un archivo con información de la base (para que yo verifique su importación.), así como el código en .R\n\nEnvíe al siguiente formulario"
   },
   {
-    "objectID": "P3.html",
-    "href": "P3.html",
-    "title": "3  Revisión de elementos estadísticos básicos",
-    "section": "",
-    "text": "4 _at muchas operaciones de {dplyr}\nEste es un sufijo que funciona en algunos verbos de {dplyr} y permite hacer una operación en varias variables al mismo tiempo, funciona con vars()"
-  },
-  {
     "objectID": "P3.html#análisis-descriptivo",
     "href": "P3.html#análisis-descriptivo",
     "title": "3  Revisión de elementos estadísticos básicos",
@@ -294,11 +287,18 @@
     "text": "3.8 Grammar of tables\nY si queremos este tabulado más bonito\n\nconcentradohogar %>% \n  tabyl(quintil1,quintil2) %>% \n  adorn_totals(c(\"row\", \"col\")) %>% \n  gt()\n\n\n\n\n\n  \n    \n      quintil1\n      1\n      2\n      3\n      4\n      5\n      Total\n    \n  \n  \n    1\n15746\n3086\n168\n0\n0\n19000\n    2\n4888\n9425\n3785\n320\n0\n18418\n    3\n119\n5936\n8122\n3712\n44\n17933\n    4\n0\n304\n5628\n9191\n2621\n17744\n    5\n0\n0\n0\n3731\n13276\n17007\n    Total\n20753\n18751\n17703\n16954\n15941\n90102\n  \n  \n  \n\n\n\n\nconcentradohogar %>%\ntabyl(quintil1,quintil2) %>%\nadorn_totals(c(\"row\", \"col\")) %>% \ngt() %>% \ntab_header( title = md(\"Distribución de los hogares en **México**\"),\n            subtitle = md(\"Según quintiles y *quintiles*\")) %>%\ntab_footnote( footnote = paste(get_label(concentradohogar\\$ing_cor)))"
   },
   {
+    "objectID": "P3.html#at-muchas-operaciones-de-dplyr",
+    "href": "P3.html#at-muchas-operaciones-de-dplyr",
+    "title": "3  Revisión de elementos estadísticos básicos",
+    "section": "3.9 _at muchas operaciones de {dplyr}",
+    "text": "3.9 _at muchas operaciones de {dplyr}\nEste es un sufijo que funciona en algunos verbos de {dplyr} y permite hacer una operación en varias variables al mismo tiempo, funciona con vars()\n\n3.9.1 dplyr::mutate_at()\n\nconcentradohogar %>% \n  dplyr::mutate_at(vars(clase_hog, sexo_jefe), ~ as_label(.x)) %>% # ojo con la coma y con el punto\n  tabyl(clase_hog, sexo_jefe)\n\n    clase_hog Hombre Mujer\n  unipersonal   6519  5367\n      nuclear  41919 13621\n     ampliado  12898  8888\n    compuesto    372   211\n corresidente    197   110\n\n\n\n\n3.9.2 dplyr::rename_at()\nPrimero revisemos la opción paste y paste0\n\npaste(\"a\",\"b\", sep=\"_\")\n\n[1] \"a_b\"\n\npaste(\"a\",\"b\")\n\n[1] \"a b\"\n\npaste0(\"a\",\"b\")\n\n[1] \"ab\"\n\n\n\nconcentradohogar %>% \n  dplyr::rename_at(vars(clase_hog, sexo_jefe), ~ paste0(.x, \"_2022\")) %>% # sufijo\n  select(clase_hog_2022, sexo_jefe_2022)\n\n# A tibble: 90,102 × 2\n   clase_hog_2022 sexo_jefe_2022\n            <dbl>          <dbl>\n 1              3              2\n 2              2              1\n 3              2              1\n 4              3              1\n 5              1              1\n 6              2              1\n 7              2              2\n 8              1              2\n 9              2              2\n10              2              1\n# ℹ 90,092 more rows\n\n\n\nconcentradohogar %>% \n  dplyr::rename_at(vars(clase_hog, sexo_jefe), ~ paste0(\"desc_\", .x)) %>% # prefijo\n  select(starts_with(\"desc\"))\n\n# A tibble: 90,102 × 2\n   desc_clase_hog desc_sexo_jefe\n            <dbl>          <dbl>\n 1              3              2\n 2              2              1\n 3              2              1\n 4              3              1\n 5              1              1\n 6              2              1\n 7              2              2\n 8              1              2\n 9              2              2\n10              2              1\n# ℹ 90,092 more rows"
+  },
+  {
     "objectID": "P3.html#ejercicio-3",
     "href": "P3.html#ejercicio-3",
     "title": "3  Revisión de elementos estadísticos básicos",
-    "section": "4.1 Ejercicio 3",
-    "text": "4.1 Ejercicio 3\n\nGenere una tabla de frecuencias o una tabla de estadísticas con su conjunto de datos con al menos dos variables\nRecuerde respetar las características de sus variables.\n\nEnvíelo al siguiente formulario"
+    "section": "3.10 Ejercicio 3",
+    "text": "3.10 Ejercicio 3\n\nGenere una tabla de frecuencias o una tabla de estadísticas con su conjunto de datos con al menos dos variables\nRecuerde respetar las características de sus variables.\n\nEnvíelo al siguiente formulario"
   },
   {
     "objectID": "videos.html#sesión-1",

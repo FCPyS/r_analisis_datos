@@ -557,7 +557,7 @@ tab_header( title = md("Distribución de los hogares en **México**"),
 tab_footnote( footnote = paste(get_label(concentradohogar\$ing_cor)))
 ```
 
-# _at muchas operaciones de `{dplyr}`
+## _at muchas operaciones de `{dplyr}`
 
 Este es un sufijo que funciona en algunos verbos de `{dplyr}` y permite hacer una operación en varias variables al mismo tiempo, funciona con vars()
 
