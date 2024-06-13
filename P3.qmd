@@ -418,6 +418,183 @@ names(concentradohogar)[128]<-"grupo_edad2"
 names(concentradohogar)
 ```
 
+## Creación de intervalos con cortes
+
+Uno de los elementos más comunes es crear grupos. Por ejemplo, la función `cut()`, nos ayuda a crear variables con ciertos cortes. Por ejemplo, para recodificar por grupos etarios
+
+```{r}
+concentradohogar %<>% 
+  mutate(grupo=cut(edad_jefe,
+                   breaks=c(0, 25, 50, 75, 100)))
+  
+       
+concentradohogar %>% 
+  tabyl(grupo)
+```
+
+Algunas opciones se pueden modificar dentro de la función `cut()`
+
+```{r}
+concentradohogar %<>% 
+  mutate(grupo=cut(edad_jefe,
+                   breaks=c(0, 25, 50, 75, 100),
+                   include.lowest=T,
+                   right= F))
+  
+       
+concentradohogar %>% 
+  tabyl(grupo)
+
+```
+
+Esto nos puede ayudar para hacer variables de rangos de cualquier tipo.
+
+## Creación de quintiles
+
+Otro tipo de variables de intervalos muy importante son los quintiles y otras medidas de posición.
+
+```{r}
+concentradohogar %<>%
+  mutate(quintil0=ntile(ing_cor, n=5))
+
+concentradohogar %>% 
+  tabyl(quintil0)
+```
+
+Pero quizás nos interesa más los quintiles que toman en cuenta el factor de expansión, por eso usamos el paquete `{dineq}`
+
+```{r}
+
+concentradohogar %<>%
+  mutate(quintil1=dineq::ntiles.wtd(ing_cor, # variable a utilizar
+                                    n=5, # número de grupos equitativos
+                                    weights=factor)) # factor
+
+concentradohogar %>% 
+  tabyl(quintil1)
+
+concentradohogar %>% 
+  count(quintil1, wt=factor) %>% 
+  mutate(p=n/sum(n)*100) %>%
+  adorn_totals()
+```
+
+Podemos también ver la diferencia en los máximos y minimos de ambas variables
+
+```{r}
+concentradohogar %>% 
+  group_by(quintil0) %>% 
+  summarise(min=min(ing_cor),
+            max=max(ing_cor))
+```
+
+Veamos con la ponderación:
+
+```{r}
+concentradohogar %>% 
+  group_by(quintil1) %>% 
+  summarise(min=min(ing_cor),
+            max=max(ing_cor))
+```
+
+La flexibilidad de dplyr nos permite además hacer quintiles fácilmente adentro de grupos. Por ejemplo si quisiéramos hacer quintiles estatales... Claro para eso debemos tener la variable.
+
+La variable "ubica_geo", nos da esa información pero junta
+
+```{r}
+concentradohogar %>% 
+  select(ubica_geo) %>% 
+  head
+
+```
+
+Vamos a crear dos variables, uan que nos diga la entidad y la otra el municipio
+
+```{r}
+concentradohogar %<>%
+  mutate(ent=stringr::str_sub(ubica_geo, start = 1, end = 2)) %>% 
+  mutate(mun=stringr::str_sub(ubica_geo, start = 3, end = 5))
+
+concentradohogar %>% tabyl(ent)
+concentradohogar %>% tabyl(mun)
+  
+```
+
+Hoy sí podemos hacer nuestras variables dentro de cada entidad federativa
+
+```{r}
+concentradohogar %<>%
+  group_by(ent) %>% 
+  mutate(quintil2=dineq::ntiles.wtd(ing_cor, n=5, weights=factor)) %>% 
+  ungroup()
+```
+
+¿Discreparán muchos los hogares en sus distribuciones a nivel nacional y por entidad?
+
+```{r}
+concentradohogar %>% 
+  tabyl(quintil1,quintil2) %>% 
+  adorn_totals(c("row", "col"))
+```
+
+## Grammar of tables
+Y si queremos este tabulado más bonito
+
+```{r}
+concentradohogar %>% 
+  tabyl(quintil1,quintil2) %>% 
+  adorn_totals(c("row", "col")) %>% 
+  gt()
+```
+
+```         
+concentradohogar %>%
+tabyl(quintil1,quintil2) %>%
+adorn_totals(c("row", "col")) %>% 
+gt() %>% 
+tab_header( title = md("Distribución de los hogares en **México**"),
+            subtitle = md("Según quintiles y *quintiles*")) %>%
+tab_footnote( footnote = paste(get_label(concentradohogar\$ing_cor)))
+```
+
+# _at muchas operaciones de `{dplyr}`
+
+Este es un sufijo que funciona en algunos verbos de `{dplyr}` y permite hacer una operación en varias variables al mismo tiempo, funciona con vars()
+
+###  `dplyr::mutate_at()`
+
+```{r}
+concentradohogar %>% 
+  dplyr::mutate_at(vars(clase_hog, sexo_jefe), ~ as_label(.x)) %>% # ojo con la coma y con el punto
+  tabyl(clase_hog, sexo_jefe)
+```
+
+###  `dplyr::rename_at()`
+
+Primero revisemos la opción paste y paste0
+```{r}
+paste("a","b", sep="_")
+paste("a","b")
+paste0("a","b")
+
+```
+
+
+
+
+```{r}
+concentradohogar %>% 
+  dplyr::rename_at(vars(clase_hog, sexo_jefe), ~ paste0(.x, "_2022")) %>% # sufijo
+  select(clase_hog_2022, sexo_jefe_2022)
+```
+
+```{r}
+concentradohogar %>% 
+  dplyr::rename_at(vars(clase_hog, sexo_jefe), ~ paste0("desc_", .x)) %>% # prefijo
+  select(starts_with("desc"))
+```
+
+
 ## Ejercicio 3
 
 -   Genere una tabla de frecuencias o una tabla de estadísticas con su conjunto de datos con al menos dos variables
