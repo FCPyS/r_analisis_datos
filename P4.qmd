@@ -1,6 +1,6 @@
 # Revisión de elementos estadísticos básicos (II)
 
-## Paquetes 
+## Paquetes
 
 ```{r}
 if (!require("pacman")) install.packages("pacman") # instala pacman si se requiere
@@ -19,7 +19,6 @@ pacman::p_load(tidyverse,
 )
 ```
 
-
 ## Presentación
 
 Aquí dejo la presentación
@@ -32,18 +31,15 @@ Aquí dejo la presentación
 
 Vamos a trabajar con esta base de datos de la ENIGH 2022, que tiene tablas separadas:
 
-* viviendas
+-   viviendas
 
-* ingresos
+-   ingresos
 
-* población 
+-   población
 
-Ademas de la que ya tenemos de concentradohogar 
-Las puedes descargar desde
+Ademas de la que ya tenemos de concentradohogar Las puedes descargar desde
 
-[aquí](https://www.dropbox.com/scl/fo/vft7ua44ihxhgr8sdwgn0/h?rlkey=5q1j1ryuexjqet3b0r782y86e&dl=0), son todas las que tienen extensión ".sav". 
-
-
+[aquí](https://www.dropbox.com/scl/fo/42zy3owbokvfhdg4a9t78/AEPl06bBAvO6Du_zvk6EuVo?rlkey=t9f56pjt0w2nhfnn9otu1zxnm&dl=0), son todas las que tienen extensión ".sav".
 
 Hoy cargamos la versión seccionada de la base
 
@@ -299,9 +295,7 @@ merge_data3<-poblacion %>% # pongo el conjunto que será la "izquierda
 dim(merge_data3)
 ```
 
-
 ## Visualización de datos
-
 
 Incluimos los cambios anteriores
 
@@ -334,10 +328,9 @@ concentradohogar <- concentradohogar %>%
   
 ```
 
-
-
 ### ¿Cuál es el mejor gráfico?
-Hay cursos específicos de visualización de datos. Es maravilloso pero también requiere que estudiemos bien qué tipo de datos tenemos y cuáles son nuestros objetivos. 
+
+Hay cursos específicos de visualización de datos. Es maravilloso pero también requiere que estudiemos bien qué tipo de datos tenemos y cuáles son nuestros objetivos.
 
 Me gusta mucho este recurso: <https://www.data-to-viz.com/>
 
@@ -363,21 +356,21 @@ Hoy vamos a presentar a un gran paquete ¡Es de los famosos! Y tiene más de die
 
 Algunos recursos para aprender ggplot
 
-* <https://ggplot2-book.org/> hecha por el mero mero.
+-   <https://ggplot2-book.org/> hecha por el mero mero.
 
-* <http://sape.inf.usi.ch/quick-reference/ggplot2> 
+-   <http://sape.inf.usi.ch/quick-reference/ggplot2>
 
-* <https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf>
+-   <https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf>
 
 Vamos a revisar una presentación que es muy interesante
 
-* <https://evamaerey.github.io/ggplot2_grammar_guide/ggplot2_grammar_guide.html>
+-   <https://evamaerey.github.io/ggplot2_grammar_guide/ggplot2_grammar_guide.html>
 
-* <https://huygens.science.uva.nl/ggPlotteR/> Hace gráficos de ggplot con la base de datos de Gapminder
+-   <https://huygens.science.uva.nl/ggPlotteR/> Hace gráficos de ggplot con la base de datos de Gapminder
 
 ### Un lienzo para dibujar
 
-Para hacer un gráfico, `{ggplot2}` tiene el comando `ggplot()`.  Hacer gráficos con esta función tiene una lógica  aditiva. Lo ideal es que iniciemos estableciendo el mapeo estético de nuestro gráfico, con el comando aes()
+Para hacer un gráfico, `{ggplot2}` tiene el comando `ggplot()`. Hacer gráficos con esta función tiene una lógica aditiva. Lo ideal es que iniciemos estableciendo el mapeo estético de nuestro gráfico, con el comando aes()
 
 ```{r}
 concentradohogar %>%
@@ -391,7 +384,6 @@ g1<-concentradohogar %>%
 g1 ## imprime el lienzo
 ```
 
-
 ### Gráficos univariados
 
 #### Para cualitativas
@@ -402,7 +394,6 @@ Sabemos que la mejor son las barras
 g1 +
   geom_bar()
 ```
-
 
 ```{r}
 g1 +  geom_bar(aes(
@@ -420,6 +411,7 @@ concentradohogar %>%
 ```
 
 #### Para variables cuantitativas
+
 Podemos hacer histogramas y gráficos de densidad, de manera fácil. La idea es agregar en nuestro "lienzo" una geometría, un valor para dibujar en él. Esto se agrega con un "+" y con la figura que se añadirá a nuestro gráfico.
 
 ```{r}
@@ -435,17 +427,15 @@ g2 ## imprime el lienzo
 g2 + geom_histogram() 
 ```
 
-
 #### Densidad
+
 ```{r}
 g2 + geom_density()
 ```
 
-
 #### Gráficos bivariados
 
 ##### Cuali-cuali
-
 
 ```{r}
 g1 +  geom_bar(aes(fill = as_label(clase_hog)),
@@ -465,37 +455,33 @@ g_bivariado
 
 ### Escalas de color
 
-#### `{RcolorBrewer}` 
+#### `{RcolorBrewer}`
 
 ```{r}
 RColorBrewer::display.brewer.all()
 ```
-
 
 ```{r}
 
 g_bivariado + scale_fill_brewer(palette = "Dark2")
 ```
 
-#### `{viridis}` 
-
+#### `{viridis}`
 
 ```{r}
 g_bivariado + scale_fill_viridis_d()
 ```
 
+#### `{wesanderson}`
 
-#### `{wesanderson}` 
 ```{r}
 wesanderson::wes_palettes
 ```
-
 
 ```{r}
 wesanderson::wes_palette("IsleofDogs1", n=5)
 mi_paleta <- wesanderson::wes_palette("IsleofDogs1", n=5)
 ```
-
 
 ```{r}
 g_bivariado + scale_fill_manual(values=mi_paleta)
@@ -510,7 +496,7 @@ g_bivariado + scale_fill_brewer(palette = "Dark2") + theme_minimal()
 
 ```
 
-Si queremos que sean horizontales (como debe ser) 
+Si queremos que sean horizontales (como debe ser)
 
 ```{r}
 g_bivariado + 
@@ -520,10 +506,9 @@ g_bivariado +
 
 ```
 
-
 ### Un atajo `{esquisse}`
 
-Si la lógica de las capas y lienzos  parece un poco complicada para graficar con `{ggplot2}`, el paquete "esquisse" tiene un complemento. Cuando lo instalamos con pacman más arriba, se puede observar el complemento:
+Si la lógica de las capas y lienzos parece un poco complicada para graficar con `{ggplot2}`, el paquete "esquisse" tiene un complemento. Cuando lo instalamos con pacman más arriba, se puede observar el complemento:
 
 ## Ejercicio
 
