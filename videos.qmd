@@ -22,9 +22,22 @@ Sitio web [demos](https://fcpys.github.io/demos)
 
 Jamboard repaso de paquetes [aquí](https://jamboard.google.com/d/19Wt96KtCsklDNnvPINrjP-t_f4kIZWkqHbbQI6Ku3B8/edit?usp=sharing)
 
-
 ## Cheatsheets
 
 ### `{dplyr}`
 
-La puedes descargar de [aquí](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+[Inglés](https://rstudio.github.io/cheatsheets/data-transformation.pdf)
+
+[Español](https://rstudio.github.io/cheatsheets/translations/spanish/data-transformation_es.pdf)
+
+### Data import `{readr}`
+
+[Inglés](https://rstudio.github.io/cheatsheets/data-import.pdf)
+
+[Español](https://rstudio.github.io/cheatsheets/translations/spanish/data-import_es.pdf)
+
+### `{ggplot2}`
+
+[Inglés](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+
+[Español](https://rstudio.github.io/cheatsheets/translations/spanish/data-visualization_es.pdf)

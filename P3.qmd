@@ -538,6 +538,7 @@ concentradohogar %>%
 ```
 
 ## Grammar of tables
+
 Y si queremos este tabulado más bonito
 
 ```{r}
@@ -557,11 +558,11 @@ tab_header( title = md("Distribución de los hogares en **México**"),
 tab_footnote( footnote = paste(get_label(concentradohogar\$ing_cor)))
 ```
 
-## _at muchas operaciones de `{dplyr}`
+## \_at muchas operaciones de `{dplyr}`
 
 Este es un sufijo que funciona en algunos verbos de `{dplyr}` y permite hacer una operación en varias variables al mismo tiempo, funciona con vars()
 
-###  `dplyr::mutate_at()`
+### `dplyr::mutate_at()`
 
 ```{r}
 concentradohogar %>% 
@@ -569,18 +570,16 @@ concentradohogar %>%
   tabyl(clase_hog, sexo_jefe)
 ```
 
-###  `dplyr::rename_at()`
+### `dplyr::rename_at()`
 
 Primero revisemos la opción paste y paste0
+
 ```{r}
 paste("a","b", sep="_")
 paste("a","b")
 paste0("a","b")
 
 ```
-
-
-
 
 ```{r}
 concentradohogar %>% 
@@ -593,7 +592,6 @@ concentradohogar %>%
   dplyr::rename_at(vars(clase_hog, sexo_jefe), ~ paste0("desc_", .x)) %>% # prefijo
   select(starts_with("desc"))
 ```
-
 
 ## Ejercicio 3
 

@@ -16,6 +16,7 @@ book:
     - P1.qmd
     - P2.qmd
     - P3.qmd
+    - P4.qmd
     - videos.qmd
 
 
@@ -27,8 +28,8 @@ format:
       dark: darkly
 
    
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
 
 editor: visual
 

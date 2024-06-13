@@ -1,0 +1,530 @@
+# Revisión de elementos estadísticos básicos (II)
+
+## Paquetes 
+
+```{r}
+if (!require("pacman")) install.packages("pacman") # instala pacman si se requiere
+pacman::p_load(tidyverse,
+               writexl, 
+               haven,
+               sjlabelled, 
+               janitor,
+               magrittr,
+               GGally,
+               wesanderson,
+               RColorBrewer,
+               viridis,
+               ggthemes,
+               esquisse
+)
+```
+
+
+## Presentación
+
+Aquí dejo la presentación
+
+<iframe src="./s3fusionado_ppt2023.pdf" title="Fusionado" width="600" height="400">
+
+</iframe>
+
+## Fusionado de conjuntos de datos
+
+Vamos a trabajar con esta base de datos de la ENIGH 2022, que tiene tablas separadas:
+
+* viviendas
+
+* ingresos
+
+* población 
+
+Ademas de la que ya tenemos de concentradohogar 
+Las puedes descargar desde
+
+[aquí](https://www.dropbox.com/scl/fo/vft7ua44ihxhgr8sdwgn0/h?rlkey=5q1j1ryuexjqet3b0r782y86e&dl=0), son todas las que tienen extensión ".sav". 
+
+
+
+Hoy cargamos la versión seccionada de la base
+
+```{r}
+viviendas <- haven::read_sav("datos/viviendas.sav")
+concentradohogar <- haven::read_sav("datos/concentradohogar.sav")
+poblacion<- haven::read_sav("datos/poblacion.sav")
+
+
+```
+
+### Juntando bases
+
+Muchas bases de datos están organizadas en varias tablas. La ventaja de la programación por objetos de R, nos permite tener las bases cargadas en nuestro ambiente y llamarlas y juntarlas cuando sea necesario.
+
+```{r}
+dim(viviendas)
+names(viviendas[,1:15])
+
+dim(concentradohogar)
+names(concentradohogar[,1:15])
+
+dim(poblacion)
+names(poblacion[,1:15])
+
+
+```
+
+Para juntar bases usamos el comando `merge()`
+
+En `by =` ponemos el `id`, correspondiente a la variable o variables que lo conforman, de manera entrecomillada o de vector. Cuando estamos mezclando bases del mismo nivel de análisis el `id` es igual en ambas bases. Cuando estamos incorporando información de bases de distinto nivel debemos escoger el nivel mayor.
+
+En este caso, sabemos que a una vivienda corresponde más de un hogar (1 a muchos). Esto se puede revisar documentación, sabemos que el `id` de la tabla `viviendas` es `folioviv`
+
+```{r}
+merge_data<- merge(viviendas,concentradohogar, by="folioviv")
+
+```
+
+Esto es equivalente a `left_join()` de `{dplyr}`
+
+```{r}
+merge_data <- dplyr::left_join(viviendas,concentradohogar, by="folioviv") 
+
+merge_data <- viviendas %>% 
+  dplyr::left_join(concentradohogar, by="folioviv") 
+
+
+```
+
+Revisemos la base creada
+
+```{r}
+names(merge_data)
+dim(merge_data)
+
+```
+
+Algunos elementos
+
+(1) El orden de las variables corresponde al orden que pusimos las bases en las opciones.
+
+(2) También vemos que las variables que se repetían en ambas bases se repiten en la nueva base,con un sufijo `.x`, para lo que proviene de la primera base y con `.y`, lo que proviene de la segunda. R dejará las variables intactas y son coincidentes, en nuestro caso, porque las variables son iguales. R hace esto para prever que por error tengamos alguna variable con un nombre igual y no sea la misma en su contenido.
+
+### Merge con id compuesto
+
+Los identificadores pueden estar compuestos de más de una variable:
+
+-   Viviendas `viviendas` es `folioviv`
+
+```{r}
+viviendas %>% 
+  janitor::get_dupes(folioviv)
+```
+
+-   concentradohogar `concentrado` es `c("folioviv", "foliohog")`
+
+```{r}
+concentradohogar %>% 
+  janitor::get_dupes(c(folioviv, foliohog))
+```
+
+-   Poblacion `individuos` es `c("folioviv", "foliohog", "numren")`
+
+```{r}
+poblacion %>% 
+  janitor::get_dupes(c(folioviv, foliohog, numren))
+```
+
+Esto es un `id compuesto`. No es una sola variable. Para esto modificamos ligeramente cómo ponemos el `by =`, pero siempre eligiendo el id de la base de mayor nivel. (Tené cuidado con los paréntesis)
+
+```{r}
+merge_data2<- merge(concentradohogar, poblacion, 
+                    by = c("folioviv", "foliohog"))
+dim(merge_data2)
+
+```
+
+Revisemos la base
+
+```{r}
+merge_data2 %>% 
+  tail()
+```
+
+### Bases de distinto tamaño
+
+Hasta ahorita hemos hecho merge que son de unidades de distinto nivel y son incluyentes. A veces tenemos bases de datos que son de distinto tamaño y del mismo nivel. A veces las dos aportan casos y a veces aportan variables, y a veces, las dos aportan las dos cosas.
+
+Vamos a revisar qué pasaría si quisiéramos incorporar la información los ingresos
+
+```{r}
+rm(merge_data, merge_data2) # botamos otros ejemplos
+
+ingresos<- haven::read_sav("datos/ingresos.sav")
+
+```
+
+Esta base tiene otro ID
+
+-   Ingresos `ingresos` es `c("folioviv", "foliohog", "numren", "clave")`
+
+```{r}
+ingresos %>% 
+  janitor::get_dupes(c(folioviv, foliohog, numren, clave))
+```
+
+¿Cuántas claves de ingreso hay?
+
+```{r}
+ingresos %>% 
+  tabyl(clave)
+```
+
+```{r}
+ingresos_sueldos<-ingresos %>% 
+    filter(clave=="P001") 
+dim(ingresos_sueldos)
+
+```
+
+Vamos a hacer el primer tipo de fusionado
+
+```{r}
+merge_data3<-merge(poblacion, ingresos_sueldos, by=c("folioviv", "foliohog", "numren"))
+dim(merge_data3)
+```
+
+¡La base nueva no tiene a todas las observaciones, solo la que tiene en la base más pequeña!
+
+### Cuatro formas de hacer un fusionado
+
+En realidad hay cuatro formas de hacer un "merge"
+
+#### Casos en ambas bases
+
+Por *default*, el comando tiene activado la opción "all = FALSE", que nos deja los datos de ambas bases comunes. (tipo una intersección)
+
+```{r}
+merge_data3<-merge(poblacion, 
+                   ingresos_sueldos,
+                   by=c("folioviv", "foliohog", "numren"), 
+                   all = F)
+dim(merge_data3)
+```
+
+#### Todos los casos
+
+Si cambiamos la opción "all = TRUE", que nos deja los datos comunes a ambas bases. (como una unión)
+
+```{r}
+merge_data3<-merge(poblacion,
+                   ingresos_sueldos, 
+                   by=c("folioviv", "foliohog", "numren"), 
+                   all = T)
+dim(merge_data3)
+```
+
+#### Casos en la base 1
+
+Si queremos quedarnos con todos los datos que hay en la primera base, x, vamos a usar a opción all.x = TRUE.
+
+```{r}
+merge_data3<-merge(poblacion, 
+                   ingresos_sueldos,
+                   by=c("folioviv", "foliohog", "numren"), 
+                   all.x  = TRUE)
+dim(merge_data3)
+```
+
+#### Casos de la base 2
+
+Notamos que hoy sí tenemos los datos de toda la población y hay missings en las variables aportadas por la base de trabajo
+
+Si queremos lo contrario, quedarnos con los datos aportados por la segunda base, y, vamos a usar la opción all.y=TRUE
+
+```{r}
+merge_data3<-merge(poblacion, 
+                   ingresos_sueldos,
+                   by=c("folioviv", "foliohog", "numren"),
+                   all.y  = TRUE)
+dim(merge_data3)
+```
+
+### Las cuatro formas en `dplyr`
+
+El caso 1:
+
+```{r}
+merge_data3<-dplyr::inner_join(poblacion,
+                               ingresos_sueldos,
+                               by=c("folioviv", "foliohog", "numren"))
+dim(merge_data3)
+
+```
+
+El caso 2:
+
+```{r}
+merge_data3<-dplyr::full_join(poblacion, 
+                              ingresos_sueldos, 
+                              by=c("folioviv", "foliohog", "numren"))
+dim(merge_data3)
+
+```
+
+El caso 3:
+
+```{r}
+merge_data3<-dplyr::left_join(poblacion,
+                              ingresos_sueldos, 
+                              by=c("folioviv", "foliohog", "numren"))
+dim(merge_data3)
+
+```
+
+El caso 4:
+
+```{r}
+merge_data3<-dplyr::right_join(poblacion, 
+                               ingresos_sueldos,
+                               by=c("folioviv", "foliohog", "numren"))
+dim(merge_data3)
+
+```
+
+También se puede usar con pipes, cualquier opción de dplyr
+
+```{r}
+merge_data3<-poblacion %>% # pongo el conjunto que será la "izquierda
+  dplyr::right_join(ingresos_sueldos, 
+                    by=c("folioviv", "foliohog", "numren"))
+dim(merge_data3)
+```
+
+
+## Visualización de datos
+
+
+Incluimos los cambios anteriores
+
+```{r}
+etiqueta_sex<-c("Hombre", "Mujer")
+
+concentradohogar <- concentradohogar %>% 
+  mutate(sexo_jefe=as_numeric(sexo_jefe)) %>% # para quitar el "string"
+  sjlabelled::set_labels(sexo_jefe, labels=etiqueta_sex) %>% 
+  mutate(clase_hog=as_numeric(clase_hog)) %>% # para quitar el "string"
+  sjlabelled::set_labels(clase_hog, labels=c("unipersonal",
+                                             "nuclear", 
+                                             "ampliado",
+                                             "compuesto",
+                                             "corresidente")) %>% 
+  mutate(educa_jefe=as_numeric(educa_jefe)) %>% 
+  set_labels(educa_jefe,
+             labels=c("Sin instrucción", 
+                      "Preescolar",
+                      "Primaria incompleta",
+                      "Primaria completa",
+                      "Secundaria incompleta",
+                      "Secundaria completa",
+                      "Preparatoria incompleta",
+                      "Preparatoria completa",
+                      "Profesional incompleta",
+                      "Profesional completa",
+                      "Posgrado")) %>% 
+    mutate(ent=stringr::str_sub(folioviv, start=1, end=2 ))
+  
+```
+
+
+
+### ¿Cuál es el mejor gráfico?
+Hay cursos específicos de visualización de datos. Es maravilloso pero también requiere que estudiemos bien qué tipo de datos tenemos y cuáles son nuestros objetivos. 
+
+Me gusta mucho este recurso: <https://www.data-to-viz.com/>
+
+### Gráficos de `{graphics}`
+
+"plot()" Es la función más simple. Y es otro comando "listo"
+
+```{r}
+  plot(as_label(concentradohogar$sexo_jefe))
+```
+
+Esto es igual que:
+
+```{r}
+barplot(table(as_label(concentradohogar$sexo_jefe)))
+```
+
+### Gráficos con `{ggplot2}`
+
+Hoy vamos a presentar a un gran paquete ¡Es de los famosos! Y tiene más de diez años.
+
+"gg" proviene de "Grammar of Graphics", funciona un poco como sintácticamente, de ahí su nombre.
+
+Algunos recursos para aprender ggplot
+
+* <https://ggplot2-book.org/> hecha por el mero mero.
+
+* <http://sape.inf.usi.ch/quick-reference/ggplot2> 
+
+* <https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf>
+
+Vamos a revisar una presentación que es muy interesante
+
+* <https://evamaerey.github.io/ggplot2_grammar_guide/ggplot2_grammar_guide.html>
+
+* <https://huygens.science.uva.nl/ggPlotteR/> Hace gráficos de ggplot con la base de datos de Gapminder
+
+### Un lienzo para dibujar
+
+Para hacer un gráfico, `{ggplot2}` tiene el comando `ggplot()`.  Hacer gráficos con esta función tiene una lógica  aditiva. Lo ideal es que iniciemos estableciendo el mapeo estético de nuestro gráfico, con el comando aes()
+
+```{r}
+concentradohogar %>%
+  ggplot2::ggplot() + # ojo es un +
+  aes(x= as_label(sexo_jefe))
+
+g1<-concentradohogar %>%
+  ggplot2::ggplot() + # ojo es un +
+  aes(x= as_label(sexo_jefe))
+
+g1 ## imprime el lienzo
+```
+
+
+### Gráficos univariados
+
+#### Para cualitativas
+
+Sabemos que la mejor son las barras
+
+```{r}
+g1 +
+  geom_bar()
+```
+
+
+```{r}
+g1 +  geom_bar(aes(
+  fill = as_label(sexo_jefe)
+  )) ## colorea la geometría
+
+## Esto es equivalente
+
+concentradohogar %>%
+  ggplot(aes(as_label(sexo_jefe),
+             fill = as_label(sexo_jefe)
+             )
+         ) + geom_bar()
+
+```
+
+#### Para variables cuantitativas
+Podemos hacer histogramas y gráficos de densidad, de manera fácil. La idea es agregar en nuestro "lienzo" una geometría, un valor para dibujar en él. Esto se agrega con un "+" y con la figura que se añadirá a nuestro gráfico.
+
+```{r}
+g2<-concentradohogar %>%
+  ggplot(aes(ing_cor))
+
+g2 ## imprime el lienzo
+```
+
+#### Histograma
+
+```{r}
+g2 + geom_histogram() 
+```
+
+
+#### Densidad
+```{r}
+g2 + geom_density()
+```
+
+
+#### Gráficos bivariados
+
+##### Cuali-cuali
+
+
+```{r}
+g1 +  geom_bar(aes(fill = as_label(clase_hog)),
+              position="dodge") #pone las categorías lado a lado y no apiladas
+
+```
+
+Otra manera interesante de observar estas variables, es que estando apiladas, cada categoría de escolaridad se entendiera como una unidad:
+
+```{r}
+g_bivariado <- g1 +  
+  geom_bar(aes(fill = as_label(clase_hog)),
+              position="fill") ## cada categoría "llena" a una unidad
+
+g_bivariado
+```
+
+### Escalas de color
+
+#### `{RcolorBrewer}` 
+
+```{r}
+RColorBrewer::display.brewer.all()
+```
+
+
+```{r}
+
+g_bivariado + scale_fill_brewer(palette = "Dark2")
+```
+
+#### `{viridis}` 
+
+
+```{r}
+g_bivariado + scale_fill_viridis_d()
+```
+
+
+#### `{wesanderson}` 
+```{r}
+wesanderson::wes_palettes
+```
+
+
+```{r}
+wesanderson::wes_palette("IsleofDogs1", n=5)
+mi_paleta <- wesanderson::wes_palette("IsleofDogs1", n=5)
+```
+
+
+```{r}
+g_bivariado + scale_fill_manual(values=mi_paleta)
+```
+
+### Temas
+
+Cambiamos el tema:
+
+```{r}
+g_bivariado + scale_fill_brewer(palette = "Dark2") + theme_minimal()
+
+```
+
+Si queremos que sean horizontales (como debe ser) 
+
+```{r}
+g_bivariado + 
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() +
+  coord_flip()
+
+```
+
+
+### Un atajo `{esquisse}`
+
+Si la lógica de las capas y lienzos  parece un poco complicada para graficar con `{ggplot2}`, el paquete "esquisse" tiene un complemento. Cuando lo instalamos con pacman más arriba, se puede observar el complemento:
+
+## Ejercicio
+
+¡Junta tu base!
