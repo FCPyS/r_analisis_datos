@@ -60,7 +60,14 @@ concentradohogar <- haven::read_sav("datos/concentradohogar.sav") %>%
 
 
 plot(concentradohogar$ing_cor, concentradohogar$gasto_mon)
-corr(concentradohogar$ing_cor, concentradohogar$gasto_mon)
+
+concentradohogar |> 
+  with(
+   plot(ing_cor, gasto_mon) 
+  )
+
+cor(concentradohogar$ing_cor,
+     concentradohogar$gasto_mon)
 
 
 
@@ -71,9 +78,10 @@ corr(concentradohogar$ing_cor, concentradohogar$gasto_mon)
   
   
 concentradohogar %>% 
+  filter(ent=="01") |> 
   ggplot() +
-  aes(x=ing_cor,
-      y=gasto_mon) +
+  aes(x = ing_cor,
+      y = gasto_mon) +
   geom_point() #puntito
 
 
@@ -83,20 +91,42 @@ concentradohogar %>%
 
 concentradohogar %>% 
   ggplot() +
-  aes(x=ing_cor,
-      y=gasto_mon,
-      alpha= I(0.2))+
-  geom_jitter() # puntito pero "separado"
+  aes(x = ing_cor,
+      y = gasto_mon) +
+  geom_jitter() #puntito pero separados
+
 
 concentradohogar %>% 
+  filter(ing_cor<2000000) |> 
+  ggplot() +
+  aes(x=log(ing_cor),
+      y=log(gasto_mon),
+      alpha= I(0.2))+ # para la transparencia
+  geom_jitter() # puntito pero "separado"
+
+concentradohogar %>%
   ggplot() +
   aes(x=ing_cor,
-      y=gasto_mon) +
+      y=gasto_mon, alpha= I(0.2)) +
   geom_text(aes(label=ent)) # un texto en lugar de punto
+
+
+concentradohogar %>%
+  dplyr::mutate(puntitoAGS=if_else(ent=="01", 
+                                 "AGS", 
+                                 "")) |> 
+  ggplot() +
+  aes(x=ing_cor,
+      y=gasto_mon, alpha= I(0.2)) +
+  geom_point()+
+  geom_text(aes(label=puntitoAGS)) # un texto en lugar de punto
+
+
 
 ### geometría "label" ----
 
 concentradohogar %>% 
+  filter(ent=="01") |> 
   ggplot() +
   aes(x=ing_cor,
       y=gasto_mon) +
@@ -106,14 +136,19 @@ concentradohogar %>%
 ## Ya no es tan bivariado ----
 
 # Con *color*
-  
+
+concentradohogar |>   
+ggplot() + 
+  aes(x=ing_cor, y = gasto_mon) +
+  geom_point()
   
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon,
-             color=tam_loc)
-  ) +
+  ggplot() + # de aqui adelante no hay pipes
+  aes(x=log(ing_cor), # este es el eje de las x
+      y=log(gasto_mon), # este es el eje de las y
+      alpha=I(0.2), # cambia transparencia
+      color=tam_loc) + # puntitos o líneas +
   geom_point()
 
 
@@ -122,10 +157,10 @@ concentradohogar %>%
   
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon,
-             shape=tam_loc)
-  ) +
+  ggplot() +
+  aes(x=ing_cor,
+      y=gasto_mon,
+      shape=tam_loc) + # variables de hasta 6 categorías
   geom_point() # ojo, nos da un "warning"
 
 
@@ -135,19 +170,29 @@ concentradohogar %>%
   
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon)) +
-  geom_point() + facet_wrap(~tam_loc)
-
-
-# Con *facet_wrap*, columna
+  ggplot() +
+  aes(x=ing_cor,
+      y=gasto_mon) +
+  geom_point() +
+  facet_wrap(~tam_loc)
 
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon)) +
+  ggplot() +
+  aes(x=ing_cor,
+      y=gasto_mon) +
   geom_point() +
-  facet_grid(.~tam_loc)
+  facet_wrap(vars(tam_loc))
+
+# Con *facet_grid*, columna
+
+
+concentradohogar %>% 
+  ggplot() +
+  aes(x=log(ing_cor),
+             y=log(gasto_mon)) +
+  geom_point() +
+  facet_grid(. ~ tam_loc)
 
 
 
@@ -155,21 +200,32 @@ concentradohogar %>%
 
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon)) +
+  ggplot() +
+  aes(x=log(ing_cor),
+      y=log(gasto_mon)) +
   geom_point() +
-  facet_grid(tam_loc~.)
+  facet_grid(tam_loc ~ .)
+
+
+
+concentradohogar %>% 
+  ggplot() +
+  aes(x=log(ing_cor),
+      y=log(gasto_mon)) +
+  geom_point() +
+  facet_grid(tam_loc ~ as_label(sexo_jefe))
 
 
 ## Ajustes *smooth* ----
 
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon)) +
-  geom_point() +
-  geom_smooth(method="lm") +
-  facet_grid(tam_loc~.)
+  ggplot() +
+  aes(x = log(ing_cor),
+      y = log(gasto_mon)) +
+  geom_point(color = "gray") +
+  geom_smooth(method="lm", color = "purple") + # linear model
+  facet_grid(tam_loc ~.)
 
 
 # Enchulando tantito:
@@ -179,7 +235,8 @@ concentradohogar %>%
              y=gasto_mon,
              color=tam_loc)) +
   geom_text(aes(label=ent)) +
-  geom_smooth(method="lm") + scale_fill_brewer(palette = "Dark2") +
+  geom_smooth(method="lm") + 
+  scale_color_brewer(palette = "Dark2") +
   theme_minimal()
 
 
@@ -187,10 +244,13 @@ concentradohogar %>%
 
 
 concentradohogar %>% 
-  ggplot(aes(x=ing_cor,
-             y=gasto_mon,
-             color=tam_loc)) +
-  geom_point(aes(size=tot_integ))+ # ojo
+  ggplot() +
+  aes(x=ing_cor,
+      y=gasto_mon,
+      color=tam_loc, 
+      size=tot_integ) +
+  geom_point() +# ojo una variable cuantitavia
+  geom_smooth(method = "lm") +
   theme_minimal()
 
 
@@ -220,8 +280,6 @@ concentradohogar %>%
 
 
 ## GGally pares ----
-
-
 
 concentradohogar %>% 
   filter(ent=="01") %>%
