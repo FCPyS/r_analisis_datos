@@ -1,6 +1,5 @@
 # Visualización (II) y diseño muestral
 
-
 ## Paquetes
 
 ```{r}
@@ -49,19 +48,16 @@ concentradohogar <- haven::read_sav("datos/concentradohogar.sav") %>%
   mutate(ent=stringr::str_sub(folioviv, start=1, end=2 ))
 ```
 
-
 ## Gráficos bivariados cuanti - cuanti
 
 ### correlación
 
 ```{r}
 plot(concentradohogar$ing_cor, concentradohogar$gasto_mon)
-corr(concentradohogar$ing_cor, concentradohogar$gasto_mon)
+cor(concentradohogar$ing_cor, concentradohogar$gasto_mon)
 ```
 
-
 Para los gráficos "cuanti-cuanti", iniciamos con un gráfico de dispersión o *scatter*
-
 
 ### *scatterplot*
 
@@ -178,6 +174,7 @@ concentradohogar %>%
 ```
 
 Enchulando tantito:
+
 ```{r}
 concentradohogar %>% 
   ggplot(aes(x=ing_cor,
@@ -212,6 +209,7 @@ concentradohogar %>%
 ```
 
 Algunas opciones interesantes:
+
 ```{r}
 concentradohogar %>% 
   ggplot(aes(x=ing_cor,
@@ -223,9 +221,7 @@ concentradohogar %>%
   theme_minimal()
 ```
 
-
 ### GGally pares
-
 
 ```{r}
 concentradohogar %>% 
@@ -236,6 +232,7 @@ concentradohogar %>%
 ```
 
 ## Diseño complejo
+
 ```{r}
 
 ```
@@ -317,7 +314,6 @@ ags_srvy %>%
             total = survey_total() ) # totales
 ```
 
-
 ```{r}
 ags_srvy %>%
   mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
@@ -325,7 +321,6 @@ ags_srvy %>%
   group_by(interact(sexo_jefe, clase_hog)) %>% # para que todo sume 100%
   summarize(prop = survey_mean())
 ```
-
 
 ```{r}
 ags_srvy %>%
@@ -335,10 +330,7 @@ ags_srvy %>%
   summarize(prop = survey_mean())
 ```
 
-
-Más sobre este tipo de estimaciones [acá](https://tidy-survey-r.github.io/tidy-survey-short-course/Presentation/Slides-day-1.html#1
-)
-
+Más sobre este tipo de estimaciones [acá](https://tidy-survey-r.github.io/tidy-survey-short-course/Presentation/Slides-day-1.html#1)
 
 ```{r}
 ags_srvy %>%
@@ -349,7 +341,6 @@ ags_srvy %>%
    vartype = c("se", "ci", "var", "cv")
 )
 ```
-
 
 ### Todo es una regresión
 
@@ -371,7 +362,6 @@ results0$ing_cor_mu[1]-results0$ing_cor_mu[2]
 
 ```
 
-
 ```{r}
 ags_srvy %>%
     mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
@@ -390,6 +380,7 @@ svyglm <-ags_srvy %>%
 El coeficiente coincide y tenemos el error estándar y podemos tener también los intervalos
 
 Vamos a pedirle los intervalos
+
 ```{r}
 confint(svyglm)
 
@@ -404,7 +395,6 @@ ags_srvy %>%
   group_by(clase_hog) %>% 
   summarize(ing_cor_mu = survey_mean(ing_cor, vartype="ci")) 
 ```
-
 
 ```{r}
 ags_srvy %>%
@@ -424,14 +414,11 @@ svyglm2 <-ags_srvy %>%
 El coeficiente coincide y tenemos el error estándar y podemos tener también los intervalos
 
 Vamos a pedirle los intervalos
+
 ```{r}
 confint(svyglm2)
 ```
 
-
-
 ```{r}
 broom::tidy(svyglm2, conf.int = TRUE)
 ```
-
-
