@@ -291,18 +291,21 @@ concentradohogar %>%
 # Diseño complejo ----
 
 
-
 # Muestreo aleatorio ----
+
 ags_srvy <- concentradohogar %>%
   filter(ent=="01") %>% 
   srvyr::as_survey_design(weights = factor)
 
 
+ags_srvy |> 
+  summarise(media = srvyr::survey_mean(ing_cor))
 
 # Si revisamos las encuestas tiene un diseño complejo, hay estratos y unidades primarias de muestreo
 
 
 # Muestreo estratificado
+
 ags_srvy <- concentradohogar %>%
   filter(ent=="01") %>% 
   srvyr::as_survey_design(
@@ -333,7 +336,7 @@ ags_srvy <- concentradohogar %>%
 
 
 ags_srvy %>%
-  filter(ing_cor>0) %>% # sólo con ingresos
+  #filter(ing_cor>0) %>% # sólo con ingresos
   summarise(
     media_ponderada = survey_mean(ing_cor, na.rm=T))
 
@@ -345,9 +348,7 @@ ags_srvy %>%
 ags_srvy %>%
   summarize(
     media_ponderada = survey_mean(ing_cor,
-                                  vartype = "ci") )
-
-
+                                  vartype = "cv") )
 
 
 ags_srvy %>%
@@ -355,8 +356,14 @@ ags_srvy %>%
     mediana_ponderada = survey_median(ing_cor,
                                       vartype = "ci") )
 
+ags_srvy |> 
+  group_by(as_label(clase_hog)) |> 
+  summarise(media_ingresos = survey_mean(ing_cor, 
+                                         vartype = c("se", "cv", "ci")) )
 
 
+lentes <- c(1, 0, 1, 0, 0)
+mean(lentes)
 
 ags_srvy %>%
   mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
@@ -365,28 +372,23 @@ ags_srvy %>%
             total = survey_total() ) # totales
 
 
-
-
 ags_srvy %>%
   mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
   mutate(clase_hog=as_label(clase_hog)) %>% 
-  group_by(interact(sexo_jefe, clase_hog)) %>% # para que todo sume 100%
+  group_by(interact(sexo_jefe, clase_hog)) %>% # para que todo sume 100% "all" "cell"
   summarize(prop = survey_mean())
-
-
 
 
 ags_srvy %>%
   mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
   mutate(clase_hog=as_label(clase_hog)) %>% 
   group_by(sexo_jefe, clase_hog) %>% # cada categoría de sexo suma 100
-  summarize(prop = survey_mean())
+  summarize(prop = survey_mean(vartype = "ci"))
 
 
 # 
 # Más sobre este tipo de estimaciones [acá](https://tidy-survey-r.github.io/tidy-survey-short-course/Presentation/Slides-day-1.html#1
 # )
-
 
 
 ags_srvy %>%
@@ -398,10 +400,9 @@ ags_srvy %>%
   )
 
 
-
 ## Todo es una regresión ----
 
-Este tema es un poquito más avanzado. Siguiendo este [artículo](https://danielroelfs.com/blog/everything-is-a-linear-model/)
+# Este tema es un poquito más avanzado. Siguiendo este [artículo](https://danielroelfs.com/blog/everything-is-a-linear-model/)
 
 
 ags_srvy %>%
@@ -419,7 +420,7 @@ results0$ing_cor_mu[1]-results0$ing_cor_mu[2]
 
 ags_srvy %>%
   mutate(sexo_jefe=as_label(sexo_jefe)) %>% 
-  svyglm(design=.,
+  survey::svyglm(design=.,
          formula=ing_cor ~ sexo_jefe,
          family = gaussian()) %>%
   summary()
@@ -436,8 +437,6 @@ svyglm <-ags_srvy %>%
 # Vamos a pedirle los intervalos
 
 confint(svyglm)
-
-
 
 
 ## Con más categorías
@@ -470,7 +469,8 @@ svyglm2 <-ags_srvy %>%
 confint(svyglm2)
 
 # En formato tabular
-broom::tidy(svyglm2, conf.int = TRUE)
+broom::tidy(svyglm2, conf.int = TRUE) |> 
+  mutate(cv = std.error/estimate * 100)
 
 
 

@@ -1,5 +1,6 @@
 # Videos y extras {.unnumbered}
 
+
 ## Sesión 1
 
 {{< video https://youtu.be/N78ZLRTZeLg >}}
@@ -28,6 +29,14 @@ Jamboard repaso de paquetes [aquí](https://jamboard.google.com/d/19Wt96KtCsklDN
 
 [Código](https://www.dropbox.com/scl/fi/ie2phbaa345r60q644svn/P4.R?rlkey=s00kro1lq29pwxs9b3t44jwot&dl=0)
 
+## Sesión 5
+
+{{< video https://youtu.be/MmVbGnk6amQ >}}
+
+[Código](https://www.dropbox.com/scl/fi/znidn60gnyrxub62k5k3s/P5.R?rlkey=gh2dq6wui47j8t4om2d5n6dq4&dl=0)
+
+
+["Procesamiento eficiente de datos del Censo de Población y Vivienda: análisis de muestras complejas"](https://www.youtube.com/watch?v=dnFMntuHcpw)
 
 ## Cheatsheets
 
@@ -48,3 +57,9 @@ Jamboard repaso de paquetes [aquí](https://jamboard.google.com/d/19Wt96KtCsklDN
 [Inglés](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
 
 [Español](https://rstudio.github.io/cheatsheets/translations/spanish/data-visualization_es.pdf)
+
+## Otros cursos
+
+[Inferencia e introducción a los modelos estadísticos con R](https://aniuxa.github.io/posgrado_modelo3/)
+
+

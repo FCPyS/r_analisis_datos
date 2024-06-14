@@ -392,10 +392,24 @@
     "text": "Sesión 4\n\nCódigo"
   },
   {
+    "objectID": "videos.html#sesión-5",
+    "href": "videos.html#sesión-5",
+    "title": "Videos y extras",
+    "section": "Sesión 5",
+    "text": "Sesión 5\n\nCódigo\n“Procesamiento eficiente de datos del Censo de Población y Vivienda: análisis de muestras complejas”"
+  },
+  {
     "objectID": "videos.html#cheatsheets",
     "href": "videos.html#cheatsheets",
     "title": "Videos y extras",
     "section": "Cheatsheets",
     "text": "Cheatsheets\n\n{dplyr}\nInglés\nEspañol\n\n\nData import {readr}\nInglés\nEspañol\n\n\n{ggplot2}\nInglés\nEspañol"
+  },
+  {
+    "objectID": "videos.html#otros-cursos",
+    "href": "videos.html#otros-cursos",
+    "title": "Videos y extras",
+    "section": "Otros cursos",
+    "text": "Otros cursos\nInferencia e introducción a los modelos estadísticos con R"
   }
 ]
