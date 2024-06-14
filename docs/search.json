@@ -137,7 +137,7 @@
     "href": "P1.html#directorio-de-trabajo",
     "title": "1  Primer acercamiento al uso del programa",
     "section": "1.10 Directorio de trabajo",
-    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/Curso_R_inter/r_analisis_datos/r_analisis_datos\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"Mi_Exportación.xlsx\"      \"P1.qmd\"                  \n [3] \"P1.rmarkdown\"             \"P2.qmd\"                  \n [5] \"P3.qmd\"                   \"P4.qmd\"                  \n [7] \"README.md\"                \"_quarto.yml\"             \n [9] \"datos\"                    \"docs\"                    \n[11] \"index.html\"               \"index.qmd\"               \n[13] \"instala.html\"             \"instala.qmd\"             \n[15] \"intro1.png\"               \"mi_exportacion.sav\"      \n[17] \"mi_primer_ambiente.RData\" \"miexportacion.dta\"       \n[19] \"nombres_limpios.xlsx\"     \"r_analisis_datos.Rproj\"  \n[21] \"resultados.xlsx\"          \"s3fusionado_ppt2023.pdf\" \n[23] \"scripts\"                  \"site_libs\"               \n[25] \"videos.qmd\"              \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
+    "text": "1.10 Directorio de trabajo\nEs muy útil saber dónde estamos trabajando y donde queremos trabajar. Por eso podemos utilizar los siguientes comandos para saberlo\nOjo, checa, si estás desdes una PC, cómo cambian las “” por”/” o por “\\”\n\ngetwd()           # Directorio actual\n\n[1] \"/Users/anaescoto/Dropbox/2024/Curso_R_inter/r_analisis_datos/r_analisis_datos\"\n\n#setwd(\"\")# Cambio de directorio\n\nlist.files()      # Lista de archivos en ese directorio\n\n [1] \"BD_ENCUCI2020_dbf\"        \"Mi_Exportación.xlsx\"     \n [3] \"P1.qmd\"                   \"P1.rmarkdown\"            \n [5] \"P2.qmd\"                   \"P3.qmd\"                  \n [7] \"P4.qmd\"                   \"README.md\"               \n [9] \"_quarto.yml\"              \"datos\"                   \n[11] \"docs\"                     \"index.html\"              \n[13] \"index.qmd\"                \"instala.html\"            \n[15] \"instala.qmd\"              \"intro1.png\"              \n[17] \"mi_exportacion.sav\"       \"mi_primer_ambiente.RData\"\n[19] \"miexportacion.dta\"        \"nombres_limpios.xlsx\"    \n[21] \"r_analisis_datos.Rproj\"   \"resultados.xlsx\"         \n[23] \"s3fusionado_ppt2023.pdf\"  \"scripts\"                 \n[25] \"site_libs\"                \"videos.qmd\"              \n\n\nChecar que esto también se puede hacer desde el menú:\n\n\n\ni0"
   },
   {
     "objectID": "P1.html#proyectos",
@@ -355,6 +355,13 @@
     "title": "Videos y extras",
     "section": "Sesión 3",
     "text": "Sesión 3\n\nCódigo\nJamboard repaso de paquetes aquí"
+  },
+  {
+    "objectID": "videos.html#sesión-4",
+    "href": "videos.html#sesión-4",
+    "title": "Videos y extras",
+    "section": "Sesión 4",
+    "text": "Sesión 4\n\nCódigo"
   },
   {
     "objectID": "videos.html#cheatsheets",

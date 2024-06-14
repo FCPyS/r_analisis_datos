@@ -40,9 +40,10 @@ names(concentradohogar[,1:15])
 dim(poblacion)
 names(poblacion[,1:15])
 
+# Identificador único es "folioviv"
 
-merge_data<- merge(viviendas,
-                   concentradohogar,
+merge_data<- merge(viviendas, # dataframe x
+                   concentradohogar, # daframe y
                    by="folioviv")
 
 
@@ -50,11 +51,11 @@ merge_data<- merge(viviendas,
 #Esto es equivalente a `left_join()` de `{dplyr}`
 
 
-merge_data <- dplyr::left_join(viviendas,
-                               concentradohogar, 
+merge_data <- dplyr::inner_join(viviendas, #dataframe left
+                               concentradohogar, #dataframe right
                                by="folioviv") 
 
-merge_data <- viviendas %>% 
+merge_data <- viviendas %>% #dataframe left
   dplyr::left_join(concentradohogar, by="folioviv") 
 
 
@@ -64,24 +65,39 @@ dim(merge_data)
 ### Merge con id compuesto ----
 
 viviendas %>% 
-  janitor::get_dupes(folioviv)
+  select(folioviv) |> 
+  janitor::get_dupes()
 
 concentradohogar %>% 
-  janitor::get_dupes(c(folioviv, foliohog))
+  select(folioviv, foliohog) |> 
+  janitor::get_dupes()
 
 poblacion %>% 
-  janitor::get_dupes(c(folioviv, foliohog, numren))
-
+  select(folioviv, foliohog, numren) |> 
+  janitor::get_dupes()
 
 
 merge_data2<- merge(concentradohogar, 
                     poblacion, 
-                    by = c("folioviv", "foliohog"))
+                    by = c("folioviv", "foliohog"), 
+                    all = FALSE)
 dim(merge_data2)
 
 
 merge_data2 %>% 
   tail()
+
+names(concentradohogar)
+names(poblacion)
+
+names(merge_data2)
+
+intersect(names(concentradohogar),
+          names(poblacion))
+
+
+merge_data2 <- concentradohogar |> 
+  dplyr::left_join(poblacion) # si no pongo el by, R toma la intersección de nombres
 
 
 ### Bases de distinto tamaño ----
@@ -91,14 +107,16 @@ rm(merge_data, merge_data2) # botamos otros ejemplos
 ingresos<- haven::read_sav("datos/ingresos.sav")
 
 ingresos %>% 
-  janitor::get_dupes(c(folioviv, foliohog, numren, clave))
+  select(folioviv, foliohog, numren, clave) |> 
+  janitor::get_dupes()
 
 ingresos %>% 
   tabyl(clave)
 
+rm(ingresos)
 
 ingresos_sueldos<-ingresos %>% 
-  filter(clave=="P001") 
+  filter(clave=="P001") # sueldos
 
 dim(ingresos_sueldos)
 
@@ -189,6 +207,33 @@ merge_data3<-poblacion %>% # pongo el conjunto que será la "izquierda
 dim(merge_data3)
 
 
+# EJEMPLO  ENCUCI 2020  ----
+# https://www.dropbox.com/scl/fo/3pdbpjgi0cctnf7y2lcin/ANBL55zYyHHqAAcpHsuON9A?rlkey=m3zvod05sijx9ufzfp0meelmg&dl=0
+
+encuci_viv <- foreign::read.dbf("BD_ENCUCI2020_dbf/ENCUCI_2020_VIV.dbf")
+encuci_sd <- foreign::read.dbf("BD_ENCUCI2020_dbf/ENCUCI_2020_SD.dbf")
+encuci_sec4_5 <- foreign::read.dbf("BD_ENCUCI2020_dbf/ENCUCI_2020_SEC_4_5.dbf")
+
+encuci_sec6_7_8 <- foreign::read.dbf("BD_ENCUCI2020_dbf/ENCUCI_2020_SEC_6_7_8.dbf")
+
+encuci<-encuci_viv |> 
+  dplyr::left_join(encuci_s) |> 
+  dplyr::left_join(encuci_sec4_5)
+
+names(encuci)
+
+encuci |> 
+  pollster::topline(SEXO, weight = FAC_VIV)
+
+
+encuci |> 
+  pollster::topline(SEXO, weight = FAC_SEL)
+
+encuci |> 
+  filter(!is.na(FAC_SEL)) |> 
+  select(FAC_VIV, FAC_SEL)
+
+rm(list=ls()[-1]) # depende del objeto donde esté en la lista
 
 ## Visualización de datos ----
 
@@ -253,15 +298,19 @@ barplot(table(as_label(concentradohogar$sexo_jefe)))
 
 
 concentradohogar %>%
+  select(sexo_jefe, clase_hog, ing_cor, edad_jefe, educa_jefe) |> 
   ggplot2::ggplot() + # ojo es un +
   aes(x= as_label(sexo_jefe))
 
 g1<-concentradohogar %>%
+  select(sexo_jefe, clase_hog, ing_cor, edad_jefe, educa_jefe) |> 
   ggplot2::ggplot() + # ojo es un +
   aes(x= as_label(sexo_jefe))
 
 g1 ## imprime el lienzo
 
+
+g1$data
 
 
 ### Gráficos univariados
@@ -272,17 +321,15 @@ g1 ## imprime el lienzo
 g1 +
   geom_bar()
 
-g1 +  geom_bar(aes(
-  fill = as_label(sexo_jefe)
-)) ## colorea la geometría
+g1 +  geom_bar(aes(fill = as_label(sexo_jefe))) ## colorea la geometría
 
 ## Esto es equivalente
 
 concentradohogar %>%
-  ggplot(aes(as_label(sexo_jefe),
-             fill = as_label(sexo_jefe)
-  )
-  ) + geom_bar()
+  ggplot2::ggplot() +
+  aes(x = as_label(sexo_jefe),
+      fill = as_label(sexo_jefe)) +
+    geom_bar()
 
 
 
@@ -290,41 +337,63 @@ concentradohogar %>%
 # Podemos hacer histogramas y gráficos de densidad, de manera fácil. La idea es agregar en nuestro "lienzo" una geometría, un valor para dibujar en él. Esto se agrega con un "+" y con la figura que se añadirá a nuestro gráfico.
 
 
-g2<-concentradohogar %>%
-  ggplot(aes(ing_cor))
-
-g2 ## imprime el lienzo
+concentradohogar %>%
+ ggplot2::ggplot() +
+  aes(x = ing_cor)
+ ## imprime el lienzo
 
 
 #### Histograma
 
 
-g2 + geom_histogram() 
+concentradohogar %>%
+  ggplot2::ggplot() +
+  aes(x = ing_cor) +
+  geom_histogram(bins = 10) 
 
 
 
 #### Densidad
 
-g2 + geom_density()
 
+concentradohogar %>%
+  ggplot2::ggplot() +
+  aes(x = log(ing_cor/3)) +
+  geom_density()
 
 
 #### Gráficos bivariados ----
 
 ##### Cuali-cuali
 
-
-
-g1 +  geom_bar(aes(fill = as_label(clase_hog)),
-               position="dodge") #pone las categorías lado a lado y no apiladas
+concentradohogar |> 
+  ggplot2::ggplot() +
+  aes(x = as_label(sexo_jefe)) +
+  geom_bar()
 
   
-g_bivariado <- g1 +  
+
+concentradohogar |> 
+  ggplot2::ggplot() +
+  aes(x = as_label(sexo_jefe)) +
+  geom_bar(aes(fill = as_label(clase_hog)))
+
+
+concentradohogar |> 
+  ggplot2::ggplot() +
+  aes(x = as_label(sexo_jefe)) +
   geom_bar(aes(fill = as_label(clase_hog)),
-           position="fill") ## cada categoría "llena" a una unidad
+                 position="dodge") ## cada categoría "llena" a una unidad
+
+
+
+g_bivariado <-concentradohogar |> 
+  ggplot2::ggplot() +
+  aes(y = as_label(sexo_jefe)) +
+  geom_bar(aes(fill = as_label(clase_hog)),
+           position="dodge") ## cada categoría "llena" a una unidad
 
 g_bivariado
-
 
 ### Escalas de color ----
 
@@ -334,7 +403,7 @@ g_bivariado
 RColorBrewer::display.brewer.all()
 
 
-g_bivariado + scale_fill_brewer(palette = "Dark2")
+g_bivariado + scale_fill_brewer(palette = "Accent")
 
 
 #### `{viridis}` ----
@@ -355,7 +424,15 @@ g_bivariado + scale_fill_manual(values=mi_paleta)
 ### Temas ----
 
   
-g_bivariado + scale_fill_brewer(palette = "Dark2") + theme_minimal()
+g_bivariado + 
+  scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal()
+
+
+
+g_bivariado + 
+  scale_fill_brewer(palette = "Dark2") + 
+  ggthemes::theme_stata()
 
 
 #Si queremos que sean horizontales (como debe ser) 
@@ -366,9 +443,21 @@ g_bivariado +
   coord_flip()
 
 
+subset <- concentradohogar |> 
+  dplyr::mutate(sexo_jefe=as_label(sexo_jefe)) |> 
+  select(sexo_jefe, educa_jefe, ing_cor)
+
 ### Un atajo `{esquisse}` ----
 
 # Si la lógica de las capas y lienzos  parece un poco complicada para graficar con `{ggplot2}`, el paquete "esquisse" tiene un complemento. Cuando lo instalamos con pacman más arriba, se puede observar el complemento:
+
+ggplot(subset) +
+  aes(x = sexo_jefe) +
+  geom_bar(fill = "#FF69B4") +
+  labs(y = "Frecuencia", title = "Título de mi gráfico") +
+  coord_flip() +
+  ggthemes::theme_economist()
+
   
 ## Ejercicio
   
