@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ana Escoto">
-<meta name="dcterms.date" content="2024-08-19">
+<meta name="dcterms.date" content="2024-06-10">
 
-<title>Uso de R para la investigación social</title>
+<title>R para el análisis estadístico de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
 </style>
@@ -60,8 +60,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -72,16 +71,11 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Uso de R para la investigación social</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">R para el análisis estadístico de datos</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav>
@@ -89,90 +83,92 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Uso de R para la investigación social</a> 
+      <a href="./">R para el análisis estadístico de datos</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/fcpys/r_ccss_2025/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/fcpys/r_analisis_datos/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Uso de R para la investigación social</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">Sobre el curso</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./instala.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Instalación de R y Rstudio</span></a>
+  <a href="./instala.html" class="sidebar-item-text sidebar-link">Instalación de R y Rstudio</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></span></a>
+  <a href="./P1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></span></a>
+  <a href="./P2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manejo de datos: importación, selección y revisión</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></span></a>
+  <a href="./P3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos (II)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./P5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualización (II) y diseño muestral</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./videos.html" class="sidebar-item-text sidebar-link">Videos y extras</a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#uso-de-r-para-la-investigación-social" id="toc-uso-de-r-para-la-investigación-social" class="nav-link active" data-scroll-target="#uso-de-r-para-la-investigación-social">Uso de R para la investigación social</a>
+  <li><a href="#sobre-el-curso" id="toc-sobre-el-curso" class="nav-link active" data-scroll-target="#sobre-el-curso">Sobre el curso</a>
   <ul class="collapse">
-  <li><a href="#datos-utilizados" id="toc-datos-utilizados" class="nav-link" data-scroll-target="#datos-utilizados">Datos utilizados</a></li>
+  <li><a href="#introducción-a-r-y-rstudio-4-horas" id="toc-introducción-a-r-y-rstudio-4-horas" class="nav-link" data-scroll-target="#introducción-a-r-y-rstudio-4-horas">1. Introducción a R y Rstudio (4 horas)</a></li>
+  <li><a href="#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas" id="toc-importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas" class="nav-link" data-scroll-target="#importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas">2. Importación de información y primera revisión de fuentes demográficas (4 horas)</a></li>
+  <li><a href="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" id="toc-revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" class="nav-link" data-scroll-target="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas">3. Revisión de elementos estadísticos básicos desde <code>{tidyverse}</code> (8 horas)</a></li>
+  <li><a href="#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas" id="toc-estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas" class="nav-link" data-scroll-target="#estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas">4. Estimaciones por intervalo y diseño complejo muestral (4 horas)</a></li>
+  </ul></li>
   <li><a href="#facilitadora" id="toc-facilitadora" class="nav-link" data-scroll-target="#facilitadora">Facilitadora</a>
   <ul class="collapse">
   <li><a href="#ana-ruth-escoto-castillo" id="toc-ana-ruth-escoto-castillo" class="nav-link" data-scroll-target="#ana-ruth-escoto-castillo">Ana Ruth Escoto Castillo</a></li>
   </ul></li>
-  <li><a href="#contenido-y-objetivos" id="toc-contenido-y-objetivos" class="nav-link" data-scroll-target="#contenido-y-objetivos">Contenido y objetivos</a>
-  <ul class="collapse">
-  <li><a href="#introducción-a-r-y-rstudio-4-horas" id="toc-introducción-a-r-y-rstudio-4-horas" class="nav-link" data-scroll-target="#introducción-a-r-y-rstudio-4-horas">1. Introducción a R y Rstudio (4 horas)</a></li>
-  <li><a href="#importación-de-información-y-primera-revisión-de-fuentes-estadísticas-8-horas" id="toc-importación-de-información-y-primera-revisión-de-fuentes-estadísticas-8-horas" class="nav-link" data-scroll-target="#importación-de-información-y-primera-revisión-de-fuentes-estadísticas-8-horas">2. Importación de información y primera revisión de fuentes estadísticas (8 horas)</a></li>
-  <li><a href="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-12-horas" id="toc-revisión-de-elementos-estadísticos-básicos-desde-tidyverse-12-horas" class="nav-link" data-scroll-target="#revisión-de-elementos-estadísticos-básicos-desde-tidyverse-12-horas">3. Revisión de elementos estadísticos básicos desde “tidyverse” (12 horas)</a></li>
-  <li><a href="#inferencia-con-r-12-horas" id="toc-inferencia-con-r-12-horas" class="nav-link" data-scroll-target="#inferencia-con-r-12-horas">4. Inferencia con R (12 horas)</a></li>
-  <li><a href="#modelos-estadísticos-con-r-16-horas" id="toc-modelos-estadísticos-con-r-16-horas" class="nav-link" data-scroll-target="#modelos-estadísticos-con-r-16-horas">5. Modelos estadísticos con R (16 horas)</a></li>
-  <li><a href="#introducción-al-análisis-de-texto-8-horas" id="toc-introducción-al-análisis-de-texto-8-horas" class="nav-link" data-scroll-target="#introducción-al-análisis-de-texto-8-horas">6. Introducción al análisis de texto (8 horas)</a></li>
-  <li><a href="#r-para-comunicar-resultados-con-quarto-4-horas" id="toc-r-para-comunicar-resultados-con-quarto-4-horas" class="nav-link" data-scroll-target="#r-para-comunicar-resultados-con-quarto-4-horas">7. R para comunicar resultados con Quarto (4 horas)</a></li>
-  </ul></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_ccss_2025/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_ccss_2025/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_analisis_datos/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_analisis_datos/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Uso de R para la investigación social</h1>
+<h1 class="title d-none d-lg-block">R para el análisis estadístico de datos</h1>
 </div>
 
 
@@ -189,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 19, 2024</p>
+      <p class="date">June 10, 2024</p>
     </div>
   </div>
   
@@ -199,105 +195,49 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="uso-de-r-para-la-investigación-social" class="level1 unnumbered">
-<h1 class="unnumbered">Uso de R para la investigación social</h1>
-<section id="datos-utilizados" class="level2">
-<h2 class="anchored" data-anchor-id="datos-utilizados">Datos utilizados</h2>
-<p>Lo puedes descargar de <a href="https://www.dropbox.com/scl/fo/oh2c2kxfvcvfajor94cc3/AN62zPRBEUgM86Zo_rwmhKU?rlkey=sxr2y1lqeslvibt5m5fz8w0x5&amp;dl=0">acá</a></p>
+<section id="sobre-el-curso" class="level1 unnumbered">
+<h1 class="unnumbered">Sobre el curso</h1>
+<section id="introducción-a-r-y-rstudio-4-horas" class="level2">
+<h2 class="anchored" data-anchor-id="introducción-a-r-y-rstudio-4-horas">1. Introducción a R y Rstudio (4 horas)</h2>
+<p><em>Objetivo: que el estudiantado sea familiarice con la interfase de trabajo y la programación por objetos, del mismo modo que sean capaces de realizar tareas básicas tales como crear un script, un proyecto, objetos, ambientes e instalar paqueterías</em>.</p>
 </section>
-<section id="facilitadora" class="level2">
-<h2 class="anchored" data-anchor-id="facilitadora">Facilitadora</h2>
-<section id="ana-ruth-escoto-castillo" class="level3">
-<h3 class="anchored" data-anchor-id="ana-ruth-escoto-castillo">Ana Ruth Escoto Castillo</h3>
-<p>Profesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado.</p>
-</section>
-</section>
-<section id="contenido-y-objetivos" class="level2">
-<h2 class="anchored" data-anchor-id="contenido-y-objetivos">Contenido y objetivos</h2>
-<blockquote class="blockquote">
-<p>Objetivo General: Que el estudiantado sea capaz de estudiar fenómenos sociales y aplicar conceptos estadísticos utilizando el paquete R a fuentes de información mexicanas y mundiales.</p>
-</blockquote>
-<p>Objetivos por unidad:</p>
-<section id="introducción-a-r-y-rstudio-4-horas" class="level3">
-<h3 class="anchored" data-anchor-id="introducción-a-r-y-rstudio-4-horas">1. Introducción a R y Rstudio (4 horas)</h3>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea familiarice con la interfase de trabajo y la programación por objetos, del mismo modo que sean capaces de realizar tareas básicas tales como crear un script, un proyecto, objetos, ambientes e instalar paqueterías.</p>
-</blockquote>
-</section>
-<section id="importación-de-información-y-primera-revisión-de-fuentes-estadísticas-8-horas" class="level3">
-<h3 class="anchored" data-anchor-id="importación-de-información-y-primera-revisión-de-fuentes-estadísticas-8-horas">2. Importación de información y primera revisión de fuentes estadísticas (8 horas)</h3>
+<section id="importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas" class="level2">
+<h2 class="anchored" data-anchor-id="importación-de-información-y-primera-revisión-de-fuentes-demográficas-4-horas">2. Importación de información y primera revisión de fuentes demográficas (4 horas)</h2>
 <ol type="a">
 <li><p>Importación de información a R en diferentes formatos</p></li>
-<li><p>Importación de información de INEGI</p></li>
-<li><p>Revisión de encuestas y ejemplos de importación de datos de acuerdo al tema de cada estudiante</p></li>
+<li><p>Revisión de encuestas y ejemplos de importación de datos en formatos diferentes</p></li>
+<li><p>Revisión preliminar y limpieza de información</p></li>
 </ol>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo <code>data.frame</code>: funciones <code>dplyr::glimpse()</code>, <code>skimr::skim()</code>, manejo de etiquetas y hacer subconjuntos de información.</p>
-</blockquote>
+<p><em>Objetivo: que el estudiantado sea capaz de importar información desde diferentes formatos (.txt, .csv, .xlsx, .dta, .dbf) a R, así como de exportar sus resultados en estos formatos. Del mismo modo que sean capaces de revisar de manera preliminar los objetos de tipo <code>data.frame</code>: funciones <code>dplyr::glimpse()</code>, <code>skimr::skim()</code>, manejo de etiquetas y hacer subconjuntos de información</em></p>
 </section>
-<section id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-12-horas" class="level3">
-<h3 class="anchored" data-anchor-id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-12-horas">3. Revisión de elementos estadísticos básicos desde “tidyverse” (12 horas)</h3>
+<section id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas" class="level2">
+<h2 class="anchored" data-anchor-id="revisión-de-elementos-estadísticos-básicos-desde-tidyverse-8-horas">3. Revisión de elementos estadísticos básicos desde <code>{tidyverse}</code> (8 horas)</h2>
 <ol type="a">
 <li><p>Tabulados con <code>janitor::tabyl()</code> y uso de factores de expansión con <code>pollster::topline()</code>, <code>pollster::crosstab</code>. Lectura e interpretación de tablas de doble entrada</p></li>
 <li><p>Estadística descriptiva básica (medidas de tendencia central, dispersión y de posición) con el paquete <code>{dplyr}</code></p></li>
-<li><p>Gráficos univariados y bivariados usando <code>{ggplot2}</code> y extensiones de ggplot</p></li>
+<li><p>Gráficos univariados y bivariados usando <code>{ggplot2}</code> y extensiones de <code>{ggplot2}</code></p></li>
+<li><p>Fusionado de información</p></li>
 </ol>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando las bases de datos más afines a sus temas de investigación.</p>
-</blockquote>
+<p><em>Objetivo: que el estudiantado sea capaz de realizar análisis estadísticos básicos utilizando encuestas mexicanas</em></p>
 </section>
-<section id="inferencia-con-r-12-horas" class="level3">
-<h3 class="anchored" data-anchor-id="inferencia-con-r-12-horas">4. Inferencia con R (12 horas)</h3>
+<section id="estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas" class="level2">
+<h2 class="anchored" data-anchor-id="estimaciones-por-intervalo-y-diseño-complejo-muestral-4-horas">4. Estimaciones por intervalo y diseño complejo muestral (4 horas)</h2>
 <ol type="a">
-<li><p>Estimaciones por intervalo y diseño complejo muestral</p></li>
-<li><p>Pruebas de Hipótesis</p></li>
-<li><p>De una media y una proporción</p></li>
+<li><p>Estimaciones para medias</p></li>
+<li><p>Estimaciones para proporciones</p></li>
+<li><p>Estimaciones para totales</p></li>
+<li><p>Estimaciones lineales de coeficientes</p></li>
 </ol>
-<!-- -->
-<ol start="2" type="i">
-<li>De dos medias y dos proporciones</li>
-<li>Prueba chi-cuadrado</li>
-<li>Prueba ANOVA</li>
-</ol>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea capaz de realizar inferencia estadística de las variables de interés utilizando las bases de datos más afines a sus temas de investigación.</p>
-</blockquote>
+<p><em>Objetivo: que el estudiantado sea capaz de realizar intervalos de confianza, calculo de errores estándar con diseño muestral complejo y sepa evaluar la confiabilidad de sus estimaciones</em></p>
 </section>
-<section id="modelos-estadísticos-con-r-16-horas" class="level3">
-<h3 class="anchored" data-anchor-id="modelos-estadísticos-con-r-16-horas">5. Modelos estadísticos con R (16 horas)</h3>
-<ol type="a">
-<li>Modelos de regresión lineal</li>
-<li>Introducción a otros modelos generalizados</li>
-<li>Modelo logit</li>
-</ol>
-<!-- -->
-<ol start="2" type="i">
-<li>Modelo multilogit</li>
-</ol>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea capaz de modelar variables dependientes contínuas y cualitativas, así como evaluar los modelos estadísticos de acuerdo a sus supuestos con R.</p>
-</blockquote>
 </section>
-<section id="introducción-al-análisis-de-texto-8-horas" class="level3">
-<h3 class="anchored" data-anchor-id="introducción-al-análisis-de-texto-8-horas">6. Introducción al análisis de texto (8 horas)</h3>
-<ol type="a">
-<li>Importación de corpus desde .txt, pdf, epub, pdf</li>
-<li>Limpieza básica de cadenass</li>
-<li>Tokenización, nubes y frecuencia de palabras</li>
-<li>Asociación entre palabras y modelos</li>
-</ol>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea capaz de manejar corpus de textos, tokenizar y dar estadísticas de palabras así como su asociación, utilizando los paquetes <code>{tidytext}</code> y <code>{udpipe}</code>.</p>
-</blockquote>
-</section>
-<section id="r-para-comunicar-resultados-con-quarto-4-horas" class="level3">
-<h3 class="anchored" data-anchor-id="r-para-comunicar-resultados-con-quarto-4-horas">7. R para comunicar resultados con Quarto (4 horas)</h3>
-<blockquote class="blockquote">
-<p>Objetivo: que el estudiantado sea capaz de comprender los elementos básicos para crear documentos desde R utilizando Quarto</p>
-</blockquote>
+<section id="facilitadora" class="level1 unnumbered">
+<h1 class="unnumbered">Facilitadora</h1>
+<section id="ana-ruth-escoto-castillo" class="level2">
+<h2 class="anchored" data-anchor-id="ana-ruth-escoto-castillo">Ana Ruth Escoto Castillo</h2>
+<p>Profesora de tiempo completo en la Facultad de Ciencias Políticas y Sociales, UNAM. Doctora en Estudios de Población por El Colegio de México, cuenta con el nivel I en el Sistema Nacional de Investigadores. Coorganizadora del capítulo de la CDMX de la iniciativa global Rladies. Le interesa el bienestar de la población, en el presente, analizando los procesos de desigualdad y exclusión en los mercados laborales latinoamericanos; y, en el futuro, a través del estudio de la sustentabilidad. Su experiencia en el ámbito académico se ha concentrado en el estudio de este bienestar, específicamente en el análisis sociodemográfico de las condiciones laborales y la vinculación del comercio exterior con el mercado de trabajo, en la relación del cambio climático y la distribución de ingresos, el consumo energético de los hogares y sus implicaciones ambientales. Posee experiencia en recolección de información estadística, diseño y control de procesos de recolección y su procesamiento. Ha aplicado diversos métodos y herramientas multivariadas, homologación de información y comparabilidad de fuentes en sus investigaciones, así como usa de diversos softwares estadísticos, y ha impartido clases de estadítica aplicada a nivel de licenciatura y posgrado.</p>
 
 
-</section>
 </section>
 </section>
 
@@ -444,23 +384,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -525,92 +451,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
