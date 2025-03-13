@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R para el análisis estadístico de datos - 4&nbsp; Revisión de elementos estadísticos básicos (II)</title>
+<title>Uso de R para la investigación social - 4&nbsp; Fusionado</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -122,7 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -133,11 +105,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos (II)</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./P4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fusionado</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -145,103 +122,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R para el análisis estadístico de datos</a> 
+      <a href="./">Uso de R para la investigación social</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/fcpys/r_analisis_datos/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/fcpys/r_ccss_2025/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Sobre el curso</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Uso de R para la investigación social</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./instala.html" class="sidebar-item-text sidebar-link">Instalación de R y Rstudio</a>
+  <a href="./instala.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instalación de R y Rstudio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></a>
+  <a href="./P1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manejo de datos: importación, selección y revisión</span></a>
+  <a href="./P2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos</span></a>
+  <a href="./P3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos (II)</span></a>
+  <a href="./P4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fusionado</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualización (II) y diseño muestral</span></a>
+  <a href="./P5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ponderación y otros</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./videos.html" class="sidebar-item-text sidebar-link">Videos y extras</a>
+  <a href="./P6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análisis descriptivo II</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#paquetes" id="toc-paquetes" class="nav-link active" data-scroll-target="#paquetes"><span class="toc-section-number">4.1</span>  Paquetes</a></li>
-  <li><a href="#presentación" id="toc-presentación" class="nav-link" data-scroll-target="#presentación"><span class="toc-section-number">4.2</span>  Presentación</a></li>
-  <li><a href="#fusionado-de-conjuntos-de-datos" id="toc-fusionado-de-conjuntos-de-datos" class="nav-link" data-scroll-target="#fusionado-de-conjuntos-de-datos"><span class="toc-section-number">4.3</span>  Fusionado de conjuntos de datos</a>
+  <li><a href="#presentación" id="toc-presentación" class="nav-link active" data-scroll-target="#presentación"><span class="header-section-number">4.1</span> Presentación</a></li>
+  <li><a href="#fusionado-de-conjuntos-de-datos" id="toc-fusionado-de-conjuntos-de-datos" class="nav-link" data-scroll-target="#fusionado-de-conjuntos-de-datos"><span class="header-section-number">4.2</span> Fusionado de conjuntos de datos</a></li>
+  <li><a href="#juntando-bases" id="toc-juntando-bases" class="nav-link" data-scroll-target="#juntando-bases"><span class="header-section-number">4.3</span> Juntando bases</a></li>
+  <li><a href="#merge-con-id-compuesto" id="toc-merge-con-id-compuesto" class="nav-link" data-scroll-target="#merge-con-id-compuesto"><span class="header-section-number">4.4</span> Merge con id compuesto</a></li>
+  <li><a href="#bases-de-distinto-tamaño" id="toc-bases-de-distinto-tamaño" class="nav-link" data-scroll-target="#bases-de-distinto-tamaño"><span class="header-section-number">4.5</span> Bases de distinto tamaño</a></li>
+  <li><a href="#cuatro-formas-de-hacer-un-fusionado" id="toc-cuatro-formas-de-hacer-un-fusionado" class="nav-link" data-scroll-target="#cuatro-formas-de-hacer-un-fusionado"><span class="header-section-number">4.6</span> Cuatro formas de hacer un fusionado</a>
   <ul class="collapse">
-  <li><a href="#juntando-bases" id="toc-juntando-bases" class="nav-link" data-scroll-target="#juntando-bases"><span class="toc-section-number">4.3.1</span>  Juntando bases</a></li>
-  <li><a href="#merge-con-id-compuesto" id="toc-merge-con-id-compuesto" class="nav-link" data-scroll-target="#merge-con-id-compuesto"><span class="toc-section-number">4.3.2</span>  Merge con id compuesto</a></li>
-  <li><a href="#bases-de-distinto-tamaño" id="toc-bases-de-distinto-tamaño" class="nav-link" data-scroll-target="#bases-de-distinto-tamaño"><span class="toc-section-number">4.3.3</span>  Bases de distinto tamaño</a></li>
-  <li><a href="#cuatro-formas-de-hacer-un-fusionado" id="toc-cuatro-formas-de-hacer-un-fusionado" class="nav-link" data-scroll-target="#cuatro-formas-de-hacer-un-fusionado"><span class="toc-section-number">4.3.4</span>  Cuatro formas de hacer un fusionado</a></li>
-  <li><a href="#las-cuatro-formas-en-dplyr" id="toc-las-cuatro-formas-en-dplyr" class="nav-link" data-scroll-target="#las-cuatro-formas-en-dplyr"><span class="toc-section-number">4.3.5</span>  Las cuatro formas en <code>dplyr</code></a></li>
+  <li><a href="#casos-en-ambas-bases" id="toc-casos-en-ambas-bases" class="nav-link" data-scroll-target="#casos-en-ambas-bases"><span class="header-section-number">4.6.1</span> Casos en ambas bases</a></li>
+  <li><a href="#todos-los-casos" id="toc-todos-los-casos" class="nav-link" data-scroll-target="#todos-los-casos"><span class="header-section-number">4.6.2</span> Todos los casos</a></li>
+  <li><a href="#casos-en-la-base-1" id="toc-casos-en-la-base-1" class="nav-link" data-scroll-target="#casos-en-la-base-1"><span class="header-section-number">4.6.3</span> Casos en la base 1</a></li>
+  <li><a href="#casos-de-la-base-2" id="toc-casos-de-la-base-2" class="nav-link" data-scroll-target="#casos-de-la-base-2"><span class="header-section-number">4.6.4</span> Casos de la base 2</a></li>
   </ul></li>
-  <li><a href="#visualización-de-datos" id="toc-visualización-de-datos" class="nav-link" data-scroll-target="#visualización-de-datos"><span class="toc-section-number">4.4</span>  Visualización de datos</a>
-  <ul class="collapse">
-  <li><a href="#cuál-es-el-mejor-gráfico" id="toc-cuál-es-el-mejor-gráfico" class="nav-link" data-scroll-target="#cuál-es-el-mejor-gráfico"><span class="toc-section-number">4.4.1</span>  ¿Cuál es el mejor gráfico?</a></li>
-  <li><a href="#gráficos-de-graphics" id="toc-gráficos-de-graphics" class="nav-link" data-scroll-target="#gráficos-de-graphics"><span class="toc-section-number">4.4.2</span>  Gráficos de <code>{graphics}</code></a></li>
-  <li><a href="#gráficos-con-ggplot2" id="toc-gráficos-con-ggplot2" class="nav-link" data-scroll-target="#gráficos-con-ggplot2"><span class="toc-section-number">4.4.3</span>  Gráficos con <code>{ggplot2}</code></a></li>
-  <li><a href="#un-lienzo-para-dibujar" id="toc-un-lienzo-para-dibujar" class="nav-link" data-scroll-target="#un-lienzo-para-dibujar"><span class="toc-section-number">4.4.4</span>  Un lienzo para dibujar</a></li>
-  <li><a href="#gráficos-univariados" id="toc-gráficos-univariados" class="nav-link" data-scroll-target="#gráficos-univariados"><span class="toc-section-number">4.4.5</span>  Gráficos univariados</a></li>
-  <li><a href="#escalas-de-color" id="toc-escalas-de-color" class="nav-link" data-scroll-target="#escalas-de-color"><span class="toc-section-number">4.4.6</span>  Escalas de color</a></li>
-  <li><a href="#temas" id="toc-temas" class="nav-link" data-scroll-target="#temas"><span class="toc-section-number">4.4.7</span>  Temas</a></li>
-  <li><a href="#un-atajo-esquisse" id="toc-un-atajo-esquisse" class="nav-link" data-scroll-target="#un-atajo-esquisse"><span class="toc-section-number">4.4.8</span>  Un atajo <code>{esquisse}</code></a></li>
-  </ul></li>
-  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="toc-section-number">4.5</span>  Ejercicio</a></li>
+  <li><a href="#las-cuatro-formas-en-dplyr" id="toc-las-cuatro-formas-en-dplyr" class="nav-link" data-scroll-target="#las-cuatro-formas-en-dplyr"><span class="header-section-number">4.7</span> Las cuatro formas en <code>dplyr</code></a></li>
+  <li><a href="#cheatsheet-de-dplyr" id="toc-cheatsheet-de-dplyr" class="nav-link" data-scroll-target="#cheatsheet-de-dplyr"><span class="header-section-number">4.8</span> Cheatsheet de <code>{dplyr}</code></a></li>
+  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="header-section-number">4.9</span> Ejercicio</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_analisis_datos/edit/main/P4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_analisis_datos/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_ccss_2025/edit/main/P4.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_ccss_2025/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos (II)</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fusionado</span></h1>
 </div>
 
 
@@ -256,52 +235,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="paquetes" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="paquetes"><span class="header-section-number">4.1</span> Paquetes</h2>
+<section id="presentación" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="presentación"><span class="header-section-number">4.1</span> Presentación</h2>
+<p>Aquí dejo la presentación</p>
+<iframe src="./s3fusionado_ppt2023.pdf" title="Fusionado" width="600" height="400">
+</iframe>
+</section>
+<section id="fusionado-de-conjuntos-de-datos" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="fusionado-de-conjuntos-de-datos"><span class="header-section-number">4.2</span> Fusionado de conjuntos de datos</h2>
+<p>Vamos a trabajar con esta base de datos de la ENIGH 2022, que tiene tablas separadas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) <span class="co"># instala pacman si se requiere</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Cargando paquete requerido: pacman</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               writexl, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               haven,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               sjlabelled, </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               janitor,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               magrittr,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>               GGally,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               wesanderson,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>               RColorBrewer,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>               viridis,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>               ggthemes,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>               esquisse</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(skimr,tidyverse, magrittr, <span class="co"># sobretodo para dplyr</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              haven, readxl, <span class="co">#importación</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              janitor, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              sjlabelled) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="presentación" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="presentación"><span class="header-section-number">4.2</span> Presentación</h2>
-<p>Aquí dejo la presentación</p>
-<iframe src="./s3fusionado_ppt2023.pdf" title="Fusionado" width="600" height="400">
-</iframe>
-</section>
-<section id="fusionado-de-conjuntos-de-datos" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="fusionado-de-conjuntos-de-datos"><span class="header-section-number">4.3</span> Fusionado de conjuntos de datos</h2>
-<p>Vamos a trabajar con esta base de datos de la ENIGH 2022, que tiene tablas separadas:</p>
-<ul>
-<li><p>viviendas</p></li>
-<li><p>ingresos</p></li>
-<li><p>población</p></li>
-</ul>
-<p>Ademas de la que ya tenemos de concentradohogar Las puedes descargar desde</p>
-<p><a href="https://www.dropbox.com/scl/fo/42zy3owbokvfhdg4a9t78/AEPl06bBAvO6Du_zvk6EuVo?rlkey=t9f56pjt0w2nhfnn9otu1zxnm&amp;dl=0">aquí</a>, son todas las que tienen extensión “.sav”.</p>
 <p>Hoy cargamos la versión seccionada de la base</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>viviendas <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"datos/viviendas.sav"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"datos/concentradohogar.sav"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>concentrado <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"datos/concentradohogar.sav"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>poblacion<span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"datos/poblacion.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="juntando-bases" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="juntando-bases"><span class="header-section-number">4.3.1</span> Juntando bases</h3>
+</section>
+<section id="juntando-bases" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="juntando-bases"><span class="header-section-number">4.3</span> Juntando bases</h2>
 <p>Muchas bases de datos están organizadas en varias tablas. La ventaja de la programación por objetos de R, nos permite tener las bases cargadas en nuestro ambiente y llamarlas y juntarlas cuando sea necesario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(viviendas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -314,11 +275,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  [6] "antiguedad" "antigua_ne" "cocina"     "cocina_dor" "cuart_dorm"
 [11] "num_cuarto" "disp_agua"  "dotac_agua" "excusado"   "uso_compar"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(concentrado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 90102   126</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentradohogar[,<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentrado[,<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "folioviv"   "foliohog"   "ubica_geo"  "tam_loc"    "est_socio" 
  [6] "est_dis"    "upm"        "factor"     "clase_hog"  "sexo_jefe" 
@@ -339,14 +300,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>En <code>by =</code> ponemos el <code>id</code>, correspondiente a la variable o variables que lo conforman, de manera entrecomillada o de vector. Cuando estamos mezclando bases del mismo nivel de análisis el <code>id</code> es igual en ambas bases. Cuando estamos incorporando información de bases de distinto nivel debemos escoger el nivel mayor.</p>
 <p>En este caso, sabemos que a una vivienda corresponde más de un hogar (1 a muchos). Esto se puede revisar documentación, sabemos que el <code>id</code> de la tabla <code>viviendas</code> es <code>folioviv</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>merge_data<span class="ot">&lt;-</span> <span class="fu">merge</span>(viviendas,concentradohogar, <span class="at">by=</span><span class="st">"folioviv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>merge_data<span class="ot">&lt;-</span> <span class="fu">merge</span>(viviendas, concentrado, <span class="at">by=</span><span class="st">"folioviv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Esto es equivalente a <code>left_join()</code> de <code>{dplyr}</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>merge_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(viviendas,concentradohogar, <span class="at">by=</span><span class="st">"folioviv"</span>) </span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>merge_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(viviendas, concentrado, <span class="at">by=</span><span class="st">"folioviv"</span>) </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>merge_data <span class="ot">&lt;-</span> viviendas <span class="sc">%&gt;%</span> </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(concentradohogar, <span class="at">by=</span><span class="st">"folioviv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(concentrado, <span class="at">by=</span><span class="st">"folioviv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Revisemos la base creada</p>
 <div class="cell">
@@ -402,8 +363,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>También vemos que las variables que se repetían en ambas bases se repiten en la nueva base,con un sufijo <code>.x</code>, para lo que proviene de la primera base y con <code>.y</code>, lo que proviene de la segunda. R dejará las variables intactas y son coincidentes, en nuestro caso, porque las variables son iguales. R hace esto para prever que por error tengamos alguna variable con un nombre igual y no sea la misma en su contenido.</p></li>
 </ol>
 </section>
-<section id="merge-con-id-compuesto" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="merge-con-id-compuesto"><span class="header-section-number">4.3.2</span> Merge con id compuesto</h3>
+<section id="merge-con-id-compuesto" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="merge-con-id-compuesto"><span class="header-section-number">4.4</span> Merge con id compuesto</h2>
 <p>Los identificadores pueden estar compuestos de más de una variable:</p>
 <ul>
 <li>Viviendas <code>viviendas</code> es <code>folioviv</code></li>
@@ -426,10 +387,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <ul>
-<li>concentradohogar <code>concentrado</code> es <code>c("folioviv", "foliohog")</code></li>
+<li>concentrado <code>concentrado</code> es <code>c("folioviv", "foliohog")</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>concentrado <span class="sc">%&gt;%</span> </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">get_dupes</span>(<span class="fu">c</span>(folioviv, foliohog))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>No duplicate combinations found of: folioviv, foliohog</code></pre>
@@ -467,7 +428,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Esto es un <code>id compuesto</code>. No es una sola variable. Para esto modificamos ligeramente cómo ponemos el <code>by =</code>, pero siempre eligiendo el id de la base de mayor nivel. (Tené cuidado con los paréntesis)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>merge_data2<span class="ot">&lt;-</span> <span class="fu">merge</span>(concentradohogar, poblacion, </span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>merge_data2<span class="ot">&lt;-</span> <span class="fu">merge</span>(concentrado, poblacion, </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"folioviv"</span>, <span class="st">"foliohog"</span>))</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(merge_data2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -776,8 +737,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="bases-de-distinto-tamaño" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="bases-de-distinto-tamaño"><span class="header-section-number">4.3.3</span> Bases de distinto tamaño</h3>
+<section id="bases-de-distinto-tamaño" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="bases-de-distinto-tamaño"><span class="header-section-number">4.5</span> Bases de distinto tamaño</h2>
 <p>Hasta ahorita hemos hecho merge que son de unidades de distinto nivel y son incluyentes. A veces tenemos bases de datos que son de distinto tamaño y del mismo nivel. A veces las dos aportan casos y a veces aportan variables, y a veces, las dos aportan las dos cosas.</p>
 <p>Vamos a revisar qué pasaría si quisiéramos incorporar la información los ingresos</p>
 <div class="cell">
@@ -914,11 +875,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>¡La base nueva no tiene a todas las observaciones, solo la que tiene en la base más pequeña!</p>
 </section>
-<section id="cuatro-formas-de-hacer-un-fusionado" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="cuatro-formas-de-hacer-un-fusionado"><span class="header-section-number">4.3.4</span> Cuatro formas de hacer un fusionado</h3>
+<section id="cuatro-formas-de-hacer-un-fusionado" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="cuatro-formas-de-hacer-un-fusionado"><span class="header-section-number">4.6</span> Cuatro formas de hacer un fusionado</h2>
 <p>En realidad hay cuatro formas de hacer un “merge”</p>
-<section id="casos-en-ambas-bases" class="level4" data-number="4.3.4.1">
-<h4 data-number="4.3.4.1" class="anchored" data-anchor-id="casos-en-ambas-bases"><span class="header-section-number">4.3.4.1</span> Casos en ambas bases</h4>
+<section id="casos-en-ambas-bases" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="casos-en-ambas-bases"><span class="header-section-number">4.6.1</span> Casos en ambas bases</h3>
 <p>Por <em>default</em>, el comando tiene activado la opción “all = FALSE”, que nos deja los datos de ambas bases comunes. (tipo una intersección)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>merge_data3<span class="ot">&lt;-</span><span class="fu">merge</span>(poblacion, </span>
@@ -931,8 +892,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="todos-los-casos" class="level4" data-number="4.3.4.2">
-<h4 data-number="4.3.4.2" class="anchored" data-anchor-id="todos-los-casos"><span class="header-section-number">4.3.4.2</span> Todos los casos</h4>
+<section id="todos-los-casos" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="todos-los-casos"><span class="header-section-number">4.6.2</span> Todos los casos</h3>
 <p>Si cambiamos la opción “all = TRUE”, que nos deja los datos comunes a ambas bases. (como una unión)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>merge_data3<span class="ot">&lt;-</span><span class="fu">merge</span>(poblacion,</span>
@@ -945,8 +906,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="casos-en-la-base-1" class="level4" data-number="4.3.4.3">
-<h4 data-number="4.3.4.3" class="anchored" data-anchor-id="casos-en-la-base-1"><span class="header-section-number">4.3.4.3</span> Casos en la base 1</h4>
+<section id="casos-en-la-base-1" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="casos-en-la-base-1"><span class="header-section-number">4.6.3</span> Casos en la base 1</h3>
 <p>Si queremos quedarnos con todos los datos que hay en la primera base, x, vamos a usar a opción all.x = TRUE.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>merge_data3<span class="ot">&lt;-</span><span class="fu">merge</span>(poblacion, </span>
@@ -959,8 +920,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="casos-de-la-base-2" class="level4" data-number="4.3.4.4">
-<h4 data-number="4.3.4.4" class="anchored" data-anchor-id="casos-de-la-base-2"><span class="header-section-number">4.3.4.4</span> Casos de la base 2</h4>
+<section id="casos-de-la-base-2" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="casos-de-la-base-2"><span class="header-section-number">4.6.4</span> Casos de la base 2</h3>
 <p>Notamos que hoy sí tenemos los datos de toda la población y hay missings en las variables aportadas por la base de trabajo</p>
 <p>Si queremos lo contrario, quedarnos con los datos aportados por la segunda base, y, vamos a usar la opción all.y=TRUE</p>
 <div class="cell">
@@ -975,8 +936,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="las-cuatro-formas-en-dplyr" class="level3" data-number="4.3.5">
-<h3 data-number="4.3.5" class="anchored" data-anchor-id="las-cuatro-formas-en-dplyr"><span class="header-section-number">4.3.5</span> Las cuatro formas en <code>dplyr</code></h3>
+<section id="las-cuatro-formas-en-dplyr" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="las-cuatro-formas-en-dplyr"><span class="header-section-number">4.7</span> Las cuatro formas en <code>dplyr</code></h2>
 <p>El caso 1:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>merge_data3<span class="ot">&lt;-</span>dplyr<span class="sc">::</span><span class="fu">inner_join</span>(poblacion,</span>
@@ -1028,332 +989,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
+<section id="cheatsheet-de-dplyr" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="cheatsheet-de-dplyr"><span class="header-section-number">4.8</span> Cheatsheet de <code>{dplyr}</code></h2>
+<p>La puedes descargar de <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf">aquí</a></p>
 </section>
-<section id="visualización-de-datos" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="visualización-de-datos"><span class="header-section-number">4.4</span> Visualización de datos</h2>
-<p>Incluimos los cambios anteriores</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>etiqueta_sex<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Hombre"</span>, <span class="st">"Mujer"</span>)</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="ot">&lt;-</span> concentradohogar <span class="sc">%&gt;%</span> </span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexo_jefe=</span><span class="fu">as_numeric</span>(sexo_jefe)) <span class="sc">%&gt;%</span> <span class="co"># para quitar el "string"</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  sjlabelled<span class="sc">::</span><span class="fu">set_labels</span>(sexo_jefe, <span class="at">labels=</span>etiqueta_sex) <span class="sc">%&gt;%</span> </span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clase_hog=</span><span class="fu">as_numeric</span>(clase_hog)) <span class="sc">%&gt;%</span> <span class="co"># para quitar el "string"</span></span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  sjlabelled<span class="sc">::</span><span class="fu">set_labels</span>(clase_hog, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"unipersonal"</span>,</span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"nuclear"</span>, </span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"ampliado"</span>,</span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"compuesto"</span>,</span>
-<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">"corresidente"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">educa_jefe=</span><span class="fu">as_numeric</span>(educa_jefe)) <span class="sc">%&gt;%</span> </span>
-<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_labels</span>(educa_jefe,</span>
-<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Sin instrucción"</span>, </span>
-<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Preescolar"</span>,</span>
-<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Primaria incompleta"</span>,</span>
-<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Primaria completa"</span>,</span>
-<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Secundaria incompleta"</span>,</span>
-<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Secundaria completa"</span>,</span>
-<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Preparatoria incompleta"</span>,</span>
-<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Preparatoria completa"</span>,</span>
-<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Profesional incompleta"</span>,</span>
-<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Profesional completa"</span>,</span>
-<span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Posgrado"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb64-25"><a href="#cb64-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ent=</span>stringr<span class="sc">::</span><span class="fu">str_sub</span>(folioviv, <span class="at">start=</span><span class="dv">1</span>, <span class="at">end=</span><span class="dv">2</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="cuál-es-el-mejor-gráfico" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="cuál-es-el-mejor-gráfico"><span class="header-section-number">4.4.1</span> ¿Cuál es el mejor gráfico?</h3>
-<p>Hay cursos específicos de visualización de datos. Es maravilloso pero también requiere que estudiemos bien qué tipo de datos tenemos y cuáles son nuestros objetivos.</p>
-<p>Me gusta mucho este recurso: <a href="https://www.data-to-viz.com/" class="uri">https://www.data-to-viz.com/</a></p>
-</section>
-<section id="gráficos-de-graphics" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="gráficos-de-graphics"><span class="header-section-number">4.4.2</span> Gráficos de <code>{graphics}</code></h3>
-<p>“plot()” Es la función más simple. Y es otro comando “listo”</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">as_label</span>(concentradohogar<span class="sc">$</span>sexo_jefe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Esto es igual que:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(<span class="fu">as_label</span>(concentradohogar<span class="sc">$</span>sexo_jefe)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="gráficos-con-ggplot2" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="gráficos-con-ggplot2"><span class="header-section-number">4.4.3</span> Gráficos con <code>{ggplot2}</code></h3>
-<p>Hoy vamos a presentar a un gran paquete ¡Es de los famosos! Y tiene más de diez años.</p>
-<p>“gg” proviene de “Grammar of Graphics”, funciona un poco como sintácticamente, de ahí su nombre.</p>
-<p>Algunos recursos para aprender ggplot</p>
-<ul>
-<li><p><a href="https://ggplot2-book.org/" class="uri">https://ggplot2-book.org/</a> hecha por el mero mero.</p></li>
-<li><p><a href="http://sape.inf.usi.ch/quick-reference/ggplot2" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2</a></p></li>
-<li><p><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf" class="uri">https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf</a></p></li>
-</ul>
-<p>Vamos a revisar una presentación que es muy interesante</p>
-<ul>
-<li><p><a href="https://evamaerey.github.io/ggplot2_grammar_guide/ggplot2_grammar_guide.html" class="uri">https://evamaerey.github.io/ggplot2_grammar_guide/ggplot2_grammar_guide.html</a></p></li>
-<li><p><a href="https://huygens.science.uva.nl/ggPlotteR/" class="uri">https://huygens.science.uva.nl/ggPlotteR/</a> Hace gráficos de ggplot con la base de datos de Gapminder</p></li>
-</ul>
-</section>
-<section id="un-lienzo-para-dibujar" class="level3" data-number="4.4.4">
-<h3 data-number="4.4.4" class="anchored" data-anchor-id="un-lienzo-para-dibujar"><span class="header-section-number">4.4.4</span> Un lienzo para dibujar</h3>
-<p>Para hacer un gráfico, <code>{ggplot2}</code> tiene el comando <code>ggplot()</code>. Hacer gráficos con esta función tiene una lógica aditiva. Lo ideal es que iniciemos estableciendo el mapeo estético de nuestro gráfico, con el comando aes()</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="co"># ojo es un +</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as_label</span>(sexo_jefe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>g1<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="co"># ojo es un +</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">as_label</span>(sexo_jefe))</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>g1 <span class="do">## imprime el lienzo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="gráficos-univariados" class="level3" data-number="4.4.5">
-<h3 data-number="4.4.5" class="anchored" data-anchor-id="gráficos-univariados"><span class="header-section-number">4.4.5</span> Gráficos univariados</h3>
-<section id="para-cualitativas" class="level4" data-number="4.4.5.1">
-<h4 data-number="4.4.5.1" class="anchored" data-anchor-id="para-cualitativas"><span class="header-section-number">4.4.5.1</span> Para cualitativas</h4>
-<p>Sabemos que la mejor son las barras</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">+</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">+</span>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="fu">as_label</span>(sexo_jefe)</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  )) <span class="do">## colorea la geometría</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Esto es equivalente</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span></span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">as_label</span>(sexo_jefe),</span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="fu">as_label</span>(sexo_jefe)</span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>             )</span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-31-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="para-variables-cuantitativas" class="level4" data-number="4.4.5.2">
-<h4 data-number="4.4.5.2" class="anchored" data-anchor-id="para-variables-cuantitativas"><span class="header-section-number">4.4.5.2</span> Para variables cuantitativas</h4>
-<p>Podemos hacer histogramas y gráficos de densidad, de manera fácil. La idea es agregar en nuestro “lienzo” una geometría, un valor para dibujar en él. Esto se agrega con un “+” y con la figura que se añadirá a nuestro gráfico.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>g2<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(ing_cor))</span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>g2 <span class="do">## imprime el lienzo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="histograma" class="level4" data-number="4.4.5.3">
-<h4 data-number="4.4.5.3" class="anchored" data-anchor-id="histograma"><span class="header-section-number">4.4.5.3</span> Histograma</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>g2 <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="densidad" class="level4" data-number="4.4.5.4">
-<h4 data-number="4.4.5.4" class="anchored" data-anchor-id="densidad"><span class="header-section-number">4.4.5.4</span> Densidad</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>g2 <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="gráficos-bivariados" class="level4" data-number="4.4.5.5">
-<h4 data-number="4.4.5.5" class="anchored" data-anchor-id="gráficos-bivariados"><span class="header-section-number">4.4.5.5</span> Gráficos bivariados</h4>
-<section id="cuali-cuali" class="level5" data-number="4.4.5.5.1">
-<h5 data-number="4.4.5.5.1" class="anchored" data-anchor-id="cuali-cuali"><span class="header-section-number">4.4.5.5.1</span> Cuali-cuali</h5>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="sc">+</span>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as_label</span>(clase_hog)),</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">position=</span><span class="st">"dodge"</span>) <span class="co">#pone las categorías lado a lado y no apiladas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Otra manera interesante de observar estas variables, es que estando apiladas, cada categoría de escolaridad se entendiera como una unidad:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>g_bivariado <span class="ot">&lt;-</span> g1 <span class="sc">+</span>  </span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as_label</span>(clase_hog)),</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">position=</span><span class="st">"fill"</span>) <span class="do">## cada categoría "llena" a una unidad</span></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>g_bivariado</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="escalas-de-color" class="level3" data-number="4.4.6">
-<h3 data-number="4.4.6" class="anchored" data-anchor-id="escalas-de-color"><span class="header-section-number">4.4.6</span> Escalas de color</h3>
-<section id="rcolorbrewer" class="level4" data-number="4.4.6.1">
-<h4 data-number="4.4.6.1" class="anchored" data-anchor-id="rcolorbrewer"><span class="header-section-number">4.4.6.1</span> <code>{RcolorBrewer}</code></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>RColorBrewer<span class="sc">::</span><span class="fu">display.brewer.all</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>g_bivariado <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="viridis" class="level4" data-number="4.4.6.2">
-<h4 data-number="4.4.6.2" class="anchored" data-anchor-id="viridis"><span class="header-section-number">4.4.6.2</span> <code>{viridis}</code></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>g_bivariado <span class="sc">+</span> <span class="fu">scale_fill_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="wesanderson" class="level4" data-number="4.4.6.3">
-<h4 data-number="4.4.6.3" class="anchored" data-anchor-id="wesanderson"><span class="header-section-number">4.4.6.3</span> <code>{wesanderson}</code></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>wesanderson<span class="sc">::</span>wes_palettes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$BottleRocket1
-[1] "#A42820" "#5F5647" "#9B110E" "#3F5151" "#4E2A1E" "#550307" "#0C1707"
-
-$BottleRocket2
-[1] "#FAD510" "#CB2314" "#273046" "#354823" "#1E1E1E"
-
-$Rushmore1
-[1] "#E1BD6D" "#EABE94" "#0B775E" "#35274A" "#F2300F"
-
-$Rushmore
-[1] "#E1BD6D" "#EABE94" "#0B775E" "#35274A" "#F2300F"
-
-$Royal1
-[1] "#899DA4" "#C93312" "#FAEFD1" "#DC863B"
-
-$Royal2
-[1] "#9A8822" "#F5CDB4" "#F8AFA8" "#FDDDA0" "#74A089"
-
-$Zissou1
-[1] "#3B9AB2" "#78B7C5" "#EBCC2A" "#E1AF00" "#F21A00"
-
-$Zissou1Continuous
- [1] "#3A9AB2" "#6FB2C1" "#91BAB6" "#A5C2A3" "#BDC881" "#DCCB4E" "#E3B710"
- [8] "#E79805" "#EC7A05" "#EF5703" "#F11B00"
-
-$Darjeeling1
-[1] "#FF0000" "#00A08A" "#F2AD00" "#F98400" "#5BBCD6"
-
-$Darjeeling2
-[1] "#ECCBAE" "#046C9A" "#D69C4E" "#ABDDDE" "#000000"
-
-$Chevalier1
-[1] "#446455" "#FDD262" "#D3DDDC" "#C7B19C"
-
-$FantasticFox1
-[1] "#DD8D29" "#E2D200" "#46ACC8" "#E58601" "#B40F20"
-
-$Moonrise1
-[1] "#F3DF6C" "#CEAB07" "#D5D5D3" "#24281A"
-
-$Moonrise2
-[1] "#798E87" "#C27D38" "#CCC591" "#29211F"
-
-$Moonrise3
-[1] "#85D4E3" "#F4B5BD" "#9C964A" "#CDC08C" "#FAD77B"
-
-$Cavalcanti1
-[1] "#D8B70A" "#02401B" "#A2A475" "#81A88D" "#972D15"
-
-$GrandBudapest1
-[1] "#F1BB7B" "#FD6467" "#5B1A18" "#D67236"
-
-$GrandBudapest2
-[1] "#E6A0C4" "#C6CDF7" "#D8A499" "#7294D4"
-
-$IsleofDogs1
-[1] "#9986A5" "#79402E" "#CCBA72" "#0F0D0E" "#D9D0D3" "#8D8680"
-
-$IsleofDogs2
-[1] "#EAD3BF" "#AA9486" "#B6854D" "#39312F" "#1C1718"
-
-$FrenchDispatch
-[1] "#90D4CC" "#BD3027" "#B0AFA2" "#7FC0C6" "#9D9C85"
-
-$AsteroidCity1
-[1] "#0A9F9D" "#CEB175" "#E54E21" "#6C8645" "#C18748"
-
-$AsteroidCity2
-[1] "#C52E19" "#AC9765" "#54D8B1" "#b67c3b" "#175149" "#AF4E24"
-
-$AsteroidCity3
-[1] "#FBA72A" "#D3D4D8" "#CB7A5C" "#5785C1"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">"IsleofDogs1"</span>, <span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>mi_paleta <span class="ot">&lt;-</span> wesanderson<span class="sc">::</span><span class="fu">wes_palette</span>(<span class="st">"IsleofDogs1"</span>, <span class="at">n=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>g_bivariado <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>mi_paleta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="temas" class="level3" data-number="4.4.7">
-<h3 data-number="4.4.7" class="anchored" data-anchor-id="temas"><span class="header-section-number">4.4.7</span> Temas</h3>
-<p>Cambiamos el tema:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>g_bivariado <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Si queremos que sean horizontales (como debe ser)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>g_bivariado <span class="sc">+</span> </span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="P4_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="un-atajo-esquisse" class="level3" data-number="4.4.8">
-<h3 data-number="4.4.8" class="anchored" data-anchor-id="un-atajo-esquisse"><span class="header-section-number">4.4.8</span> Un atajo <code>{esquisse}</code></h3>
-<p>Si la lógica de las capas y lienzos parece un poco complicada para graficar con <code>{ggplot2}</code>, el paquete “esquisse” tiene un complemento. Cuando lo instalamos con pacman más arriba, se puede observar el complemento:</p>
-</section>
-</section>
-<section id="ejercicio" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">4.5</span> Ejercicio</h2>
+<section id="ejercicio" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">4.9</span> Ejercicio</h2>
 <p>¡Junta tu base!</p>
 
 
@@ -1502,9 +1143,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1569,6 +1224,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1611,12 +1352,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./P3.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./P5.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualización (II) y diseño muestral</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ponderación y otros</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

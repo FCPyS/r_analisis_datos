@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R para el análisis estadístico de datos - 2&nbsp; Manejo de datos: importación, selección y revisión</title>
+<title>Uso de R para la investigación social - 2&nbsp; Importación de conjuntos de datos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -122,7 +93,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -133,11 +105,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manejo de datos: importación, selección y revisión</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./P2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -145,104 +122,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R para el análisis estadístico de datos</a> 
+      <a href="./">Uso de R para la investigación social</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/fcpys/r_analisis_datos/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://github.com/fcpys/r_ccss_2025/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Sobre el curso</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Uso de R para la investigación social</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./instala.html" class="sidebar-item-text sidebar-link">Instalación de R y Rstudio</a>
+  <a href="./instala.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instalación de R y Rstudio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></a>
+  <a href="./P1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Primer acercamiento al uso del programa</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manejo de datos: importación, selección y revisión</span></a>
+  <a href="./P2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos</span></a>
+  <a href="./P3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos (II)</span></a>
+  <a href="./P4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fusionado</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./P5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Visualización (II) y diseño muestral</span></a>
+  <a href="./P5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ponderación y otros</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./videos.html" class="sidebar-item-text sidebar-link">Videos y extras</a>
+  <a href="./P6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análisis descriptivo II</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#datos" id="toc-datos" class="nav-link active" data-scroll-target="#datos"><span class="toc-section-number">2.1</span>  Datos</a></li>
-  <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes"><span class="toc-section-number">2.2</span>  Paquetes</a></li>
-  <li><a href="#importación-de-datos" id="toc-importación-de-datos" class="nav-link" data-scroll-target="#importación-de-datos"><span class="toc-section-number">2.3</span>  Importación de datos</a>
+  <li><a href="#consejo-para-escribir-código" id="toc-consejo-para-escribir-código" class="nav-link active" data-scroll-target="#consejo-para-escribir-código"><span class="header-section-number">2.1</span> Consejo para escribir “código””</a></li>
+  <li><a href="#importación-de-datos" id="toc-importación-de-datos" class="nav-link" data-scroll-target="#importación-de-datos"><span class="header-section-number">2.2</span> Importación de datos</a>
   <ul class="collapse">
-  <li><a href="#desde-excel" id="toc-desde-excel" class="nav-link" data-scroll-target="#desde-excel"><span class="toc-section-number">2.3.1</span>  Desde Excel</a></li>
-  <li><a href="#desde-stata-y-spss" id="toc-desde-stata-y-spss" class="nav-link" data-scroll-target="#desde-stata-y-spss"><span class="toc-section-number">2.3.2</span>  Desde STATA y SPSS</a></li>
-  <li><a href="#desde-archivos-de-texto-y-de-una-url" id="toc-desde-archivos-de-texto-y-de-una-url" class="nav-link" data-scroll-target="#desde-archivos-de-texto-y-de-una-url"><span class="toc-section-number">2.3.3</span>  Desde archivos de texto y de una url</a></li>
+  <li><a href="#desde-excel" id="toc-desde-excel" class="nav-link" data-scroll-target="#desde-excel"><span class="header-section-number">2.2.1</span> Desde Excel</a></li>
+  <li><a href="#desde-stata-y-spss" id="toc-desde-stata-y-spss" class="nav-link" data-scroll-target="#desde-stata-y-spss"><span class="header-section-number">2.2.2</span> Desde STATA y SPSS</a></li>
   </ul></li>
-  <li><a href="#revisión-de-nuestro-conjunto-de-datos" id="toc-revisión-de-nuestro-conjunto-de-datos" class="nav-link" data-scroll-target="#revisión-de-nuestro-conjunto-de-datos"><span class="toc-section-number">2.4</span>  Revisión de nuestro conjunto de datos</a>
+  <li><a href="#desde-.dbf" id="toc-desde-.dbf" class="nav-link" data-scroll-target="#desde-.dbf"><span class="header-section-number">2.3</span> Desde <code>.dbf</code></a></li>
+  <li><a href="#revisión-de-nuestro-data.frame" id="toc-revisión-de-nuestro-data.frame" class="nav-link" data-scroll-target="#revisión-de-nuestro-data.frame"><span class="header-section-number">2.4</span> Revisión de nuestro data.frame</a></li>
+  <li><a href="#revisión-con-dplyr" id="toc-revisión-con-dplyr" class="nav-link" data-scroll-target="#revisión-con-dplyr"><span class="header-section-number">2.5</span> Revisión con dplyr</a>
   <ul class="collapse">
-  <li><a href="#con-base" id="toc-con-base" class="nav-link" data-scroll-target="#con-base"><span class="toc-section-number">2.4.1</span>  con base</a></li>
-  <li><a href="#revisión-con-skimr" id="toc-revisión-con-skimr" class="nav-link" data-scroll-target="#revisión-con-skimr"><span class="toc-section-number">2.4.2</span>  Revisión con <code>{skimr}</code></a></li>
+  <li><a href="#ojeando" id="toc-ojeando" class="nav-link" data-scroll-target="#ojeando"><span class="header-section-number">2.5.1</span> Ojeando</a></li>
+  <li><a href="#revisión-con-skimr" id="toc-revisión-con-skimr" class="nav-link" data-scroll-target="#revisión-con-skimr"><span class="header-section-number">2.5.2</span> Revisión con <code>{skimr}</code></a></li>
+  <li><a href="#selección-de-casos-y-de-variables" id="toc-selección-de-casos-y-de-variables" class="nav-link" data-scroll-target="#selección-de-casos-y-de-variables"><span class="header-section-number">2.5.3</span> Selección de casos y de variables</a></li>
   </ul></li>
-  <li><a href="#un-poquito-de-dplyr-y-limpieza" id="toc-un-poquito-de-dplyr-y-limpieza" class="nav-link" data-scroll-target="#un-poquito-de-dplyr-y-limpieza"><span class="toc-section-number">2.5</span>  Un poquito de <code>{dplyr}</code> y limpieza</a>
-  <ul class="collapse">
-  <li><a href="#primero-los-pipes" id="toc-primero-los-pipes" class="nav-link" data-scroll-target="#primero-los-pipes"><span class="toc-section-number">2.5.1</span>  Primero, los pipes</a></li>
-  <li><a href="#limpieza-de-nombres-con-janitor" id="toc-limpieza-de-nombres-con-janitor" class="nav-link" data-scroll-target="#limpieza-de-nombres-con-janitor"><span class="toc-section-number">2.5.2</span>  Limpieza de nombres con <code>{janitor}</code></a></li>
-  <li><a href="#ojeando" id="toc-ojeando" class="nav-link" data-scroll-target="#ojeando"><span class="toc-section-number">2.5.3</span>  Ojeando</a></li>
-  <li><a href="#selección-de-casos-y-de-variables" id="toc-selección-de-casos-y-de-variables" class="nav-link" data-scroll-target="#selección-de-casos-y-de-variables"><span class="toc-section-number">2.5.4</span>  Selección de casos y de variables</a></li>
-  </ul></li>
-  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting"><span class="toc-section-number">2.6</span>  “Subsetting”</a></li>
-  <li><a href="#etiquetas-y-cómo-usarlas" id="toc-etiquetas-y-cómo-usarlas" class="nav-link" data-scroll-target="#etiquetas-y-cómo-usarlas"><span class="toc-section-number">2.7</span>  Etiquetas y cómo usarlas</a></li>
-  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="toc-section-number">2.8</span>  Ejercicio</a></li>
+  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting"><span class="header-section-number">2.6</span> “Subsetting”</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_analisis_datos/edit/main/P2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_analisis_datos/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcpys/r_ccss_2025/edit/main/P2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/fcpys/r_ccss_2025/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Manejo de datos: importación, selección y revisión</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Importación de conjuntos de datos</span></h1>
 </div>
 
 
@@ -257,35 +235,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="datos" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="datos"><span class="header-section-number">2.1</span> Datos</h2>
-<p>Guarda en tu carpeta de datos, la información que está <a href="https://www.dropbox.com/scl/fo/42zy3owbokvfhdg4a9t78/AEPl06bBAvO6Du_zvk6EuVo?rlkey=t9f56pjt0w2nhfnn9otu1zxnm&amp;dl=0">acá</a> (ayer descargamos algunos archivos, agregué dos más)</p>
-</section>
-<section id="paquetes" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="paquetes"><span class="header-section-number">2.2</span> Paquetes</h2>
-<p>Vamos a llamar algunas paqueterías básicas para la práctica de hoy.</p>
+<section id="consejo-para-escribir-código" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="consejo-para-escribir-código"><span class="header-section-number">2.1</span> Consejo para escribir “código””</h2>
+<p>En general, cuando hacemos nuestro código querremos verificar que nuestras librerías estén instaladas. Si actualizamos nuestro R y Rstudio es probable que hayamos perdido alguno.</p>
+<p>Este es un ejemplo de un código. Y vamos a introducir un paquete muy útil llamado <code>{pacman}</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) <span class="co"># instala pacman si se requiere</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Cargando paquete requerido: pacman</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               readr,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               readxl,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               writexl,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               haven, </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               magrittr,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>               skimr,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>               sjlabelled,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>               foreign,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>               janitor) <span class="co">#carga los paquetes necesarios para esta práctica</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>               readxl,writexl, <span class="co"># importar hojas de cálculo</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               haven, foreign, <span class="co"># importación de dta y sab</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               sjlabelled, <span class="co"># etiquetas</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               janitor, skimr, <span class="co">#carga los paquetes necesarios para esta práctica</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               curl) <span class="co"># para que lea urls </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importación-de-datos" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="importación-de-datos"><span class="header-section-number">2.3</span> Importación de datos</h2>
-<section id="desde-excel" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="desde-excel"><span class="header-section-number">2.3.1</span> Desde Excel</h3>
-<p>El paquete más compatible con RStudio es <code>{readxl}</code>. Como su nombre dice “lee” los archivos de excel</p>
+<section id="importación-de-datos" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="importación-de-datos"><span class="header-section-number">2.2</span> Importación de datos</h2>
+<section id="desde-excel" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="desde-excel"><span class="header-section-number">2.2.1</span> Desde Excel</h3>
+<p>El paquete más compatible con RStudio es readxl. A veces, otros paquetes tienen más problemas de configuración entre R y el Java.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ejemploxl <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"datos/ejemplo_xlsx.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"para_importar"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -307,79 +278,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 • `PIB` -&gt; `PIB...142`</code></pre>
 </div>
 </div>
-<p>Como el nombre de paquete lo indica, sólo lee. Para “escribir” en este formato, recomiendo el paquete <code>{writexl}</code>. Lo instalamos anteriormente.</p>
-<p>Si quisiéramos exportar un objeto a Excel, se hace de la siguiente forma:</p>
+<p>Como el nombre de paquete lo indica, sólo lee. Para escribir en este formato, recomiendo el paquete “writexl”. Lo instalamos anteriormente.</p>
+<p>Si quisiéramos exportar un objeto a Excel</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(ejemploxl, <span class="at">path =</span> <span class="st">"Mi_Exportación.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="desde-stata-y-spss" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="desde-stata-y-spss"><span class="header-section-number">2.3.2</span> Desde STATA y SPSS</h3>
-<p>Si bien también se puede realizar desde el paquete <code>{foreign}</code> Pero este no importa algunas características como las etiquetas y tampoco funciona con las versiones más nuevas de STATA. Vamos a instalar otro paquete, compatible con el mundo <code>{tidyverse}</code>.</p>
-<p>Recuerda que no hay que instalarlo (viene adentro de <code>{tidyverse}</code>).</p>
+<section id="desde-stata-y-spss" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="desde-stata-y-spss"><span class="header-section-number">2.2.2</span> Desde STATA y SPSS</h3>
+<p>Si bien también se puede realizar desde el paquete <code>{foreign}</code>. Pero este no importa algunas características como las etiquetas y tampoco funciona con las versiones más nuevas de STATA. Vamos a instalar otro paquete, compatible con el mundo tidyverse.</p>
+<p>Recuerda que no hay que instalarlo (viene adentro de tidyverse).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_dta</span>(<span class="st">"datos/concentradohogar.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>!Importante, a R no le gustan los objetos con nombres que empiezan en números</p>
 <p>El paquete haven sí exporta información.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>haven<span class="sc">::</span><span class="fu">write_dta</span>(concentradohogar,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"datos/mi_exportación.dta"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">version =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>haven<span class="sc">::</span><span class="fu">write_dta</span>(concentradohogar, <span class="st">"datos/mi_exportacion.dta"</span>, <span class="at">version =</span> <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Con SSPS es muy parecido. Dentro de <code>{haven}</code> hay una función específica para ello.</p>
+<p>Con SSPS es muy parecido. Dentro de “haven” hay una función específica para ello.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>concentradohogarr<span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"datos/concentradohogar.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ingresos<span class="ot">&lt;-</span> haven<span class="sc">::</span><span class="fu">read_sav</span>(<span class="st">"datos/ingresos.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para escribir</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>haven<span class="sc">::</span><span class="fu">write_sav</span>(concentradohogar , <span class="st">"mi_exportacion.sav"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#haven::write_sav(concentradohogar , "mi_exportacion.sav")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Checa que en todas las exportaciones en los nombres hay que incluir la extensión del programa. Si quieres guardar en un lugar diferente al directorio del trabajo, hay que escribir toda la ruta dentro de la computadora.</p>
 </section>
-<section id="desde-archivos-de-texto-y-de-una-url" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="desde-archivos-de-texto-y-de-una-url"><span class="header-section-number">2.3.3</span> Desde archivos de texto y de una url</h3>
-<p>Desde el portal <a href="https://datos.gob.mx/" class="uri">https://datos.gob.mx/</a> tenemos acceso a directo a varias fuentes de información, al ser datos abiertos, los archivos de texto son muy comunes.</p>
-<p>Leeremos parte de esa información, específicamente de las <a href="https://datos.gob.mx/busca/dataset/proyecciones-de-la-poblacion-de-mexico-y-de-las-entidades-federativas-2020-2070">proyecciones de CONAPO</a></p>
+</section>
+<section id="desde-.dbf" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="desde-.dbf"><span class="header-section-number">2.3</span> Desde <code>.dbf</code></h2>
+<p><code>{foreing}</code> nos permite leer archivos en formato de <em>dBase</em>, con extensión “.dbf”. Si bien no es un formato muy común para los investigadores, sí para los que generan la información, puesto que dBase es uno de los principales programas de administración de bases de datos.</p>
+<p>He puesto un ejemplo de una base de datos mexicana en dbf, en este formato.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mig_inter_quin_proyecciones <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://conapo.segob.gob.mx/work/models/CONAPO/Datos_Abiertos/pry23/02_mig_inter_quinquen_proyecciones.csv"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mig_inter_quin_proyecciones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "RENGLON"     "AÑO"         "ENTIDAD"     "CVE_GEO"     "EDAD"       
-[6] "SEXO"        "EMIGRANTES"  "INMIGRANTES"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mig_inter_quin_proyecciones <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://conapo.segob.gob.mx/work/models/CONAPO/Datos_Abiertos/pry23/02_mig_inter_quinquen_proyecciones.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 23904 Columns: 8
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): AÑO, ENTIDAD, EDAD, SEXO
-dbl (4): RENGLON, CVE_GEO, EMIGRANTES, INMIGRANTES
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mig_inter_quin_proyecciones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "RENGLON"     "AÑO"         "ENTIDAD"     "CVE_GEO"     "EDAD"       
-[6] "SEXO"        "EMIGRANTES"  "INMIGRANTES"</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ejemplo_dbf<span class="ot">&lt;-</span>foreign<span class="sc">::</span><span class="fu">read.dbf</span>(<span class="st">"datos/ejemplo_dbf.DBF"</span>) <span class="co">#checa cómo nos vamos adentro de nuestro directorio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-</section>
-<section id="revisión-de-nuestro-conjunto-de-datos" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="revisión-de-nuestro-conjunto-de-datos"><span class="header-section-number">2.4</span> Revisión de nuestro conjunto de datos</h2>
-<section id="con-base" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="con-base"><span class="header-section-number">2.4.1</span> con base</h3>
-<p>Vamos a revisar la base, brevemente la base</p>
+<section id="revisión-de-nuestro-data.frame" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="revisión-de-nuestro-data.frame"><span class="header-section-number">2.4</span> Revisión de nuestro data.frame</h2>
+<p>Vamos a revisar la data.frame,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(concentradohogar) <span class="co"># tipo de objeto</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(concentradohogar) <span class="co"># tipo de objeto</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentradohogar) <span class="co"># lista las variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentradohogar) <span class="co"># lista las variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] "folioviv"   "foliohog"   "ubica_geo"  "tam_loc"    "est_socio" 
   [6] "est_dis"    "upm"        "factor"     "clase_hog"  "sexo_jefe" 
@@ -408,7 +352,7 @@ dbl (4): RENGLON, CVE_GEO, EMIGRANTES, INMIGRANTES
 [121] "prest_terc" "pago_tarje" "deudas"     "balance"    "otras_erog"
 [126] "smg"       </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(concentradohogar) <span class="co"># muestra las primeras 6 líneas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(concentradohogar) <span class="co"># muestra las primeras 6 líneas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 126
   folioviv   foliohog ubica_geo tam_loc est_socio est_dis upm   factor clase_hog
@@ -427,21 +371,263 @@ dbl (4): RENGLON, CVE_GEO, EMIGRANTES, INMIGRANTES
 #   aguinaldo &lt;dbl&gt;, indemtrab &lt;dbl&gt;, otra_rem &lt;dbl&gt;, remu_espec &lt;dbl&gt;,
 #   negocio &lt;dbl&gt;, noagrop &lt;dbl&gt;, industria &lt;dbl&gt;, comercio &lt;dbl&gt;, …</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(concentradohogar<span class="sc">$</span>sexo_jefe) <span class="co"># un tabulado simple</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(concentradohogar<span class="sc">$</span>clase_hog) <span class="co"># un tabulado simple</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    1     2 
-61905 28197 </code></pre>
+    1     2     3     4     5 
+11886 55540 21786   583   307 </code></pre>
 </div>
 </div>
 </section>
-<section id="revisión-con-skimr" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="revisión-con-skimr"><span class="header-section-number">2.4.2</span> Revisión con <code>{skimr}</code></h3>
-<p>Esto se puede tardar un poquito</p>
+<section id="revisión-con-dplyr" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="revisión-con-dplyr"><span class="header-section-number">2.5</span> Revisión con dplyr</h2>
+<p>Operador de “pipe” o “tubería” %&gt;% (Ctrl+Shift+M) Antes de continuar, presentemos el operador “pipe” %&gt;%. dplyr importa este operador de otro paquete (magrittr). Este operador le permite canalizar la salida de una función a la entrada de otra función. En lugar de funciones de anidamiento (lectura desde adentro hacia afuera), la idea de la tubería es leer las funciones de izquierda a derecha.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(sexo_jefe, edad_jefe) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  sexo_jefe edad_jefe
+  &lt;chr&gt;         &lt;dbl&gt;
+1 2                91
+2 1                68
+3 1                56
+4 1                87
+5 1                27
+6 1                57</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(sexo_jefe, edad_jefe) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    glimpse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 90,102
+Columns: 2
+$ sexo_jefe &lt;chr&gt; "2", "1", "1", "1", "1", "1", "2", "2", "2", "1", "1", "1", …
+$ edad_jefe &lt;dbl&gt; 91, 68, 56, 87, 27, 57, 47, 75, 70, 69, 48, 73, 64, 55, 58, …</code></pre>
+</div>
+</div>
+<section id="ojeando" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="ojeando"><span class="header-section-number">2.5.1</span> Ojeando</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 90,102
+Columns: 126
+$ folioviv   &lt;chr&gt; "0100005002", "0100005003", "0100005004", "0100012002", "01…
+$ foliohog   &lt;chr&gt; "1", "1", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1",…
+$ ubica_geo  &lt;chr&gt; "01001", "01001", "01001", "01001", "01001", "01001", "0100…
+$ tam_loc    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",…
+$ est_socio  &lt;chr&gt; "4", "4", "4", "3", "3", "3", "3", "4", "4", "4", "4", "3",…
+$ est_dis    &lt;chr&gt; "003", "003", "003", "002", "002", "002", "002", "003", "00…
+$ upm        &lt;chr&gt; "0000001", "0000001", "0000001", "0000002", "0000002", "000…
+$ factor     &lt;dbl&gt; 206, 206, 206, 167, 167, 167, 167, 212, 212, 212, 212, 184,…
+$ clase_hog  &lt;chr&gt; "3", "2", "2", "3", "1", "2", "2", "1", "2", "2", "2", "1",…
+$ sexo_jefe  &lt;chr&gt; "2", "1", "1", "1", "1", "1", "2", "2", "2", "1", "1", "1",…
+$ edad_jefe  &lt;dbl&gt; 91, 68, 56, 87, 27, 57, 47, 75, 70, 69, 48, 73, 64, 55, 58,…
+$ educa_jefe &lt;chr&gt; "03", "08", "10", "11", "08", "08", "10", "06", "10", "04",…
+$ tot_integ  &lt;dbl&gt; 3, 2, 3, 4, 1, 4, 4, 1, 3, 2, 5, 1, 4, 3, 1, 6, 4, 2, 3, 1,…
+$ hombres    &lt;dbl&gt; 0, 1, 2, 2, 1, 2, 2, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 3, 0,…
+$ mujeres    &lt;dbl&gt; 3, 1, 1, 2, 0, 2, 2, 1, 2, 1, 4, 0, 3, 2, 1, 5, 3, 1, 0, 1,…
+$ mayores    &lt;dbl&gt; 3, 2, 3, 4, 1, 3, 4, 1, 3, 2, 5, 1, 4, 2, 1, 4, 4, 2, 1, 1,…
+$ menores    &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 2, 0,…
+$ p12_64     &lt;dbl&gt; 2, 1, 3, 2, 1, 3, 4, 0, 2, 0, 5, 0, 4, 2, 1, 4, 3, 0, 1, 1,…
+$ p65mas     &lt;dbl&gt; 1, 1, 0, 2, 0, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 2, 0, 0,…
+$ ocupados   &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
+$ percep_ing &lt;dbl&gt; 3, 2, 2, 2, 1, 4, 2, 1, 3, 2, 1, 1, 2, 2, 1, 3, 2, 2, 1, 1,…
+$ perc_ocupa &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
+$ ing_cor    &lt;dbl&gt; 56123.75, 108048.87, 133852.88, 105054.15, 24211.95, 121649…
+$ ingtrab    &lt;dbl&gt; 35706.51, 66766.28, 93081.50, 0.00, 22255.43, 40255.41, 333…
+$ trabajo    &lt;dbl&gt; 35706.51, 66766.28, 51603.24, 0.00, 17364.13, 40255.41, 327…
+$ sueldos    &lt;dbl&gt; 33749.99, 61630.42, 41086.95, 0.00, 17364.13, 36586.94, 246…
+$ horas_extr &lt;dbl&gt; 0.00, 0.00, 978.26, 0.00, 0.00, 0.00, 7092.39, 0.00, 0.00, …
+$ comisiones &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ aguinaldo  &lt;dbl&gt; 1956.52, 4646.73, 5135.86, 0.00, 0.00, 3668.47, 1027.17, 0.…
+$ indemtrab  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ otra_rem   &lt;dbl&gt; 0.00, 489.13, 4402.17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, …
+$ remu_espec &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ negocio    &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ noagrop    &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ industria  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ comercio   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ servicios  &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ agrope     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ agricolas  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ pecuarios  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ reproducc  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ pesca      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ otros_trab &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 4891.30, 0.00, 586.95, 0.00, 0.00, …
+$ rentas     &lt;dbl&gt; 0.00, 32282.60, 11739.13, 0.00, 0.00, 72684.78, 0.00, 0.00,…
+$ utilidad   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 72684.78, 0.00, 0.00, 16007.2…
+$ arrenda    &lt;dbl&gt; 0.00, 32282.60, 11739.13, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ transfer   &lt;dbl&gt; 8804.34, 8999.99, 0.00, 90538.03, 1956.52, 0.00, 26902.17, …
+$ jubilacion &lt;dbl&gt; 0.00, 0.00, 0.00, 79239.13, 0.00, 0.00, 0.00, 73369.56, 440…
+$ becas      &lt;dbl&gt; 391.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.…
+$ donativos  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1956.52, 0.00, 26902.17, 0.00, 0.00…
+$ remesas    &lt;dbl&gt; 978.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ bene_gob   &lt;dbl&gt; 7434.78, 0.00, 0.00, 11298.90, 0.00, 0.00, 0.00, 5649.45, 0…
+$ transf_hog &lt;dbl&gt; 0.00, 8999.99, 0.00, 0.00, 0.00, 0.00, 0.00, 2442.84, 0.00,…
+$ trans_inst &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ estim_alqu &lt;dbl&gt; 11612.90, 0.00, 29032.25, 14516.12, 0.00, 8709.67, 0.00, 14…
+$ otros_ing  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ gasto_mon  &lt;dbl&gt; 35091.17, 78670.73, 101647.27, 46702.31, 26927.85, 51176.07…
+$ alimentos  &lt;dbl&gt; 9514.19, 17524.25, 18321.36, 14759.90, 12458.47, 6351.40, 1…
+$ ali_dentro &lt;dbl&gt; 6814.20, 5181.41, 16907.08, 6274.20, 7315.63, 951.42, 11828…
+$ cereales   &lt;dbl&gt; 1465.70, 231.42, 1362.84, 1928.53, 308.56, 617.14, 1915.67,…
+$ carnes     &lt;dbl&gt; 617.14, 4114.28, 5142.85, 1928.57, 2442.84, 0.00, 6685.69, …
+$ pescado    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1799.99, 0.00, 1414.28, 0.00, 0.00,…
+$ leche      &lt;dbl&gt; 269.99, 578.57, 0.00, 1414.26, 0.00, 334.28, 0.00, 565.70, …
+$ huevo      &lt;dbl&gt; 0.00, 257.14, 1028.57, 0.00, 321.42, 0.00, 0.00, 0.00, 1002…
+$ aceites    &lt;dbl&gt; 0.00, 0.00, 565.71, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ tuberculo  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1028.56, 0.00, 321.42, 621.38, 0.00…
+$ verduras   &lt;dbl&gt; 2288.53, 0.00, 1735.69, 1002.84, 642.85, 0.00, 951.41, 2069…
+$ frutas     &lt;dbl&gt; 1954.27, 0.00, 0.00, 0.00, 0.00, 0.00, 539.99, 1234.27, 195…
+$ azucar     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ cafe       &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ especias   &lt;dbl&gt; 218.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
+$ otros_alim &lt;dbl&gt; 0.00, 0.00, 5142.85, 0.00, 0.00, 0.00, 0.00, 3857.14, 1928.…
+$ bebidas    &lt;dbl&gt; 0.00, 0.00, 1928.57, 0.00, 771.41, 0.00, 0.00, 462.84, 2378…
+$ ali_fuera  &lt;dbl&gt; 2699.99, 12342.84, 1414.28, 8485.70, 5142.84, 5399.98, 5528…
+$ tabaco     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ vesti_calz &lt;dbl&gt; 2445.64, 684.78, 0.00, 1369.56, 0.00, 1751.06, 9782.60, 489…
+$ vestido    &lt;dbl&gt; 2445.64, 684.78, 0.00, 1369.56, 0.00, 1751.06, 5380.43, 489…
+$ calzado    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 4402.17, 0.00, 0.00, 0.…
+$ vivienda   &lt;dbl&gt; 1736.75, 29649.66, 3232.25, 2850.00, 2700.00, 3660.00, 1822…
+$ alquiler   &lt;dbl&gt; 0.00, 24677.41, 0.00, 0.00, 0.00, 0.00, 13935.48, 0.00, 0.0…
+$ pred_cons  &lt;dbl&gt; 116.75, 2032.25, 2032.25, 150.00, 0.00, 150.00, 0.00, 750.0…
+$ agua       &lt;dbl&gt; 780, 540, 750, 450, 450, 1200, 1410, 420, 840, 420, 900, 87…
+$ energia    &lt;dbl&gt; 840.00, 2400.00, 450.00, 2250.00, 2250.00, 2310.00, 2876.61…
+$ limpieza   &lt;dbl&gt; 2075.80, 2816.11, 1422.55, 1228.04, 890.36, 3518.67, 2386.3…
+$ cuidados   &lt;dbl&gt; 2075.80, 2816.11, 1422.55, 1228.04, 792.54, 3518.67, 2386.3…
+$ utensilios &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 97.82, 0.00, 0.00, 0.00, 489.13, 23…
+$ enseres    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ salud      &lt;dbl&gt; 2641.29, 0.00, 0.00, 0.00, 0.00, 1007.60, 8902.16, 3277.16,…
+$ atenc_ambu &lt;dbl&gt; 2641.29, 0.00, 0.00, 0.00, 0.00, 1007.60, 7923.90, 3277.16,…
+$ hospital   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ medicinas  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 978.26, 0.00, 978.26, 0…
+$ transporte &lt;dbl&gt; 6773.62, 6706.44, 23312.90, 23574.19, 5080.63, 20601.28, 84…
+$ publico    &lt;dbl&gt; 2314.28, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 771.42, 1157.1…
+$ foraneo    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ adqui_vehi &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ mantenim   &lt;dbl&gt; 2903.22, 4354.83, 11612.90, 20322.58, 4064.51, 17709.67, 53…
+$ refaccion  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ combus     &lt;dbl&gt; 2903.22, 4354.83, 11612.90, 20322.58, 4064.51, 17709.67, 53…
+$ comunica   &lt;dbl&gt; 1556.12, 2351.61, 11700.00, 3251.61, 1016.12, 2891.61, 3033…
+$ educa_espa &lt;dbl&gt; 2903.22, 0.00, 34728.25, 0.00, 4209.66, 6967.74, 9058.05, 0…
+$ educacion  &lt;dbl&gt; 2903.22, 0.00, 0.00, 0.00, 0.00, 6967.74, 6735.47, 0.00, 0.…
+$ esparci    &lt;dbl&gt; 0.00, 0.00, 5380.43, 0.00, 4209.66, 0.00, 2322.58, 0.00, 0.…
+$ paq_turist &lt;dbl&gt; 0.00, 0.00, 29347.82, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
+$ personales &lt;dbl&gt; 4097.44, 3870.14, 13416.08, 2920.62, 1344.17, 812.90, 4918.…
+$ cuida_pers &lt;dbl&gt; 673.53, 3745.14, 1916.09, 2920.62, 1344.17, 812.90, 4708.95…
+$ acces_pers &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ otros_gas  &lt;dbl&gt; 3423.91, 125.00, 11499.99, 0.00, 0.00, 0.00, 210.00, 0.00, …
+$ transf_gas &lt;dbl&gt; 2903.22, 17419.35, 7213.88, 0.00, 244.56, 6505.42, 73.36, 4…
+$ percep_tot &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 3214.27, 0.00, 0.00, 0.00, 0.00, 0.…
+$ retiro_inv &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ prestamos  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ otras_perc &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ero_nm_viv &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ ero_nm_hog &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 3214.27, 0.00, 0.00, 0.00, 0.00, 0.…
+$ erogac_tot &lt;dbl&gt; 0.00, 19565.21, 0.00, 28124.99, 0.00, 5771.73, 360.97, 2445…
+$ cuota_viv  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ mater_serv &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ material   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ servicio   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ deposito   &lt;dbl&gt; 0.00, 19565.21, 0.00, 28124.99, 0.00, 5771.73, 0.00, 2445.6…
+$ prest_terc &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ pago_tarje &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ deudas     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ balance    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ otras_erog &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 360.97, 0.00, 0.00, 0.0…
+$ smg        &lt;dbl&gt; 15558.3, 15558.3, 15558.3, 15558.3, 15558.3, 15558.3, 15558…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(concentradohogar[,<span class="dv">20</span><span class="sc">:</span><span class="dv">30</span>]) <span class="co"># en corchete del lado derecho podemos ojear columnas </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 90,102
+Columns: 11
+$ ocupados   &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
+$ percep_ing &lt;dbl&gt; 3, 2, 2, 2, 1, 4, 2, 1, 3, 2, 1, 1, 2, 2, 1, 3, 2, 2, 1, 1,…
+$ perc_ocupa &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
+$ ing_cor    &lt;dbl&gt; 56123.75, 108048.87, 133852.88, 105054.15, 24211.95, 121649…
+$ ingtrab    &lt;dbl&gt; 35706.51, 66766.28, 93081.50, 0.00, 22255.43, 40255.41, 333…
+$ trabajo    &lt;dbl&gt; 35706.51, 66766.28, 51603.24, 0.00, 17364.13, 40255.41, 327…
+$ sueldos    &lt;dbl&gt; 33749.99, 61630.42, 41086.95, 0.00, 17364.13, 36586.94, 246…
+$ horas_extr &lt;dbl&gt; 0.00, 0.00, 978.26, 0.00, 0.00, 0.00, 7092.39, 0.00, 0.00, …
+$ comisiones &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
+$ aguinaldo  &lt;dbl&gt; 1956.52, 4646.73, 5135.86, 0.00, 0.00, 3668.47, 1027.17, 0.…
+$ indemtrab  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</code></pre>
+</div>
+</div>
+<p>Podemos hacer un tipo “labelbook”, usando una función que viene de la librería <code>{sjlabelled}</code>, <code>get_labels()</code>. Funciona para toda la base o para columnas, o para variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print(sjlabelled::get_labels(concentradohogar)) #todas</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sjlabelled<span class="sc">::</span><span class="fu">get_labels</span>(concentradohogar[, <span class="dv">20</span><span class="sc">:</span><span class="dv">30</span>])) <span class="co">#de las segundas 10 variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$ocupados
+NULL
+
+$percep_ing
+NULL
+
+$perc_ocupa
+NULL
+
+$ing_cor
+NULL
+
+$ingtrab
+NULL
+
+$trabajo
+NULL
+
+$sueldos
+NULL
+
+$horas_extr
+NULL
+
+$comisiones
+NULL
+
+$aguinaldo
+NULL
+
+$indemtrab
+NULL</code></pre>
+</div>
+</div>
+<p>No tienen :(</p>
+<p>En singular nos da las etiquetas de las variables, no de los valores:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print(get_label(concentradohogar)) #todas</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">get_label</span>(concentradohogar[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])) <span class="co">#de las primeras 10 variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      folioviv                       foliohog 
+"Identificador de la vivienda"      "Identificador del hogar" 
+                     ubica_geo                        tam_loc 
+        "Ubicación geográfica"          "Tamaño de localidad" 
+                     est_socio                        est_dis 
+      "Estrato socioeconómico"   "Estrato de diseño muestral" 
+                           upm                         factor 
+ "Unidad primaria de muestreo"          "Factor de expansión" 
+                     clase_hog                      sexo_jefe 
+              "Clase de hogar"      "Sexo del jefe del hogar" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">get_label</span>(concentradohogar<span class="sc">$</span>clase_hog)) <span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Clase de hogar"</code></pre>
+</div>
+</div>
+</section>
+<section id="revisión-con-skimr" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="revisión-con-skimr"><span class="header-section-number">2.5.2</span> Revisión con <code>{skimr}</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
@@ -483,7 +669,7 @@ dbl (4): RENGLON, CVE_GEO, EMIGRANTES, INMIGRANTES
 </tbody>
 </table>
 <p><strong>Variable type: character</strong></p>
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 13%">
@@ -610,7 +796,7 @@ dbl (4): RENGLON, CVE_GEO, EMIGRANTES, INMIGRANTES
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table table-sm table-striped">
+<table class="table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 9%">
@@ -2153,592 +2339,20 @@ dbl (4): RENGLON, CVE_GEO, EMIGRANTES, INMIGRANTES
 </div>
 </div>
 </section>
-</section>
-<section id="un-poquito-de-dplyr-y-limpieza" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="un-poquito-de-dplyr-y-limpieza"><span class="header-section-number">2.5</span> Un poquito de <code>{dplyr}</code> y limpieza</h2>
-<section id="primero-los-pipes" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1" class="anchored" data-anchor-id="primero-los-pipes"><span class="header-section-number">2.5.1</span> Primero, los pipes</h3>
-<p>R utiliza dos pipes el nativo <code>|&gt;</code> y el pipe que está en <code>{dplyr}</code> <code>%&gt;%</code>. Algunas de las diferencias las puedes checar acá <a href="https://eliocamp.github.io/codigo-r/2021/05/r-pipa-nativa/" class="uri">https://eliocamp.github.io/codigo-r/2021/05/r-pipa-nativa/</a></p>
-<p>Aquí hay un <em>tuit</em>, o <em>post de x.com</em> que lo explica bien.</p>
-<p><a href="https://x.com/ArthurWelle/status/1535429654760284161" class="uri">https://x.com/ArthurWelle/status/1535429654760284161</a></p>
-<p>En estas prácticas utilizaremos el segundo, son muy parecidos y así esta instructora pueda reciclar algunos de sus códigos viejos. Pero funcionan igual:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="sc">|&gt;</span> <span class="co">#pipe nativo, no necesita instalación</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 126
-  folioviv   foliohog ubica_geo tam_loc est_socio est_dis upm   factor clase_hog
-  &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    
-1 0100005002 1        01001     1       4         003     0000…    206 3        
-2 0100005003 1        01001     1       4         003     0000…    206 2        
-3 0100005004 1        01001     1       4         003     0000…    206 2        
-4 0100012002 1        01001     1       3         002     0000…    167 3        
-5 0100012002 2        01001     1       3         002     0000…    167 1        
-6 0100012004 1        01001     1       3         002     0000…    167 2        
-# ℹ 117 more variables: sexo_jefe &lt;chr&gt;, edad_jefe &lt;dbl&gt;, educa_jefe &lt;chr&gt;,
-#   tot_integ &lt;dbl&gt;, hombres &lt;dbl&gt;, mujeres &lt;dbl&gt;, mayores &lt;dbl&gt;,
-#   menores &lt;dbl&gt;, p12_64 &lt;dbl&gt;, p65mas &lt;dbl&gt;, ocupados &lt;dbl&gt;,
-#   percep_ing &lt;dbl&gt;, perc_ocupa &lt;dbl&gt;, ing_cor &lt;dbl&gt;, ingtrab &lt;dbl&gt;,
-#   trabajo &lt;dbl&gt;, sueldos &lt;dbl&gt;, horas_extr &lt;dbl&gt;, comisiones &lt;dbl&gt;,
-#   aguinaldo &lt;dbl&gt;, indemtrab &lt;dbl&gt;, otra_rem &lt;dbl&gt;, remu_espec &lt;dbl&gt;,
-#   negocio &lt;dbl&gt;, noagrop &lt;dbl&gt;, industria &lt;dbl&gt;, comercio &lt;dbl&gt;, …</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span>  <span class="co">#pipe de dplyr, necesita instalación de dplyr en tidyverse</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 126
-  folioviv   foliohog ubica_geo tam_loc est_socio est_dis upm   factor clase_hog
-  &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    
-1 0100005002 1        01001     1       4         003     0000…    206 3        
-2 0100005003 1        01001     1       4         003     0000…    206 2        
-3 0100005004 1        01001     1       4         003     0000…    206 2        
-4 0100012002 1        01001     1       3         002     0000…    167 3        
-5 0100012002 2        01001     1       3         002     0000…    167 1        
-6 0100012004 1        01001     1       3         002     0000…    167 2        
-# ℹ 117 more variables: sexo_jefe &lt;chr&gt;, edad_jefe &lt;dbl&gt;, educa_jefe &lt;chr&gt;,
-#   tot_integ &lt;dbl&gt;, hombres &lt;dbl&gt;, mujeres &lt;dbl&gt;, mayores &lt;dbl&gt;,
-#   menores &lt;dbl&gt;, p12_64 &lt;dbl&gt;, p65mas &lt;dbl&gt;, ocupados &lt;dbl&gt;,
-#   percep_ing &lt;dbl&gt;, perc_ocupa &lt;dbl&gt;, ing_cor &lt;dbl&gt;, ingtrab &lt;dbl&gt;,
-#   trabajo &lt;dbl&gt;, sueldos &lt;dbl&gt;, horas_extr &lt;dbl&gt;, comisiones &lt;dbl&gt;,
-#   aguinaldo &lt;dbl&gt;, indemtrab &lt;dbl&gt;, otra_rem &lt;dbl&gt;, remu_espec &lt;dbl&gt;,
-#   negocio &lt;dbl&gt;, noagrop &lt;dbl&gt;, industria &lt;dbl&gt;, comercio &lt;dbl&gt;, …</code></pre>
-</div>
-</div>
-</section>
-<section id="limpieza-de-nombres-con-janitor" class="level3" data-number="2.5.2">
-<h3 data-number="2.5.2" class="anchored" data-anchor-id="limpieza-de-nombres-con-janitor"><span class="header-section-number">2.5.2</span> Limpieza de nombres con <code>{janitor}</code></h3>
-<p>Este paso también nos permitirá enseñar otro <em>pipe</em> que está en el paquete <code>{magrittr}</code>.</p>
-<p>Los nombres de una base de datos son los nombres de las columnas.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "folioviv"   "foliohog"   "ubica_geo"  "tam_loc"    "est_socio" 
-  [6] "est_dis"    "upm"        "factor"     "clase_hog"  "sexo_jefe" 
- [11] "edad_jefe"  "educa_jefe" "tot_integ"  "hombres"    "mujeres"   
- [16] "mayores"    "menores"    "p12_64"     "p65mas"     "ocupados"  
- [21] "percep_ing" "perc_ocupa" "ing_cor"    "ingtrab"    "trabajo"   
- [26] "sueldos"    "horas_extr" "comisiones" "aguinaldo"  "indemtrab" 
- [31] "otra_rem"   "remu_espec" "negocio"    "noagrop"    "industria" 
- [36] "comercio"   "servicios"  "agrope"     "agricolas"  "pecuarios" 
- [41] "reproducc"  "pesca"      "otros_trab" "rentas"     "utilidad"  
- [46] "arrenda"    "transfer"   "jubilacion" "becas"      "donativos" 
- [51] "remesas"    "bene_gob"   "transf_hog" "trans_inst" "estim_alqu"
- [56] "otros_ing"  "gasto_mon"  "alimentos"  "ali_dentro" "cereales"  
- [61] "carnes"     "pescado"    "leche"      "huevo"      "aceites"   
- [66] "tuberculo"  "verduras"   "frutas"     "azucar"     "cafe"      
- [71] "especias"   "otros_alim" "bebidas"    "ali_fuera"  "tabaco"    
- [76] "vesti_calz" "vestido"    "calzado"    "vivienda"   "alquiler"  
- [81] "pred_cons"  "agua"       "energia"    "limpieza"   "cuidados"  
- [86] "utensilios" "enseres"    "salud"      "atenc_ambu" "hospital"  
- [91] "medicinas"  "transporte" "publico"    "foraneo"    "adqui_vehi"
- [96] "mantenim"   "refaccion"  "combus"     "comunica"   "educa_espa"
-[101] "educacion"  "esparci"    "paq_turist" "personales" "cuida_pers"
-[106] "acces_pers" "otros_gas"  "transf_gas" "percep_tot" "retiro_inv"
-[111] "prestamos"  "otras_perc" "ero_nm_viv" "ero_nm_hog" "erogac_tot"
-[116] "cuota_viv"  "mater_serv" "material"   "servicio"   "deposito"  
-[121] "prest_terc" "pago_tarje" "deudas"     "balance"    "otras_erog"
-[126] "smg"       </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ejemploxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "Indicador"                                                             
-  [2] "Protección de derechos humanos"                                        
-  [3] "Homicidios dolosos"                                                    
-  [4] "Costos de la delincuencia en los negocios"                             
-  [5] "Confianza en la policía"                                               
-  [6] "Imparcialidad de las cortes"                                           
-  [7] "Independencia del poder judicial"                                      
-  [8] "Protección de derechos de propiedad"                                   
-  [9] "Piratería Informática"                                                 
- [10] "Protección a acreedores"                                               
- [11] "Tiempo para resolver quiebras"                                         
- [12] "Cumplimiento de contratos"                                             
- [13] "Índice de Estados Frágiles"                                            
- [14] "Índice de Estado de Derecho"                                           
- [15] "Contaminación del aire"                                                
- [16] "Emisiones de CO2"                                                      
- [17] "Recursos hídricos renovables"                                          
- [18] "Estrés hídrico"                                                        
- [19] "Áreas naturales protegidas"                                            
- [20] "Superficie forestal perdida"                                           
- [21] "Uso de fertilizantes en la agricultura"                                
- [22] "Uso de pesticidas"                                                     
- [23] "Fuentes de energía no contaminantes"                                   
- [24] "Empresas certificadas como limpias"                                    
- [25] "Índice de vulnerabilidad a efectos del cambio climático"               
- [26] "Índice de Gini"                                                        
- [27] "Índice Global de Brecha de Género"                                     
- [28] "Mujeres en la PEA"                                                     
- [29] "Dependientes de la PEA"                                                
- [30] "Acceso a agua"                                                         
- [31] "Acceso a alcantarillado"                                               
- [32] "Analfabetismo"                                                         
- [33] "Cobertura en nivel preescolar"                                         
- [34] "Escolaridad promedio"                                                  
- [35] "Calidad educativa"                                                     
- [36] "Nivel de inglés"                                                       
- [37] "Esperanza de vida"                                                     
- [38] "Mortalidad infantil"                                                   
- [39] "Cobertura de vacunación"                                               
- [40] "Embarazos adolescentes"                                                
- [41] "Impactos en salud por sobrepeso y obesidad"                            
- [42] "Prevalencia de diabetes"                                               
- [43] "Suicidios"                                                             
- [44] "Médicos y médicas"                                                     
- [45] "Gasto en salud per cápita"                                             
- [46] "Gasto en salud por cuenta propia"                                      
- [47] "Estabilidad política y ausencia de violencia"                          
- [48] "Interferencia militar en el Estado de derecho o en el proceso político"
- [49] "Derechos políticos"                                                    
- [50] "Libertades civiles"                                                    
- [51] "Libertad de prensa"                                                    
- [52] "Índice de Percepción de Corrupción"                                    
- [53] "Disponibilidad de información pública"                                 
- [54] "Participación electoral"                                               
- [55] "Índice de efectividad del gobierno"                                    
- [56] "Miembro de la Alianza para el Gobierno Abierto"                        
- [57] "Índice de desarrollo de Gobierno Electrónico"                          
- [58] "Economía informal"                                                     
- [59] "Facilidad para abrir una empresa"                                      
- [60] "Tiempo de altos ejecutivos a temas burocráticos"                       
- [61] "Tiempo para preparar y pagar impuestos"                                
- [62] "Presupuesto balanceado"                                                
- [63] "Deuda total del gobierno central"                                      
- [64] "Ingresos fiscales"                                                     
- [65] "Impuesto sobre el ingreso"                                             
- [66] "Carga impositiva"                                                      
- [67] "Edad efectiva de retiro"                                               
- [68] "Flexibilidad de las leyes laborales"                                   
- [69] "Productividad media del trabajo"                                       
- [70] "Valor agregado de la industria"                                        
- [71] "Valor agregado de la agricultura"                                      
- [72] "Eficiencia energética"                                                 
- [73] "Cambio en inventarios"                                                 
- [74] "Índice de transparencia y regulación de la propiedad privada"          
- [75] "Crecimiento del PIB"                                                   
- [76] "Crecimiento promedio del PIB"                                          
- [77] "Variabilidad del crecimiento del PIB"                                  
- [78] "Inflación"                                                             
- [79] "Inflación promedio"                                                    
- [80] "Variabilidad de la inflación"                                          
- [81] "Desempleo"                                                             
- [82] "Deuda externa"                                                         
- [83] "Calificación de deuda"                                                 
- [84] "Activos del sector financiero"                                         
- [85] "Activos de los depositantes"                                           
- [86] "Reservas"                                                              
- [87] "Índice de riesgos de seguridad energética"                             
- [88] "Pérdidas de electricidad"                                              
- [89] "Líneas móviles"                                                        
- [90] "Usuarios de internet"                                                  
- [91] "Servidores de internet seguros"                                        
- [92] "Transporte intraurbano de alta capacidad"                              
- [93] "Índice calidad de carreteras"                                          
- [94] "Flujo de pasajeros aéreos"                                             
- [95] "Índice de desempeño logístico (transporte)"                            
- [96] "Índice de infraestructura portuaria"                                   
- [97] "Tráfico portuario de contenedores"                                     
- [98] "Penetración del sistema financiero privado"                            
- [99] "Capitalización del mercado de valores"                                 
-[100] "Cambio en empresas listadas"                                           
-[101] "Rotación de activos bursátiles"                                        
-[102] "Índice de competencia de Boone"                                        
-[103] "Organizaciones internacionales a las que pertenece"                    
-[104] "Acuerdos comerciales"                                                  
-[105] "Socios comerciales efectivos"                                          
-[106] "Apertura comercial"                                                    
-[107] "Diversificación de las exportaciones"                                  
-[108] "Diversificación de las importaciones"                                  
-[109] "Barreras ocultas a la importación"                                     
-[110] "Aranceles agrícolas"                                                   
-[111] "Aranceles manufactureros"                                              
-[112] "Inversión extranjera directa (neta)"                                   
-[113] "Inversión Extranjera Directa neta promedio"                            
-[114] "Variabilidad de la IED"                                                
-[115] "Ingresos por turismo"                                                  
-[116] "Flujo de pasajeros aéreos internacionales"                             
-[117] "Gasto militar"                                                         
-[118] "Gasto en investigación y desarrollo"                                   
-[119] "Coeficiente de invención"                                              
-[120] "Artículos científicos y técnicos"                                      
-[121] "Exportaciones de alta tecnología"                                      
-[122] "Índice de Complejidad Económica"                                       
-[123] "Crecimiento de la productividad total de los factores"                 
-[124] "Empresas en Fortune 500"                                               
-[125] "Empresas ISO 9001"                                                     
-[126] "Población en grandes ciudades"                                         
-[127] "PIB en servicios"                                                      
-[128] "...128"                                                                
-[129] "...129"                                                                
-[130] "Inversión (Formación bruta de capital fijo)"                           
-[131] "Talento"                                                               
-[132] "...132"                                                                
-[133] "Población total"                                                       
-[134] "Densidad de población"                                                 
-[135] "PIB (Paridad de Poder Adquisitivo)...135"                              
-[136] "PIB (Paridad de Poder Adquisitivo)...136"                              
-[137] "PIB per cápita (Paridad de Poder Adquisitivo)...137"                   
-[138] "PIB per cápita (Paridad de Poder Adquisitivo)...138"                   
-[139] "PIB per cápita...139"                                                  
-[140] "PIB per cápita...140"                                                  
-[141] "PIB...141"                                                             
-[142] "PIB...142"                                                             </code></pre>
-</div>
-</div>
-<p>Como vemos en las bases hay mayúsculas, caracteres especiales y demás. Esto lo podemos cambiar</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ejemploxl<span class="ot">&lt;-</span>ejemploxl <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ejemploxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "indicador"                                                             
-  [2] "proteccion_de_derechos_humanos"                                        
-  [3] "homicidios_dolosos"                                                    
-  [4] "costos_de_la_delincuencia_en_los_negocios"                             
-  [5] "confianza_en_la_policia"                                               
-  [6] "imparcialidad_de_las_cortes"                                           
-  [7] "independencia_del_poder_judicial"                                      
-  [8] "proteccion_de_derechos_de_propiedad"                                   
-  [9] "pirateria_informatica"                                                 
- [10] "proteccion_a_acreedores"                                               
- [11] "tiempo_para_resolver_quiebras"                                         
- [12] "cumplimiento_de_contratos"                                             
- [13] "indice_de_estados_fragiles"                                            
- [14] "indice_de_estado_de_derecho"                                           
- [15] "contaminacion_del_aire"                                                
- [16] "emisiones_de_co2"                                                      
- [17] "recursos_hidricos_renovables"                                          
- [18] "estres_hidrico"                                                        
- [19] "areas_naturales_protegidas"                                            
- [20] "superficie_forestal_perdida"                                           
- [21] "uso_de_fertilizantes_en_la_agricultura"                                
- [22] "uso_de_pesticidas"                                                     
- [23] "fuentes_de_energia_no_contaminantes"                                   
- [24] "empresas_certificadas_como_limpias"                                    
- [25] "indice_de_vulnerabilidad_a_efectos_del_cambio_climatico"               
- [26] "indice_de_gini"                                                        
- [27] "indice_global_de_brecha_de_genero"                                     
- [28] "mujeres_en_la_pea"                                                     
- [29] "dependientes_de_la_pea"                                                
- [30] "acceso_a_agua"                                                         
- [31] "acceso_a_alcantarillado"                                               
- [32] "analfabetismo"                                                         
- [33] "cobertura_en_nivel_preescolar"                                         
- [34] "escolaridad_promedio"                                                  
- [35] "calidad_educativa"                                                     
- [36] "nivel_de_ingles"                                                       
- [37] "esperanza_de_vida"                                                     
- [38] "mortalidad_infantil"                                                   
- [39] "cobertura_de_vacunacion"                                               
- [40] "embarazos_adolescentes"                                                
- [41] "impactos_en_salud_por_sobrepeso_y_obesidad"                            
- [42] "prevalencia_de_diabetes"                                               
- [43] "suicidios"                                                             
- [44] "medicos_y_medicas"                                                     
- [45] "gasto_en_salud_per_capita"                                             
- [46] "gasto_en_salud_por_cuenta_propia"                                      
- [47] "estabilidad_politica_y_ausencia_de_violencia"                          
- [48] "interferencia_militar_en_el_estado_de_derecho_o_en_el_proceso_politico"
- [49] "derechos_politicos"                                                    
- [50] "libertades_civiles"                                                    
- [51] "libertad_de_prensa"                                                    
- [52] "indice_de_percepcion_de_corrupcion"                                    
- [53] "disponibilidad_de_informacion_publica"                                 
- [54] "participacion_electoral"                                               
- [55] "indice_de_efectividad_del_gobierno"                                    
- [56] "miembro_de_la_alianza_para_el_gobierno_abierto"                        
- [57] "indice_de_desarrollo_de_gobierno_electronico"                          
- [58] "economia_informal"                                                     
- [59] "facilidad_para_abrir_una_empresa"                                      
- [60] "tiempo_de_altos_ejecutivos_a_temas_burocraticos"                       
- [61] "tiempo_para_preparar_y_pagar_impuestos"                                
- [62] "presupuesto_balanceado"                                                
- [63] "deuda_total_del_gobierno_central"                                      
- [64] "ingresos_fiscales"                                                     
- [65] "impuesto_sobre_el_ingreso"                                             
- [66] "carga_impositiva"                                                      
- [67] "edad_efectiva_de_retiro"                                               
- [68] "flexibilidad_de_las_leyes_laborales"                                   
- [69] "productividad_media_del_trabajo"                                       
- [70] "valor_agregado_de_la_industria"                                        
- [71] "valor_agregado_de_la_agricultura"                                      
- [72] "eficiencia_energetica"                                                 
- [73] "cambio_en_inventarios"                                                 
- [74] "indice_de_transparencia_y_regulacion_de_la_propiedad_privada"          
- [75] "crecimiento_del_pib"                                                   
- [76] "crecimiento_promedio_del_pib"                                          
- [77] "variabilidad_del_crecimiento_del_pib"                                  
- [78] "inflacion"                                                             
- [79] "inflacion_promedio"                                                    
- [80] "variabilidad_de_la_inflacion"                                          
- [81] "desempleo"                                                             
- [82] "deuda_externa"                                                         
- [83] "calificacion_de_deuda"                                                 
- [84] "activos_del_sector_financiero"                                         
- [85] "activos_de_los_depositantes"                                           
- [86] "reservas"                                                              
- [87] "indice_de_riesgos_de_seguridad_energetica"                             
- [88] "perdidas_de_electricidad"                                              
- [89] "lineas_moviles"                                                        
- [90] "usuarios_de_internet"                                                  
- [91] "servidores_de_internet_seguros"                                        
- [92] "transporte_intraurbano_de_alta_capacidad"                              
- [93] "indice_calidad_de_carreteras"                                          
- [94] "flujo_de_pasajeros_aereos"                                             
- [95] "indice_de_desempeno_logistico_transporte"                              
- [96] "indice_de_infraestructura_portuaria"                                   
- [97] "trafico_portuario_de_contenedores"                                     
- [98] "penetracion_del_sistema_financiero_privado"                            
- [99] "capitalizacion_del_mercado_de_valores"                                 
-[100] "cambio_en_empresas_listadas"                                           
-[101] "rotacion_de_activos_bursatiles"                                        
-[102] "indice_de_competencia_de_boone"                                        
-[103] "organizaciones_internacionales_a_las_que_pertenece"                    
-[104] "acuerdos_comerciales"                                                  
-[105] "socios_comerciales_efectivos"                                          
-[106] "apertura_comercial"                                                    
-[107] "diversificacion_de_las_exportaciones"                                  
-[108] "diversificacion_de_las_importaciones"                                  
-[109] "barreras_ocultas_a_la_importacion"                                     
-[110] "aranceles_agricolas"                                                   
-[111] "aranceles_manufactureros"                                              
-[112] "inversion_extranjera_directa_neta"                                     
-[113] "inversion_extranjera_directa_neta_promedio"                            
-[114] "variabilidad_de_la_ied"                                                
-[115] "ingresos_por_turismo"                                                  
-[116] "flujo_de_pasajeros_aereos_internacionales"                             
-[117] "gasto_militar"                                                         
-[118] "gasto_en_investigacion_y_desarrollo"                                   
-[119] "coeficiente_de_invencion"                                              
-[120] "articulos_cientificos_y_tecnicos"                                      
-[121] "exportaciones_de_alta_tecnologia"                                      
-[122] "indice_de_complejidad_economica"                                       
-[123] "crecimiento_de_la_productividad_total_de_los_factores"                 
-[124] "empresas_en_fortune_500"                                               
-[125] "empresas_iso_9001"                                                     
-[126] "poblacion_en_grandes_ciudades"                                         
-[127] "pib_en_servicios"                                                      
-[128] "x128"                                                                  
-[129] "x129"                                                                  
-[130] "inversion_formacion_bruta_de_capital_fijo"                             
-[131] "talento"                                                               
-[132] "x132"                                                                  
-[133] "poblacion_total"                                                       
-[134] "densidad_de_poblacion"                                                 
-[135] "pib_paridad_de_poder_adquisitivo_135"                                  
-[136] "pib_paridad_de_poder_adquisitivo_136"                                  
-[137] "pib_per_capita_paridad_de_poder_adquisitivo_137"                       
-[138] "pib_per_capita_paridad_de_poder_adquisitivo_138"                       
-[139] "pib_per_capita_139"                                                    
-[140] "pib_per_capita_140"                                                    
-[141] "pib_141"                                                               
-[142] "pib_142"                                                               </code></pre>
-</div>
-</div>
-<p>Si quisiéramos que la acción quedará en una sola operación, podemos usar un pipe diferente:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "folioviv"   "foliohog"   "ubica_geo"  "tam_loc"    "est_socio" 
-  [6] "est_dis"    "upm"        "factor"     "clase_hog"  "sexo_jefe" 
- [11] "edad_jefe"  "educa_jefe" "tot_integ"  "hombres"    "mujeres"   
- [16] "mayores"    "menores"    "p12_64"     "p65mas"     "ocupados"  
- [21] "percep_ing" "perc_ocupa" "ing_cor"    "ingtrab"    "trabajo"   
- [26] "sueldos"    "horas_extr" "comisiones" "aguinaldo"  "indemtrab" 
- [31] "otra_rem"   "remu_espec" "negocio"    "noagrop"    "industria" 
- [36] "comercio"   "servicios"  "agrope"     "agricolas"  "pecuarios" 
- [41] "reproducc"  "pesca"      "otros_trab" "rentas"     "utilidad"  
- [46] "arrenda"    "transfer"   "jubilacion" "becas"      "donativos" 
- [51] "remesas"    "bene_gob"   "transf_hog" "trans_inst" "estim_alqu"
- [56] "otros_ing"  "gasto_mon"  "alimentos"  "ali_dentro" "cereales"  
- [61] "carnes"     "pescado"    "leche"      "huevo"      "aceites"   
- [66] "tuberculo"  "verduras"   "frutas"     "azucar"     "cafe"      
- [71] "especias"   "otros_alim" "bebidas"    "ali_fuera"  "tabaco"    
- [76] "vesti_calz" "vestido"    "calzado"    "vivienda"   "alquiler"  
- [81] "pred_cons"  "agua"       "energia"    "limpieza"   "cuidados"  
- [86] "utensilios" "enseres"    "salud"      "atenc_ambu" "hospital"  
- [91] "medicinas"  "transporte" "publico"    "foraneo"    "adqui_vehi"
- [96] "mantenim"   "refaccion"  "combus"     "comunica"   "educa_espa"
-[101] "educacion"  "esparci"    "paq_turist" "personales" "cuida_pers"
-[106] "acces_pers" "otros_gas"  "transf_gas" "percep_tot" "retiro_inv"
-[111] "prestamos"  "otras_perc" "ero_nm_viv" "ero_nm_hog" "erogac_tot"
-[116] "cuota_viv"  "mater_serv" "material"   "servicio"   "deposito"  
-[121] "prest_terc" "pago_tarje" "deudas"     "balance"    "otras_erog"
-[126] "smg"       </code></pre>
-</div>
-</div>
-</section>
-<section id="ojeando" class="level3" data-number="2.5.3">
-<h3 data-number="2.5.3" class="anchored" data-anchor-id="ojeando"><span class="header-section-number">2.5.3</span> Ojeando</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(concentradohogar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 90,102
-Columns: 126
-$ folioviv   &lt;chr&gt; "0100005002", "0100005003", "0100005004", "0100012002", "01…
-$ foliohog   &lt;chr&gt; "1", "1", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1",…
-$ ubica_geo  &lt;chr&gt; "01001", "01001", "01001", "01001", "01001", "01001", "0100…
-$ tam_loc    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",…
-$ est_socio  &lt;chr&gt; "4", "4", "4", "3", "3", "3", "3", "4", "4", "4", "4", "3",…
-$ est_dis    &lt;chr&gt; "003", "003", "003", "002", "002", "002", "002", "003", "00…
-$ upm        &lt;chr&gt; "0000001", "0000001", "0000001", "0000002", "0000002", "000…
-$ factor     &lt;dbl&gt; 206, 206, 206, 167, 167, 167, 167, 212, 212, 212, 212, 184,…
-$ clase_hog  &lt;chr&gt; "3", "2", "2", "3", "1", "2", "2", "1", "2", "2", "2", "1",…
-$ sexo_jefe  &lt;chr&gt; "2", "1", "1", "1", "1", "1", "2", "2", "2", "1", "1", "1",…
-$ edad_jefe  &lt;dbl&gt; 91, 68, 56, 87, 27, 57, 47, 75, 70, 69, 48, 73, 64, 55, 58,…
-$ educa_jefe &lt;chr&gt; "03", "08", "10", "11", "08", "08", "10", "06", "10", "04",…
-$ tot_integ  &lt;dbl&gt; 3, 2, 3, 4, 1, 4, 4, 1, 3, 2, 5, 1, 4, 3, 1, 6, 4, 2, 3, 1,…
-$ hombres    &lt;dbl&gt; 0, 1, 2, 2, 1, 2, 2, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 3, 0,…
-$ mujeres    &lt;dbl&gt; 3, 1, 1, 2, 0, 2, 2, 1, 2, 1, 4, 0, 3, 2, 1, 5, 3, 1, 0, 1,…
-$ mayores    &lt;dbl&gt; 3, 2, 3, 4, 1, 3, 4, 1, 3, 2, 5, 1, 4, 2, 1, 4, 4, 2, 1, 1,…
-$ menores    &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 2, 0,…
-$ p12_64     &lt;dbl&gt; 2, 1, 3, 2, 1, 3, 4, 0, 2, 0, 5, 0, 4, 2, 1, 4, 3, 0, 1, 1,…
-$ p65mas     &lt;dbl&gt; 1, 1, 0, 2, 0, 0, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 2, 0, 0,…
-$ ocupados   &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
-$ percep_ing &lt;dbl&gt; 3, 2, 2, 2, 1, 4, 2, 1, 3, 2, 1, 1, 2, 2, 1, 3, 2, 2, 1, 1,…
-$ perc_ocupa &lt;dbl&gt; 1, 2, 2, 0, 1, 3, 1, 0, 3, 1, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1,…
-$ ing_cor    &lt;dbl&gt; 56123.75, 108048.87, 133852.88, 105054.15, 24211.95, 121649…
-$ ingtrab    &lt;dbl&gt; 35706.51, 66766.28, 93081.50, 0.00, 22255.43, 40255.41, 333…
-$ trabajo    &lt;dbl&gt; 35706.51, 66766.28, 51603.24, 0.00, 17364.13, 40255.41, 327…
-$ sueldos    &lt;dbl&gt; 33749.99, 61630.42, 41086.95, 0.00, 17364.13, 36586.94, 246…
-$ horas_extr &lt;dbl&gt; 0.00, 0.00, 978.26, 0.00, 0.00, 0.00, 7092.39, 0.00, 0.00, …
-$ comisiones &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ aguinaldo  &lt;dbl&gt; 1956.52, 4646.73, 5135.86, 0.00, 0.00, 3668.47, 1027.17, 0.…
-$ indemtrab  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ otra_rem   &lt;dbl&gt; 0.00, 489.13, 4402.17, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, …
-$ remu_espec &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ negocio    &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
-$ noagrop    &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
-$ industria  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ comercio   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ servicios  &lt;dbl&gt; 0.00, 0.00, 41478.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
-$ agrope     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ agricolas  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ pecuarios  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ reproducc  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ pesca      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ otros_trab &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 4891.30, 0.00, 586.95, 0.00, 0.00, …
-$ rentas     &lt;dbl&gt; 0.00, 32282.60, 11739.13, 0.00, 0.00, 72684.78, 0.00, 0.00,…
-$ utilidad   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 72684.78, 0.00, 0.00, 16007.2…
-$ arrenda    &lt;dbl&gt; 0.00, 32282.60, 11739.13, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
-$ transfer   &lt;dbl&gt; 8804.34, 8999.99, 0.00, 90538.03, 1956.52, 0.00, 26902.17, …
-$ jubilacion &lt;dbl&gt; 0.00, 0.00, 0.00, 79239.13, 0.00, 0.00, 0.00, 73369.56, 440…
-$ becas      &lt;dbl&gt; 391.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.…
-$ donativos  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1956.52, 0.00, 26902.17, 0.00, 0.00…
-$ remesas    &lt;dbl&gt; 978.26, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
-$ bene_gob   &lt;dbl&gt; 7434.78, 0.00, 0.00, 11298.90, 0.00, 0.00, 0.00, 5649.45, 0…
-$ transf_hog &lt;dbl&gt; 0.00, 8999.99, 0.00, 0.00, 0.00, 0.00, 0.00, 2442.84, 0.00,…
-$ trans_inst &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ estim_alqu &lt;dbl&gt; 11612.90, 0.00, 29032.25, 14516.12, 0.00, 8709.67, 0.00, 14…
-$ otros_ing  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ gasto_mon  &lt;dbl&gt; 35091.17, 78670.73, 101647.27, 46702.31, 26927.85, 51176.07…
-$ alimentos  &lt;dbl&gt; 9514.19, 17524.25, 18321.36, 14759.90, 12458.47, 6351.40, 1…
-$ ali_dentro &lt;dbl&gt; 6814.20, 5181.41, 16907.08, 6274.20, 7315.63, 951.42, 11828…
-$ cereales   &lt;dbl&gt; 1465.70, 231.42, 1362.84, 1928.53, 308.56, 617.14, 1915.67,…
-$ carnes     &lt;dbl&gt; 617.14, 4114.28, 5142.85, 1928.57, 2442.84, 0.00, 6685.69, …
-$ pescado    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1799.99, 0.00, 1414.28, 0.00, 0.00,…
-$ leche      &lt;dbl&gt; 269.99, 578.57, 0.00, 1414.26, 0.00, 334.28, 0.00, 565.70, …
-$ huevo      &lt;dbl&gt; 0.00, 257.14, 1028.57, 0.00, 321.42, 0.00, 0.00, 0.00, 1002…
-$ aceites    &lt;dbl&gt; 0.00, 0.00, 565.71, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
-$ tuberculo  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 1028.56, 0.00, 321.42, 621.38, 0.00…
-$ verduras   &lt;dbl&gt; 2288.53, 0.00, 1735.69, 1002.84, 642.85, 0.00, 951.41, 2069…
-$ frutas     &lt;dbl&gt; 1954.27, 0.00, 0.00, 0.00, 0.00, 0.00, 539.99, 1234.27, 195…
-$ azucar     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ cafe       &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ especias   &lt;dbl&gt; 218.57, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.0…
-$ otros_alim &lt;dbl&gt; 0.00, 0.00, 5142.85, 0.00, 0.00, 0.00, 0.00, 3857.14, 1928.…
-$ bebidas    &lt;dbl&gt; 0.00, 0.00, 1928.57, 0.00, 771.41, 0.00, 0.00, 462.84, 2378…
-$ ali_fuera  &lt;dbl&gt; 2699.99, 12342.84, 1414.28, 8485.70, 5142.84, 5399.98, 5528…
-$ tabaco     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ vesti_calz &lt;dbl&gt; 2445.64, 684.78, 0.00, 1369.56, 0.00, 1751.06, 9782.60, 489…
-$ vestido    &lt;dbl&gt; 2445.64, 684.78, 0.00, 1369.56, 0.00, 1751.06, 5380.43, 489…
-$ calzado    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 4402.17, 0.00, 0.00, 0.…
-$ vivienda   &lt;dbl&gt; 1736.75, 29649.66, 3232.25, 2850.00, 2700.00, 3660.00, 1822…
-$ alquiler   &lt;dbl&gt; 0.00, 24677.41, 0.00, 0.00, 0.00, 0.00, 13935.48, 0.00, 0.0…
-$ pred_cons  &lt;dbl&gt; 116.75, 2032.25, 2032.25, 150.00, 0.00, 150.00, 0.00, 750.0…
-$ agua       &lt;dbl&gt; 780, 540, 750, 450, 450, 1200, 1410, 420, 840, 420, 900, 87…
-$ energia    &lt;dbl&gt; 840.00, 2400.00, 450.00, 2250.00, 2250.00, 2310.00, 2876.61…
-$ limpieza   &lt;dbl&gt; 2075.80, 2816.11, 1422.55, 1228.04, 890.36, 3518.67, 2386.3…
-$ cuidados   &lt;dbl&gt; 2075.80, 2816.11, 1422.55, 1228.04, 792.54, 3518.67, 2386.3…
-$ utensilios &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 97.82, 0.00, 0.00, 0.00, 489.13, 23…
-$ enseres    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ salud      &lt;dbl&gt; 2641.29, 0.00, 0.00, 0.00, 0.00, 1007.60, 8902.16, 3277.16,…
-$ atenc_ambu &lt;dbl&gt; 2641.29, 0.00, 0.00, 0.00, 0.00, 1007.60, 7923.90, 3277.16,…
-$ hospital   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ medicinas  &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 978.26, 0.00, 978.26, 0…
-$ transporte &lt;dbl&gt; 6773.62, 6706.44, 23312.90, 23574.19, 5080.63, 20601.28, 84…
-$ publico    &lt;dbl&gt; 2314.28, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 771.42, 1157.1…
-$ foraneo    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ adqui_vehi &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ mantenim   &lt;dbl&gt; 2903.22, 4354.83, 11612.90, 20322.58, 4064.51, 17709.67, 53…
-$ refaccion  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ combus     &lt;dbl&gt; 2903.22, 4354.83, 11612.90, 20322.58, 4064.51, 17709.67, 53…
-$ comunica   &lt;dbl&gt; 1556.12, 2351.61, 11700.00, 3251.61, 1016.12, 2891.61, 3033…
-$ educa_espa &lt;dbl&gt; 2903.22, 0.00, 34728.25, 0.00, 4209.66, 6967.74, 9058.05, 0…
-$ educacion  &lt;dbl&gt; 2903.22, 0.00, 0.00, 0.00, 0.00, 6967.74, 6735.47, 0.00, 0.…
-$ esparci    &lt;dbl&gt; 0.00, 0.00, 5380.43, 0.00, 4209.66, 0.00, 2322.58, 0.00, 0.…
-$ paq_turist &lt;dbl&gt; 0.00, 0.00, 29347.82, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0…
-$ personales &lt;dbl&gt; 4097.44, 3870.14, 13416.08, 2920.62, 1344.17, 812.90, 4918.…
-$ cuida_pers &lt;dbl&gt; 673.53, 3745.14, 1916.09, 2920.62, 1344.17, 812.90, 4708.95…
-$ acces_pers &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ otros_gas  &lt;dbl&gt; 3423.91, 125.00, 11499.99, 0.00, 0.00, 0.00, 210.00, 0.00, …
-$ transf_gas &lt;dbl&gt; 2903.22, 17419.35, 7213.88, 0.00, 244.56, 6505.42, 73.36, 4…
-$ percep_tot &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 3214.27, 0.00, 0.00, 0.00, 0.00, 0.…
-$ retiro_inv &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ prestamos  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ otras_perc &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ ero_nm_viv &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ ero_nm_hog &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 3214.27, 0.00, 0.00, 0.00, 0.00, 0.…
-$ erogac_tot &lt;dbl&gt; 0.00, 19565.21, 0.00, 28124.99, 0.00, 5771.73, 360.97, 2445…
-$ cuota_viv  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ mater_serv &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ material   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ servicio   &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ deposito   &lt;dbl&gt; 0.00, 19565.21, 0.00, 28124.99, 0.00, 5771.73, 0.00, 2445.6…
-$ prest_terc &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ pago_tarje &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ deudas     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ balance    &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,…
-$ otras_erog &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 360.97, 0.00, 0.00, 0.0…
-$ smg        &lt;dbl&gt; 15558.3, 15558.3, 15558.3, 15558.3, 15558.3, 15558.3, 15558…</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(concentradohogar[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]) <span class="co"># en corchete del lado derecho podemos ojear columnas </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 90,102
-Columns: 10
-$ folioviv  &lt;chr&gt; "0100005002", "0100005003", "0100005004", "0100012002", "010…
-$ foliohog  &lt;chr&gt; "1", "1", "1", "1", "2", "1", "1", "1", "1", "1", "1", "1", …
-$ ubica_geo &lt;chr&gt; "01001", "01001", "01001", "01001", "01001", "01001", "01001…
-$ tam_loc   &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", …
-$ est_socio &lt;chr&gt; "4", "4", "4", "3", "3", "3", "3", "4", "4", "4", "4", "3", …
-$ est_dis   &lt;chr&gt; "003", "003", "003", "002", "002", "002", "002", "003", "003…
-$ upm       &lt;chr&gt; "0000001", "0000001", "0000001", "0000002", "0000002", "0000…
-$ factor    &lt;dbl&gt; 206, 206, 206, 167, 167, 167, 167, 212, 212, 212, 212, 184, …
-$ clase_hog &lt;chr&gt; "3", "2", "2", "3", "1", "2", "2", "1", "2", "2", "2", "1", …
-$ sexo_jefe &lt;chr&gt; "2", "1", "1", "1", "1", "1", "2", "2", "2", "1", "1", "1", …</code></pre>
-</div>
-</div>
-</section>
-<section id="selección-de-casos-y-de-variables" class="level3" data-number="2.5.4">
-<h3 data-number="2.5.4" class="anchored" data-anchor-id="selección-de-casos-y-de-variables"><span class="header-section-number">2.5.4</span> Selección de casos y de variables</h3>
+<section id="selección-de-casos-y-de-variables" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="selección-de-casos-y-de-variables"><span class="header-section-number">2.5.3</span> Selección de casos y de variables</h3>
 <p>Poco a poco vamos comprendiendo más la lógica de R. Hay varias “formas” de programar. Por lo que no te asustes si varios códigos llegan al mismo resultado</p>
-<p>Para revisar el contenido de un data frame podemos usar, como lo hicimos anteriormente, el formato basededatos$var o usar corchete, checa como estas cuatro formas tan el mismo resultado.</p>
+<p>Para revisar el contenido de un data frame podemos usar, como lo hicimos anteriormente, el formato dataframe$var o usar corchete, checa como estas cuatro formas tan el mismo resultado.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar<span class="sc">$</span>ing_cor</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar[[<span class="st">"ing_cor"</span>]]  <span class="co"># ¡Ojo con las comillas! </span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar[,<span class="dv">23</span>]</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar[,<span class="st">"ing_cor"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar<span class="sc">$</span>ing_cor</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar[[<span class="st">"ing_cor"</span>]]  <span class="co"># ¡Ojo con las comillas! </span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar[,<span class="dv">23</span>]</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar[,<span class="st">"ing_cor"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ahora, con el formato de dplyr podemos llegar a lo mismo</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(ing_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ing_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -2746,96 +2360,36 @@ $ sexo_jefe &lt;chr&gt; "2", "1", "1", "1", "1", "1", "2", "2", "2", "1", "1", "
 <h2 data-number="2.6" class="anchored" data-anchor-id="subsetting"><span class="header-section-number">2.6</span> “Subsetting”</h2>
 <p>Selección “inversa” O sea no “botar algo”, es con el negativo. No funciona con todos los formatos</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ing_cor)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x) <span class="co">#rm sólo bota objetos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ing_cor)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x) <span class="co">#rm sólo bota objetos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pero con los otros formatos podemos “asignar” valores adentro de un data.frame, y uno de eso valores puede ser “la nada””</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="sc">$</span>ing_cor2<span class="ot">&lt;-</span>concentradohogar<span class="sc">$</span>ing_cor</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="sc">$</span>ing_cor2<span class="ot">&lt;-</span><span class="cn">NULL</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ing_cor2=</span>ing_cor) <span class="co"># crea o cambia variables</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&lt;&gt;%</span> </span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ing_cor2=</span><span class="cn">NULL</span>) <span class="co"># crea o cambia variables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="sc">$</span>ing_cor2<span class="ot">&lt;-</span>concentradohogar<span class="sc">$</span>ing_cor</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="sc">$</span>ing_cor2<span class="ot">&lt;-</span><span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>De aquí viene esa cuesta en el aprendizaje; tenemos que comprender en qué forma programó el que hizo el paquete e incluso a veces cómo aprendió quién te está enseñando o el foro que estás leyendo.</p>
+<p>De aquí viene esa cuesta en el aprendizaje; tenemos que comprender en qué forma programó el que hizo la librería e incluso a veces cómo aprendió quién te está enseñando o el foro que estás leyendo.</p>
 <p>Rara vez utilizamos una base de datos completa, y rara vez queremos hacer operaciones completas con ellas.</p>
 <p>Vamos a pedir cosas más específicas y podemos seleccionar observaciones o filas. Como nuestra base de datos es muy grande, guardaremos el filtro o selección en un objeto.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>subset1<span class="ot">&lt;-</span>concentradohogar[concentradohogar<span class="sc">$</span>ing_cor<span class="sc">&gt;</span><span class="dv">4</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>subset1<span class="ot">&lt;-</span>concentradohogar[concentradohogar<span class="sc">$</span>ing_cor<span class="sc">&gt;</span><span class="dv">5000</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>También podemos seleccionar columnas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>subset2<span class="ot">&lt;-</span> concentradohogar[, <span class="fu">c</span>(<span class="st">"sexo_jefe"</span>, <span class="st">"edad_jefe"</span>, <span class="st">"ing_cor"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>subset2<span class="ot">&lt;-</span> concentradohogar[, <span class="fu">c</span>(<span class="st">"sexo_jefe"</span>, <span class="st">"edad_jefe"</span>, <span class="st">"ing_cor"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>podemos combinar los dos tipos de selección</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>subset3<span class="ot">&lt;-</span> concentradohogar[(concentradohogar<span class="sc">$</span>ing_cor<span class="sc">&gt;</span><span class="dv">2000</span> <span class="sc">&amp;</span> concentradohogar<span class="sc">$</span>sexo_jefe<span class="sc">==</span><span class="dv">1</span> ), <span class="fu">c</span>(<span class="st">"sexo_jefe"</span>, <span class="st">"edad_jefe"</span>, <span class="st">"ing_cor"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>subset3<span class="ot">&lt;-</span> concentradohogar[(concentradohogar<span class="sc">$</span>ing_cor<span class="sc">&gt;</span><span class="dv">5000</span> <span class="sc">&amp;</span> concentradohogar<span class="sc">$</span>sexo_jefe<span class="sc">==</span><span class="dv">1</span> ), <span class="fu">c</span>(<span class="st">"sexo_jefe"</span>, <span class="st">"edad_jefe"</span>, <span class="st">"ing_cor"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Con <code>{dplyr}</code>, podemos usar <code>dplyr::filter()</code> y <code>dplyr::select</code></p>
+<p>Con dplyr, podemos usar “filter” y “select”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>subset4<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ing_cor<span class="sc">&gt;</span><span class="dv">2000</span> <span class="sc">&amp;</span> sexo_jefe<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sexo_jefe, edad_jefe, ing_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>subset4<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ing_cor<span class="sc">&gt;</span><span class="dv">5000</span> <span class="sc">&amp;</span> sexo_jefe<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(sexo_jefe, edad_jefe, ing_cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="etiquetas-y-cómo-usarlas" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="etiquetas-y-cómo-usarlas"><span class="header-section-number">2.7</span> Etiquetas y cómo usarlas</h2>
-<p>Podemos ver que los objetos <em>data.frame</em></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(concentradohogar<span class="sc">$</span>sexo_jefe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "character"</code></pre>
-</div>
-</div>
-<p>¿Cómo etiquetamos?</p>
-<ol type="1">
-<li><p>Creamos un vector de la etiqueta</p></li>
-<li><p>Convertimos la variable a numérica</p></li>
-<li><p>Usamos <code>dplyr::mutate()</code> y <code>sjlabelled:set_labels()</code></p></li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>etiqueta_sex<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Hombre"</span>, <span class="st">"Mujer"</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>concentradohogar<span class="ot">&lt;-</span>concentradohogar <span class="sc">%&gt;%</span> </span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexo_jefe=</span><span class="fu">as_numeric</span>(sexo_jefe)) <span class="sc">%&gt;%</span> <span class="co"># para quitar el "string"</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  sjlabelled<span class="sc">::</span><span class="fu">set_labels</span>(sexo_jefe, <span class="at">labels=</span>etiqueta_sex) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Veamos hoy nuestra variable</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(concentradohogar<span class="sc">$</span>sexo_jefe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "numeric"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(concentradohogar<span class="sc">$</span>sexo_jefe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "factor"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>concentradohogar <span class="sc">%&gt;%</span> </span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexo_jefe=</span>sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(sexo_jefe)) <span class="sc">%&gt;%</span> </span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(sexo_jefe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> sexo_jefe     n   percent
-    Hombre 61905 0.6870547
-     Mujer 28197 0.3129453</code></pre>
-</div>
-</div>
-</section>
-<section id="ejercicio" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">2.8</span> Ejercicio</h2>
-<ul>
-<li>Escoja una base con la que usted esté trabajando. Impórtela</li>
-<li>Replique la exploración de la práctica: incluya limpiar nombre, alguna revisión global y, opcionalmente, alguna selección de variables o casos de acuerdo a su interés</li>
-<li>Utilice al menos un comando con <code>{dplyr}</code> para revisar algo</li>
-<li>Adjunte un archivo con información de la base (para que yo verifique su importación.), así como el código en .R</li>
-</ul>
-<p>Envíe al siguiente <a href="https://forms.gle/kb416LtHPZxRZkSx5">formulario</a></p>
 
 
 </section>
@@ -2983,9 +2537,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -3050,6 +2618,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -3097,7 +2751,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./P3.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Revisión de elementos estadísticos básicos</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Análisis descriptivo</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
